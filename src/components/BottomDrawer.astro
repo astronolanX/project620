@@ -1,0 +1,243 @@
+---
+---
+
+<div class="bottom-drawer-container">  
+  <div class="drawer-content" id="drawer-content">
+    <nav class="drawer-nav">
+      <h2>Navigation</h2>
+      <ul class="nav-links">
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <div class="contact-links">
+          <a href="mailto:hello@example.com" class="contact-link">
+            <span class="contact-icon">✉</span>
+            Email
+          </a>
+          <a href="https://twitter.com/username" target="_blank" class="contact-link">
+            <span class="contact-icon">𝕏</span>
+            Twitter
+          </a>
+          <a href="https://github.com/username" target="_blank" class="contact-link">
+            <span class="contact-icon">⚡</span>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/username" target="_blank" class="contact-link">
+            <span class="contact-icon">💼</span>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .bottom-drawer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  
+  .drawer-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: rgba(15, 15, 15, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    box-sizing: border-box;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: auto;
+    overflow-y: auto;
+    color: white;
+  }
+  
+  .drawer-content.open {
+    transform: translateY(0);
+  }
+  
+  .drawer-nav {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 3rem;
+  }
+  
+  .drawer-nav h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+  
+  .nav-links li {
+    margin-bottom: 1rem;
+  }
+  
+  .nav-links a {
+    display: block;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 600;
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #ffffff;
+    border-bottom-color: #ffffff;
+    transform: translateX(8px);
+  }
+  
+  .contact-info h3 {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+  
+  .contact-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #e0e0e0;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .contact-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .contact-icon {
+    font-size: 1.2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .drawer-content {
+      padding: 1.5rem;
+    }
+    
+    .contact-links {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .drawer-content {
+      padding: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const drawerTrigger = document.getElementById('drawer-trigger');
+    const drawerContent = document.getElementById('drawer-content');
+    let isOpen = false;
+    
+    function toggleDrawer() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        drawerContent.classList.add('open');
+      } else {
+        drawerContent.classList.remove('open');
+      }
+    }
+    
+    function closeDrawer() {
+      isOpen = false;
+      drawerContent.classList.remove('open');
+    }
+    
+    if (drawerTrigger) {
+      drawerTrigger.addEventListener('click', toggleDrawer);
+    }
+    
+    // Close drawer when clicking outside
+    drawerContent.addEventListener('click', function(e) {
+      if (e.target === drawerContent) {
+        closeDrawer();
+      }
+    });
+    
+    // Close drawer on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen) {
+        closeDrawer();
+      }
+    });
+    
+    // Touch gesture support for mobile
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+    
+    drawerContent.addEventListener('touchstart', function(e) {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    }, { passive: true });
+    
+    drawerContent.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+      
+      // Only allow downward swipes when drawer is open
+      if (isOpen && deltaY > 0) {
+        const translateY = Math.min(deltaY, window.innerHeight);
+        drawerContent.style.transform = `translateY(${translateY}px)`;
+      }
+    }, { passive: true });
+    
+    drawerContent.addEventListener('touchend', function(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const deltaY = currentY - startY;
+      
+      // Close drawer if swiped down more than 100px
+      if (isOpen && deltaY > 100) {
+        closeDrawer();
+      }
+      
+      // Reset transform
+      drawerContent.style.transform = '';
+    }, { passive: true });
+  });
+</script>
