@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BottomDrawer from '../components/BottomDrawer.astro';
+---
+
+<Layout title="Blog - Nolan">
+  <main class="blog-container">
+    <header class="blog-header">
+      <h1>Blog</h1>
+      <p>Thoughts on technology, innovation, and the future</p>
+    </header>
+
+    <div class="blog-grid">
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=1" alt="The Future of Web Development" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">March 15, 2024</span>
+          <h2><a href="/blog/future-of-web-development">The Future of Web Development: Beyond React</a></h2>
+          <p>Exploring emerging frameworks and technologies that are reshaping how we build for the web. From Server Components to Web Assembly, the landscape is evolving rapidly.</p>
+          <a href="/blog/future-of-web-development" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=2" alt="AI and Creative Coding" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">March 8, 2024</span>
+          <h2><a href="/blog/ai-creative-coding">AI and Creative Coding: A New Renaissance</a></h2>
+          <p>How artificial intelligence is transforming creative expression in code. From generative art to automated design systems, we're entering a new era of digital creativity.</p>
+          <a href="/blog/ai-creative-coding" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=3" alt="Building Accessible Interfaces" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">February 28, 2024</span>
+          <h2><a href="/blog/accessible-interfaces">Building Accessible Interfaces That Don't Suck</a></h2>
+          <p>A practical guide to creating inclusive web experiences without compromising on design or functionality. Real-world examples and actionable insights.</p>
+          <a href="/blog/accessible-interfaces" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=4" alt="The State of CSS" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">February 20, 2024</span>
+          <h2><a href="/blog/state-of-css-2024">The State of CSS in 2024</a></h2>
+          <p>Container queries, cascade layers, and new color functions are changing how we style the web. A deep dive into the latest CSS features that actually matter.</p>
+          <a href="/blog/state-of-css-2024" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=5" alt="Performance Optimization" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">February 12, 2024</span>
+          <h2><a href="/blog/performance-optimization">Performance Optimization: The Hidden Art</a></h2>
+          <p>Beyond Core Web Vitals: advanced techniques for creating lightning-fast web experiences that users love. Metrics that matter and optimizations that work.</p>
+          <a href="/blog/performance-optimization" class="read-more">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card">
+        <div class="card-image">
+          <img src="https://picsum.photos/600/300?random=6" alt="Design Systems" />
+        </div>
+        <div class="card-content">
+          <span class="card-date">January 30, 2024</span>
+          <h2><a href="/blog/design-systems-2024">Design Systems That Scale</a></h2>
+          <p>Building maintainable design systems that grow with your team and product. From tokens to components, creating consistency at scale.</p>
+          <a href="/blog/design-systems-2024" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </main>
+  
+  <BottomDrawer />
+</Layout>
+
+<style>
+  .blog-container {
+    min-height: 100vh;
+    background: white;
+    padding: clamp(2rem, 5vw, 4rem);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 8vw, 6rem);
+  }
+
+  .blog-header h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: black;
+    text-shadow: 
+      -0.1em 0 #ff3333,
+      0.1em 0 #33ccff,
+      -0.15em 0 rgba(255, 51, 51, 0.8),
+      0.15em 0 rgba(51, 204, 255, 0.8);
+  }
+
+  .blog-header p {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 4rem;
+  }
+
+  .blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    padding: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .card-date {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .card-content h2 {
+    margin: 0.5rem 0 1rem 0;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    line-height: 1.3;
+  }
+
+  .card-content h2 a {
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .card-content h2 a:hover {
+    color: #333;
+  }
+
+  .card-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+  }
+
+  .read-more {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .read-more:hover {
+    transform: translateX(4px);
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blog-container {
+      padding: 2rem 1rem;
+    }
+    
+    .card-content {
+      padding: 1.5rem;
+    }
+  }
+</style>
