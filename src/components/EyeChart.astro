@@ -116,30 +116,48 @@
 
 <style>
   .eye-chart-container {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    margin: 0 auto;
-    background: white;
+    margin: 0;
+    background: 
+      repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(255, 182, 193, 0.3) 0deg 90deg,
+        white 90deg 180deg,
+        rgba(255, 182, 193, 0.3) 180deg 270deg,
+        white 270deg 360deg
+      );
+    background-size: 20px 20px;
     padding: min(4vw, 3rem);
     font-family: 'Silkscreen', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     box-sizing: border-box;
   }
   
+  .eye-chart {
+    width: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+  
   @media (orientation: landscape) {
-    .eye-chart-container {
+    .eye-chart {
       width: 56.25vh;
-      height: 100vh;
+      max-width: 56.25vh;
     }
   }
   
   @media (orientation: portrait) {
-    .eye-chart-container {
-      width: 100vw;
-      height: 100vh;
+    .eye-chart {
+      width: 100%;
+      max-width: 100vw;
     }
   }
   
