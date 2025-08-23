@@ -34,6 +34,7 @@ The site is configured for static output with directory-based URLs (see `astro.c
 **IMPORTANT: These theming rules must be maintained unless explicitly overridden:**
 
 ### Theme Guidelines
+
 - **Main site/eye chart**: Always light theme with subtle pink checkerboard pattern background
 - **Bottom drawer menu**: Always dark theme (dark background ~rgba(15,15,15,0.98), white text)
 - **Eye chart letters**: ALWAYS include chromatic aberration effect (red/cyan text shadows for double vision aesthetic) - THIS IS PERSISTENT AND MUST NEVER BE REMOVED
