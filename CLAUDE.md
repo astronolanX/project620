@@ -37,7 +37,8 @@ The site is configured for static output with directory-based URLs (see `astro.c
 - **Main site/eye chart**: Always light theme with subtle pink checkerboard pattern background
 - **Bottom drawer menu**: Always dark theme (dark background ~rgba(15,15,15,0.98), white text)
 - **Eye chart letters**: ALWAYS include chromatic aberration effect (red/cyan text shadows for double vision aesthetic) - THIS IS PERSISTENT AND MUST NEVER BE REMOVED
-- **Eye chart font**: Must use 'Silkscreen' font from Google Fonts for the pixel/tech aesthetic
+- **Eye chart font**: Must use 'Bebas Neue' font from Google Fonts for bold, condensed aesthetic
+- **Body copy font**: Must use 'Evolve Sans' font for all body text, interactive elements, and UI components
 - **Background pattern**: Subtle pink/white checkered pattern using CSS gradients with responsive scaling
 - **Aspect ratio**: Dynamic - always taller than wide, adapts to orientation
 - **Bottom row**: "SEE MORE" black button serves as drawer trigger
