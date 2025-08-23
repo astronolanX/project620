@@ -45,6 +45,7 @@ The site is configured for static output with directory-based URLs (see `astro.c
 - **Bottom row**: "SEE MORE" black button serves as drawer trigger
 
 ### Component Integrity
+
 - Eye chart maintains fluid responsive scaling using clamp() for all dimensions
 - Bottom drawer slides up with smooth animations and touch gestures
 - No side measurements on eye chart (removed for cleaner appearance)
