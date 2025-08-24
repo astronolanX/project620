@@ -17,12 +17,14 @@ To replace the placeholder favicon with your own:
 ## Favicon Specifications
 
 ### SVG Favicon
+
 - Size: 32x32 viewBox (scalable)
 - Format: SVG
 - Should work well at small sizes
 - Modern browsers support this format
 
 ### ICO Favicon
+
 - Recommended sizes: 16x16, 32x32 (multi-size ICO)
 - Format: ICO
 - Fallback for older browsers
