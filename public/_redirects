@@ -1,0 +1,4 @@
+# Force HTTPS redirect
+http://astronolan.com/* https://astronolan.com/:splat 301!
+http://www.astronolan.com/* https://astronolan.com/:splat 301!
+https://www.astronolan.com/* https://astronolan.com/:splat 301!

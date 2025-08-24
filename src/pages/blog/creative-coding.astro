@@ -1,0 +1,1175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BottomDrawer from '../../components/BottomDrawer.astro';
+---
+
+<Layout title="Creative Coding Experiments: Art Meets Algorithm - Nolan">
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="post-meta">
+        <a href="/blog" class="back-link">← Back to Blog</a>
+        <time class="post-date">August 22, 2022</time>
+      </div>
+      <h1>Creative Coding Experiments: Art Meets Algorithm</h1>
+      <p class="post-subtitle">Exploring the intersection of mathematics, code, and visual expression through interactive art</p>
+    </header>
+
+    <div class="post-content">
+      <div class="hero-image">
+        <img src="https://picsum.photos/800/400?random=70" alt="Generative art visualization" />
+        <p class="image-caption">Mathematical beauty expressed through code and color</p>
+      </div>
+
+      <p class="lead">Creative coding transforms algorithms into art, numbers into beauty, and logic into emotion. It's a practice that sits at the intersection of programming and visual design, where mathematical concepts become the brush strokes of digital artists.</p>
+
+      <p>This field has exploded in recent years as artists, designers, and developers discover the expressive power of code. From simple geometric patterns to complex generative systems, creative coding opens up new possibilities for artistic expression that would be impossible with traditional tools.</p>
+
+      <h2>The Language of Mathematics</h2>
+
+      <p>At its heart, creative coding is about translating mathematical concepts into visual experiences. Sine waves become flowing animations, fractals create intricate organic patterns, and random numbers introduce delightful unpredictability.</p>
+
+      <div class="code-visual-pair">
+        <div class="code-block">
+          <h3>Perlin Noise Pattern</h3>
+          <pre><code>function draw() {
+  for (let x = 0; x < width; x += 10) {
+    for (let y = 0; y < height; y += 10) {
+      let noiseVal = noise(x * 0.01, y * 0.01, frameCount * 0.01);
+      let hue = map(noiseVal, 0, 1, 0, 360);
+      fill(hue, 80, 90);
+      circle(x, y, noiseVal * 20);
+    }
+  }
+}</code></pre>
+        </div>
+        <div class="visual-result">
+          <div class="noise-demo" id="noise-canvas"></div>
+          <p class="demo-caption">Live visualization of the Perlin noise algorithm</p>
+        </div>
+      </div>
+
+      <p>The beauty of this approach is that small changes in the code can produce dramatically different visual results. Adjusting a single parameter can transform flowing organic shapes into rigid geometric patterns, or change a gentle animation into chaotic motion.</p>
+
+      <blockquote>
+        "Creative coding isn't about replacing traditional art—it's about expanding the palette of human expression to include the infinite possibilities of computation."
+        <cite>— Casey Reas, Co-creator of Processing</cite>
+      </blockquote>
+
+      <h2>Interactive Installations</h2>
+
+      <p>One of the most exciting applications of creative coding is in interactive installations that respond to human presence and movement. These pieces blur the line between observer and participant, creating unique experiences for each viewer.</p>
+
+      <div class="installation-gallery">
+        <div class="installation-item">
+          <img src="https://picsum.photos/350/250?random=71" alt="Motion-reactive light installation" />
+          <div class="installation-info">
+            <h4>Motion Canvas</h4>
+            <p>Particle systems that respond to body movement, creating personal light paintings</p>
+            <div class="tech-stack">
+              <span class="tech">Kinect</span>
+              <span class="tech">openFrameworks</span>
+              <span class="tech">OpenGL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="installation-item">
+          <img src="https://picsum.photos/350/250?random=72" alt="Sound-reactive visual projection" />
+          <div class="installation-info">
+            <h4>Sonic Landscapes</h4>
+            <p>Real-time audio visualization that transforms sound into abstract landscapes</p>
+            <div class="tech-stack">
+              <span class="tech">Web Audio API</span>
+              <span class="tech">Three.js</span>
+              <span class="tech">GLSL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="installation-item">
+          <img src="https://picsum.photos/350/250?random=73" alt="Touch-interactive digital mural" />
+          <div class="installation-info">
+            <h4>Collective Canvas</h4>
+            <p>Multi-touch interface where multiple users collaborate to create evolving digital murals</p>
+            <div class="tech-stack">
+              <span class="tech">TouchDesigner</span>
+              <span class="tech">Computer Vision</span>
+              <span class="tech">Projection Mapping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Generative Art Systems</h2>
+
+      <p>Generative art uses autonomous systems to create artwork. The artist designs the rules and constraints, then lets the system explore the possibility space, often producing surprising and delightful results.</p>
+
+      <div class="generative-showcase">
+        <div class="generator-controls">
+          <h3>Interactive Generator</h3>
+          <div class="control-panel">
+            <div class="control-group">
+              <label for="complexity">Complexity</label>
+              <input type="range" id="complexity" min="1" max="10" value="5">
+            </div>
+            <div class="control-group">
+              <label for="speed">Animation Speed</label>
+              <input type="range" id="speed" min="0.1" max="3" value="1" step="0.1">
+            </div>
+            <div class="control-group">
+              <label for="colorMode">Color Palette</label>
+              <select id="colorMode">
+                <option value="rainbow">Rainbow</option>
+                <option value="monochrome">Monochrome</option>
+                <option value="warm">Warm Tones</option>
+                <option value="cool">Cool Tones</option>
+              </select>
+            </div>
+            <button id="regenerate" class="generate-btn">Generate New Pattern</button>
+          </div>
+        </div>
+        <div class="generator-output">
+          <canvas id="generative-canvas" width="400" height="300"></canvas>
+          <p class="output-caption">Real-time generative art based on your preferences</p>
+        </div>
+      </div>
+
+      <p>The fascinating aspect of generative systems is their capacity for emergence—complex, beautiful patterns arising from simple rules. This mirrors natural processes and creates connections between digital art and biological systems.</p>
+
+      <h2>Shader Programming</h2>
+
+      <p>Shaders are programs that run on the graphics card, allowing for incredibly complex visual effects that render in real-time. They're the secret behind much of modern creative coding's visual sophistication.</p>
+
+      <div class="shader-example">
+        <div class="shader-code">
+          <h3>Fragment Shader</h3>
+          <pre><code>uniform float time;
+uniform vec2 resolution;
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / resolution.xy;
+    vec2 center = vec2(0.5, 0.5);
+    float dist = distance(uv, center);
+    
+    float wave = sin(dist * 20.0 - time * 3.0) * 0.5 + 0.5;
+    vec3 color = vec3(wave * uv.x, wave * uv.y, wave);
+    
+    gl_FragColor = vec4(color, 1.0);
+}</code></pre>
+        </div>
+        <div class="shader-result">
+          <div class="shader-demo" id="shader-canvas"></div>
+          <p class="demo-caption">GPU-powered visual effects running at 60fps</p>
+        </div>
+      </div>
+
+      <p>Shader programming opens up possibilities for real-time effects that would be computationally impossible with traditional CPU-based approaches. Complex lighting, fluid simulations, and intricate pattern generation all become feasible.</p>
+
+      <h2>Data Visualization as Art</h2>
+
+      <p>Creative coding also transforms data visualization from utilitarian charts into compelling artistic statements. Data becomes the raw material for aesthetic exploration while maintaining its informational value.</p>
+
+      <div class="dataviz-examples">
+        <div class="dataviz-item">
+          <div class="chart-container">
+            <svg id="flow-chart" width="300" height="200"></svg>
+          </div>
+          <h4>Emotional Flow</h4>
+          <p>Social media sentiment analysis visualized as flowing particles</p>
+        </div>
+
+        <div class="dataviz-item">
+          <div class="chart-container">
+            <canvas id="network-graph" width="300" height="200"></canvas>
+          </div>
+          <h4>Connection Networks</h4>
+          <p>Relationship data rendered as organic, growing network structures</p>
+        </div>
+
+        <div class="dataviz-item">
+          <div class="chart-container">
+            <div id="rhythm-viz" class="rhythm-container"></div>
+          </div>
+          <h4>Urban Rhythms</h4>
+          <p>City traffic patterns translated into musical and visual rhythms</p>
+        </div>
+      </div>
+
+      <h2>Tools and Frameworks</h2>
+
+      <p>The creative coding ecosystem offers tools for every skill level and artistic vision. From beginner-friendly environments to professional-grade frameworks, there's never been a better time to start coding art.</p>
+
+      <div class="tools-comparison">
+        <div class="tool-category">
+          <h3>Beginner Friendly</h3>
+          <div class="tool-list">
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">p5.js</span>
+                <span class="difficulty easy">Easy</span>
+              </div>
+              <p>JavaScript library perfect for learning creative coding fundamentals</p>
+              <div class="tool-features">
+                <span class="feature">Web-based</span>
+                <span class="feature">Great documentation</span>
+                <span class="feature">Large community</span>
+              </div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">Scratch for Artists</span>
+                <span class="difficulty easy">Easy</span>
+              </div>
+              <p>Visual programming environment for creating interactive art without text coding</p>
+              <div class="tool-features">
+                <span class="feature">Block-based</span>
+                <span class="feature">No syntax errors</span>
+                <span class="feature">Immediate feedback</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-category">
+          <h3>Intermediate</h3>
+          <div class="tool-list">
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">Processing</span>
+                <span class="difficulty medium">Medium</span>
+              </div>
+              <p>The original creative coding environment, perfect for learning programming concepts</p>
+              <div class="tool-features">
+                <span class="feature">Java-based</span>
+                <span class="feature">Extensive libraries</span>
+                <span class="feature">Strong community</span>
+              </div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">Three.js</span>
+                <span class="difficulty medium">Medium</span>
+              </div>
+              <p>3D graphics library that makes WebGL accessible for creative projects</p>
+              <div class="tool-features">
+                <span class="feature">3D graphics</span>
+                <span class="feature">VR/AR support</span>
+                <span class="feature">Active development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-category">
+          <h3>Advanced</h3>
+          <div class="tool-list">
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">openFrameworks</span>
+                <span class="difficulty hard">Hard</span>
+              </div>
+              <p>C++ toolkit for high-performance creative applications and installations</p>
+              <div class="tool-features">
+                <span class="feature">C++ performance</span>
+                <span class="feature">Hardware integration</span>
+                <span class="feature">Professional use</span>
+              </div>
+            </div>
+
+            <div class="tool-item">
+              <div class="tool-header">
+                <span class="tool-name">TouchDesigner</span>
+                <span class="difficulty hard">Hard</span>
+              </div>
+              <p>Node-based environment for real-time interactive multimedia content</p>
+              <div class="tool-features">
+                <span class="feature">Real-time</span>
+                <span class="feature">Professional tools</span>
+                <span class="feature">GPU acceleration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Learning Resources</h2>
+
+      <p>The creative coding community is incredibly welcoming and supportive. Online resources, workshops, and communities provide paths for artists at every level to develop their skills.</p>
+
+      <div class="content-image">
+        <img src="https://picsum.photos/750/400?random=74" alt="Creative coding workshop" />
+        <p class="image-caption">Collaborative learning in creative coding workshops and communities</p>
+      </div>
+
+      <p>Many artists find that creative coding becomes a gateway to deeper engagement with technology, leading to careers in interactive design, data visualization, or digital art. The skills translate directly to web development, game design, and user interface creation.</p>
+
+      <h2>The Future of Creative Expression</h2>
+
+      <p>As technology evolves, creative coding continues to push boundaries. Machine learning, virtual reality, and augmented reality are opening new frontiers for artistic expression.</p>
+
+      <div class="future-trends">
+        <div class="trend-item">
+          <div class="trend-icon">🧠</div>
+          <h4>AI Collaboration</h4>
+          <p>Artists working with machine learning models as creative partners</p>
+        </div>
+
+        <div class="trend-item">
+          <div class="trend-icon">🥽</div>
+          <h4>Immersive Experiences</h4>
+          <p>VR/AR environments that place viewers inside the artwork</p>
+        </div>
+
+        <div class="trend-item">
+          <div class="trend-icon">🌐</div>
+          <h4>Distributed Art</h4>
+          <p>Blockchain and Web3 enabling new models of digital art ownership</p>
+        </div>
+
+        <div class="trend-item">
+          <div class="trend-icon">📱</div>
+          <h4>Mobile Creation</h4>
+          <p>Powerful mobile devices enabling art creation anywhere</p>
+        </div>
+      </div>
+
+      <div class="final-image">
+        <img src="https://picsum.photos/800/350?random=75" alt="Future of creative coding" />
+        <p class="image-caption">The future of creative coding: where imagination meets infinite computational possibility</p>
+      </div>
+
+      <p>Creative coding represents a fundamental shift in how we think about art and technology. It's not just about using computers as tools—it's about embracing computation as a creative medium in its own right, with its own unique aesthetic possibilities and expressive potential.</p>
+
+      <div class="post-footer">
+        <div class="tags">
+          <span class="tag">Creative Coding</span>
+          <span class="tag">Generative Art</span>
+          <span class="tag">Interactive Design</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Shaders</span>
+          <span class="tag">Digital Art</span>
+        </div>
+        
+        <div class="post-nav">
+          <a href="/blog/typography-research" class="nav-link">← Previous Post</a>
+          <a href="/blog/research-methods" class="nav-link">Next Post →</a>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <BottomDrawer />
+</Layout>
+
+<style>
+  .blog-post {
+    min-height: 100vh;
+    background: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+
+  .post-header {
+    margin-bottom: clamp(3rem, 6vw, 4rem);
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .back-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: black;
+  }
+
+  .post-date {
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .post-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: black;
+    line-height: 1.2;
+    text-shadow: 
+      -0.08em 0 #ff3333,
+      0.08em 0 #33ccff,
+      -0.12em 0 rgba(255, 51, 51, 0.8),
+      0.12em 0 rgba(51, 204, 255, 0.8);
+  }
+
+  .post-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .post-content {
+    line-height: 1.8;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+  }
+
+  .hero-image,
+  .content-image,
+  .final-image {
+    margin: clamp(2rem, 5vw, 3rem) 0;
+    text-align: center;
+  }
+
+  .hero-image img,
+  .content-image img,
+  .final-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-caption {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  .lead {
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    color: #333;
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 2rem 0;
+  }
+
+  .post-content p {
+    margin: 1.5rem 0;
+    color: #444;
+  }
+
+  .post-content h2 {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin: clamp(3rem, 6vw, 4rem) 0 1.5rem 0;
+    color: black;
+  }
+
+  blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 4px solid #ff3333;
+    background: rgba(255, 51, 51, 0.05);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: normal;
+  }
+
+  /* Code Visual Pair */
+  .code-visual-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+    align-items: start;
+  }
+
+  .code-block {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-block h3 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .code-block pre {
+    margin: 0;
+    padding: 1.5rem;
+    background: #1a1a1a;
+    color: #e5e5e5;
+    font-family: 'Monaco', 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    overflow-x: auto;
+  }
+
+  .visual-result {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .noise-demo,
+  .shader-demo {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f39c12);
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .demo-caption {
+    padding: 1rem;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.02);
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* Installation Gallery */
+  .installation-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .installation-item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .installation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .installation-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .installation-info {
+    padding: 1.5rem;
+  }
+
+  .installation-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .installation-info p {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech {
+    padding: 0.2rem 0.6rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  /* Generative Showcase */
+  .generative-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.01);
+  }
+
+  .generator-controls h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .control-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .control-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+  }
+
+  .control-group input[type="range"] {
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+  }
+
+  .control-group input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3366FF;
+    cursor: pointer;
+  }
+
+  .control-group select {
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background: white;
+    font-size: 0.9rem;
+  }
+
+  .generate-btn {
+    padding: 0.75rem 1.5rem;
+    background: #3366FF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .generate-btn:hover {
+    background: #2557d6;
+  }
+
+  .generator-output {
+    text-align: center;
+  }
+
+  #generative-canvas {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: white;
+  }
+
+  .output-caption {
+    margin: 1rem 0 0 0;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* Shader Example */
+  .shader-example {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .shader-code {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .shader-code h3 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .shader-result {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  /* Data Visualization Examples */
+  .dataviz-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .dataviz-item {
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .dataviz-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .chart-container {
+    height: 200px;
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(255, 51, 51, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+  }
+
+  .rhythm-container {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 10px,
+      rgba(51, 102, 255, 0.3) 10px,
+      rgba(51, 102, 255, 0.3) 12px
+    );
+    animation: rhythmPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes rhythmPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .dataviz-item h4 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0 1rem;
+  }
+
+  .dataviz-item p {
+    margin: 0;
+    padding: 0 1rem 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  /* Tools Comparison */
+  .tools-comparison {
+    margin: 3rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .tool-category h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tool-item {
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.01);
+  }
+
+  .tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .difficulty {
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .difficulty.easy {
+    background: rgba(34, 197, 94, 0.2);
+    color: #16a34a;
+  }
+
+  .difficulty.medium {
+    background: rgba(245, 158, 11, 0.2);
+    color: #d97706;
+  }
+
+  .difficulty.hard {
+    background: rgba(239, 68, 68, 0.2);
+    color: #dc2626;
+  }
+
+  .tool-item p {
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .tool-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .feature {
+    padding: 0.2rem 0.6rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  /* Future Trends */
+  .future-trends {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  .trend-item {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.05), rgba(255, 51, 51, 0.05));
+    transition: transform 0.3s ease;
+  }
+
+  .trend-item:hover {
+    transform: translateY(-3px);
+  }
+
+  .trend-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .trend-item h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .trend-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .post-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: black;
+  }
+
+  @media (max-width: 768px) {
+    .code-visual-pair,
+    .generative-showcase,
+    .shader-example {
+      grid-template-columns: 1fr;
+    }
+
+    .tools-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .post-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .post-nav {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blog-post {
+      padding: 2rem 1rem;
+    }
+
+    .installation-gallery {
+      grid-template-columns: 1fr;
+    }
+
+    .dataviz-examples {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Generative Art Controls
+    const complexitySlider = document.getElementById('complexity');
+    const speedSlider = document.getElementById('speed');
+    const colorModeSelect = document.getElementById('colorMode');
+    const regenerateBtn = document.getElementById('regenerate');
+    const canvas = document.getElementById('generative-canvas');
+    
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let animationId;
+      let time = 0;
+      
+      function draw() {
+        const complexity = parseInt(complexitySlider?.value || 5);
+        const speed = parseFloat(speedSlider?.value || 1);
+        const colorMode = colorModeSelect?.value || 'rainbow';
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < complexity * 20; i++) {
+          const x = (Math.sin(time * speed + i * 0.1) * 150) + canvas.width / 2;
+          const y = (Math.cos(time * speed * 0.8 + i * 0.15) * 100) + canvas.height / 2;
+          
+          let hue;
+          switch(colorMode) {
+            case 'monochrome':
+              hue = 0;
+              ctx.fillStyle = `hsl(0, 0%, ${50 + Math.sin(time + i) * 30}%)`;
+              break;
+            case 'warm':
+              hue = (Math.sin(time + i) * 30) + 30;
+              ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
+              break;
+            case 'cool':
+              hue = (Math.sin(time + i) * 60) + 180;
+              ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
+              break;
+            default: // rainbow
+              hue = (time * 50 + i * 10) % 360;
+              ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
+          }
+          
+          const size = (Math.sin(time * 2 + i * 0.2) + 1) * complexity;
+          ctx.beginPath();
+          ctx.arc(x, y, Math.max(1, size), 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        time += 0.02;
+        animationId = requestAnimationFrame(draw);
+      }
+      
+      function startAnimation() {
+        if (animationId) cancelAnimationFrame(animationId);
+        draw();
+      }
+      
+      // Event listeners
+      [complexitySlider, speedSlider, colorModeSelect].forEach(element => {
+        if (element) {
+          element.addEventListener('input', startAnimation);
+        }
+      });
+      
+      if (regenerateBtn) {
+        regenerateBtn.addEventListener('click', () => {
+          time = Math.random() * 100;
+          startAnimation();
+        });
+      }
+      
+      // Start initial animation
+      startAnimation();
+    }
+    
+    // Simple SVG animation for flow chart
+    const flowChart = document.getElementById('flow-chart');
+    if (flowChart) {
+      // Add some animated circles to represent data flow
+      for (let i = 0; i < 20; i++) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', Math.random() * 300);
+        circle.setAttribute('cy', Math.random() * 200);
+        circle.setAttribute('r', Math.random() * 5 + 2);
+        circle.setAttribute('fill', `hsl(${Math.random() * 360}, 70%, 60%)`);
+        circle.setAttribute('opacity', '0.7');
+        
+        const animateX = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
+        animateX.setAttribute('attributeName', 'transform');
+        animateX.setAttribute('type', 'translate');
+        animateX.setAttribute('values', `0,0; ${Math.random() * 50 - 25},${Math.random() * 50 - 25}; 0,0`);
+        animateX.setAttribute('duration', `${2 + Math.random() * 3}s`);
+        animateX.setAttribute('repeatCount', 'indefinite');
+        
+        circle.appendChild(animateX);
+        flowChart.appendChild(circle);
+      }
+    }
+    
+    // Network graph canvas animation
+    const networkCanvas = document.getElementById('network-graph');
+    if (networkCanvas) {
+      const ctx = networkCanvas.getContext('2d');
+      const nodes = [];
+      
+      // Create nodes
+      for (let i = 0; i < 15; i++) {
+        nodes.push({
+          x: Math.random() * networkCanvas.width,
+          y: Math.random() * networkCanvas.height,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          radius: Math.random() * 5 + 3
+        });
+      }
+      
+      function drawNetwork() {
+        ctx.clearRect(0, 0, networkCanvas.width, networkCanvas.height);
+        
+        // Draw connections
+        ctx.strokeStyle = 'rgba(51, 102, 255, 0.2)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 80) {
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        
+        // Draw and update nodes
+        ctx.fillStyle = 'rgba(51, 102, 255, 0.7)';
+        nodes.forEach(node => {
+          // Update position
+          node.x += node.vx;
+          node.y += node.vy;
+          
+          // Bounce off edges
+          if (node.x < 0 || node.x > networkCanvas.width) node.vx *= -1;
+          if (node.y < 0 || node.y > networkCanvas.height) node.vy *= -1;
+          
+          // Keep in bounds
+          node.x = Math.max(0, Math.min(networkCanvas.width, node.x));
+          node.y = Math.max(0, Math.min(networkCanvas.height, node.y));
+          
+          // Draw node
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        
+        requestAnimationFrame(drawNetwork);
+      }
+      
+      drawNetwork();
+    }
+  });
+</script>

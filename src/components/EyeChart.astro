@@ -1,111 +1,50 @@
 ---
+const contentItems = [
+  { year: 2025, title: "Future Design Systems", slug: "/projects/future-design", type: "project" },
+  { year: 2024, title: "AI Interface Study", slug: "/case-studies/ai-interface", type: "case-study" },
+  { year: 2024, title: "Typography Research", slug: "/blog/typography-research", type: "blog" },
+  { year: 2024, title: "User Experience Patterns", slug: "/projects/ux-patterns", type: "project" },
+  { year: 2023, title: "Design Token Workshop", slug: "/blog/design-tokens", type: "blog" },
+  { year: 2023, title: "Component Architecture", slug: "/projects/component-arch", type: "project" },
+  { year: 2023, title: "Accessibility Audit", slug: "/case-studies/a11y-audit", type: "case-study" },
+  { year: 2022, title: "Creative Coding Experiments", slug: "/blog/creative-coding", type: "blog" },
+  { year: 2022, title: "Brand Identity System", slug: "/projects/brand-identity", type: "project" },
+  { year: 2022, title: "Mobile App Redesign", slug: "/case-studies/mobile-redesign", type: "case-study" },
+  { year: 2021, title: "Design System Migration", slug: "/projects/design-migration", type: "project" },
+  { year: 2021, title: "User Research Methods", slug: "/blog/research-methods", type: "blog" },
+  { year: 2020, title: "Remote Design Process", slug: "/blog/remote-design", type: "blog" }
+];
+
+function getYearDisplay(currentItem, index) {
+  if (index === 0) return currentItem.year.toString();
+  const previousYear = contentItems[index - 1]?.year;
+  return currentItem.year !== previousYear ? currentItem.year.toString() : '';
+}
+
+function getLettersFromTitle(title) {
+  return title.toUpperCase().replace(/[^A-Z]/g, '').substring(0, 5).split('');
+}
 ---
 
+<div class="pixel-trail-container"></div>
 <div class="eye-chart-container">
   <div class="eye-chart">
-    <div class="chart-line line-1">
-      <span data-letter="G">G</span>
-      <span data-letter="U">U</span>
-      <span data-letter="D">D</span>
-      <span data-letter="D">D</span>
-      <span data-letter="I">I</span>
-    </div>
-    
-    <div class="chart-line line-2">
-      <span data-letter="Z">Z</span>
-      <span data-letter="I">I</span>
-      <span data-letter="N">N</span>
-      <span data-letter="I">I</span>
-      <span data-letter="S">S</span>
-    </div>
-    
-    <div class="chart-line line-3">
-      <span data-letter="S">S</span>
-      <span data-letter="O">O</span>
-      <span data-letter="O">O</span>
-      <span data-letter="O">O</span>
-      <span data-letter="O">O</span>
-    </div>
-    
-    <div class="chart-line line-4">
-      <span data-letter="I">I</span>
-      <span data-letter="M">M</span>
-      <span data-letter="P">P</span>
-      <span data-letter="O">O</span>
-      <span data-letter="R">R</span>
-    </div>
-    
-    <div class="chart-line line-5">
-      <span data-letter="T">T</span>
-      <span data-letter="A">A</span>
-      <span data-letter="N">N</span>
-      <span data-letter="T">T</span>
-      <span data-letter="T">T</span>
-    </div>
-    
-    <div class="chart-line line-6">
-      <span data-letter="F">F</span>
-      <span data-letter="O">O</span>
-      <span data-letter="R">R</span>
-      <span data-letter="R">R</span>
-      <span data-letter="R">R</span>
-    </div>
-    
-    <div class="chart-line line-7">
-      <span data-letter="P">P</span>
-      <span data-letter="E">E</span>
-      <span data-letter="O">O</span>
-      <span data-letter="P">P</span>
-      <span data-letter="L">L</span>
-    </div>
-    
-    <div class="chart-line line-8">
-      <span data-letter="T">T</span>
-      <span data-letter="U">U</span>
-      <span data-letter="U">U</span>
-      <span data-letter="U">U</span>
-      <span data-letter="U">U</span>
-    </div>
-    
-    <div class="chart-line line-9">
-      <span data-letter="U">U</span>
-      <span data-letter="N">N</span>
-      <span data-letter="D">D</span>
-      <span data-letter="U">U</span>
-      <span data-letter="R">R</span>
-    </div>
-    
-    <div class="chart-line line-10">
-      <span data-letter="S">S</span>
-      <span data-letter="T">T</span>
-      <span data-letter="A">A</span>
-      <span data-letter="N">N</span>
-      <span data-letter="D">D</span>
-    </div>
-    
-    <div class="chart-line line-11">
-      <span data-letter="T">T</span>
-      <span data-letter="H">H</span>
-      <span data-letter="E">E</span>
-      <span data-letter="E">E</span>
-      <span data-letter="E">E</span>
-    </div>
-    
-    <div class="chart-line line-12">
-      <span data-letter="W">W</span>
-      <span data-letter="U">U</span>
-      <span data-letter="R">R</span>
-      <span data-letter="L">L</span>
-      <span data-letter="D">D</span>
-    </div>
-    
-    <div class="chart-line line-13">
-      <span data-letter="B">B</span>
-      <span data-letter="E">E</span>
-      <span data-letter="T">T</span>
-      <span data-letter="U">U</span>
-      <span data-letter="R">R</span>
-    </div>
+    {contentItems.map((item, index) => {
+      const letters = getLettersFromTitle(item.title);
+      const yearDisplay = getYearDisplay(item, index);
+      const lineNumber = index + 1;
+      
+      return (
+        <a href={item.slug} class={`chart-line line-${lineNumber} content-link`} data-type={item.type} title={item.title}>
+          <span class="line-number">{yearDisplay}</span>
+          <div class="letters-container">
+            {letters.map((letter, letterIndex) => (
+              <span data-letter={letter} key={letterIndex}>{letter}</span>
+            ))}
+          </div>
+        </a>
+      );
+    })}
     
     <div class="drawer-trigger" id="drawer-trigger">
       <div class="solid-block">SEE MORE</div>
@@ -122,6 +61,55 @@
 </div>
 
 <style>
+  .pixel-trail-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .pixel {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    opacity: 0;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    transform: scale(0);
+    animation: pixelAppear 0.6s ease-out forwards;
+  }
+  
+  @keyframes pixelAppear {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+      opacity: 0.8;
+      transform: scale(1) rotate(360deg);
+    }
+  }
+  
+  .pixel.fade-out {
+    animation: pixelFadeOut 0.8s ease-out forwards;
+  }
+  
+  @keyframes pixelFadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.5) rotate(540deg);
+    }
+  }
+
   .eye-chart-container {
     position: fixed;
     top: 0;
@@ -134,15 +122,7 @@
     width: 100vw;
     height: 100vh;
     margin: 0;
-    background: 
-      repeating-conic-gradient(
-        from 0deg at 50% 50%,
-        rgba(255, 182, 193, 0.3) 0deg 90deg,
-        white 90deg 180deg,
-        rgba(255, 182, 193, 0.3) 180deg 270deg,
-        white 270deg 360deg
-      );
-    background-size: 20px 20px;
+    background: white;
     padding: min(4vw, 3rem);
     font-family: 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-weight: 700;
@@ -184,10 +164,45 @@
   .chart-line {
     display: flex;
     justify-content: flex-start;
-    gap: 0.5em;
+    align-items: center;
     font-weight: 700;
     letter-spacing: 0.05em;
     white-space: nowrap;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+  }
+  
+  .content-link:hover {
+    transform: translateX(4px);
+  }
+  
+  .content-link:hover .line-number {
+    color: #666 !important;
+  }
+  
+  .line-number {
+    color: #000000 !important;
+    font-family: 'Evolve Sans', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 0.8rem !important;
+    margin-right: 1.5em !important;
+    width: 2em !important;
+    text-align: left !important;
+    flex-shrink: 0 !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  
+  .letters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    flex: 1;
   }
   
   .chart-line span {
@@ -246,68 +261,75 @@
   }
   
   .line-1 {
-    font-size: clamp(2rem, 8vw, 12rem);
+    font-size: 5rem;
   }
   
   .line-2 {
-    font-size: clamp(1.6rem, 6.4vw, 9.6rem);
+    font-size: 4rem;
   }
   
   .line-3 {
-    font-size: clamp(1.28rem, 5.12vw, 7.68rem);
+    font-size: 3.2rem;
   }
   
   .line-4 {
-    font-size: clamp(1.04rem, 4.16vw, 6.24rem);
+    font-size: 2.6rem;
   }
   
   .line-5 {
-    font-size: clamp(0.84rem, 3.36vw, 5.04rem);
+    font-size: 2.1rem;
   }
   
   .line-6 {
-    font-size: clamp(0.68rem, 2.72vw, 4.08rem);
+    font-size: 1.7rem;
   }
   
   .line-7 {
-    font-size: clamp(0.56rem, 2.24vw, 3.36rem);
+    font-size: 1.4rem;
   }
   
   .line-8 {
-    font-size: clamp(0.44rem, 1.76vw, 2.64rem);
+    font-size: 1.1rem;
   }
   
   .line-9 {
-    font-size: clamp(0.36rem, 1.44vw, 2.16rem);
+    font-size: 0.9rem;
   }
   
   .line-10 {
-    font-size: clamp(0.3rem, 1.2vw, 1.8rem);
+    font-size: 0.75rem;
   }
   
   .line-11 {
-    font-size: clamp(0.24rem, 0.96vw, 1.44rem);
+    font-size: 0.6rem;
   }
   
   .line-12 {
-    font-size: clamp(0.2rem, 0.8vw, 1.2rem);
+    font-size: 0.5rem;
   }
   
   .line-13 {
-    font-size: clamp(0.16rem, 0.64vw, 0.96rem);
-  }
-  
-  .line-14 {
-    font-size: clamp(0.14rem, 0.56vw, 0.84rem);
+    font-size: 0.4rem;
   }
   
   .drawer-trigger {
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpButton 0.6s ease forwards;
+    animation-delay: 2.5s;
+  }
+  
+  @keyframes slideUpButton {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   .drawer-trigger:hover {
@@ -323,11 +345,12 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     transition: all 0.3s ease;
-    min-width: 120px;
+    width: 100%;
     text-align: center;
     box-shadow: none !important;
     text-shadow: none !important;
     position: relative;
+    display: block;
   }
   
   .solid-block::before,
@@ -345,7 +368,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 0.3em;
-    font-size: clamp(0.12rem, 0.48vw, 0.72rem);
+    font-size: 0.6rem;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.4);
     letter-spacing: 0.1em;
@@ -389,8 +412,74 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Pixel Trail Effect
+    const pixelTrailContainer = document.querySelector('.pixel-trail-container');
+    let pixelCount = 0;
+    const maxPixels = 50;
+    
+    function createPixel(x, y) {
+      // Remove old pixels if we have too many
+      const existingPixels = pixelTrailContainer.querySelectorAll('.pixel');
+      if (existingPixels.length >= maxPixels) {
+        const oldestPixel = existingPixels[0];
+        oldestPixel.remove();
+      }
+      
+      // Create new pixel
+      const pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      pixel.style.left = (x - 8) + 'px'; // Center on cursor
+      pixel.style.top = (y - 8) + 'px';
+      
+      // Add some randomness
+      const randomOffset = 10;
+      const offsetX = (Math.random() - 0.5) * randomOffset;
+      const offsetY = (Math.random() - 0.5) * randomOffset;
+      pixel.style.left = (x - 8 + offsetX) + 'px';
+      pixel.style.top = (y - 8 + offsetY) + 'px';
+      
+      pixelTrailContainer.appendChild(pixel);
+      
+      // Remove pixel after animation
+      setTimeout(() => {
+        if (pixel.parentNode) {
+          pixel.classList.add('fade-out');
+          setTimeout(() => {
+            if (pixel.parentNode) {
+              pixel.remove();
+            }
+          }, 800);
+        }
+      }, 600);
+    }
+    
+    // Throttle pixel creation to improve performance
+    let lastPixelTime = 0;
+    const pixelThrottle = 50; // Create pixel every 50ms max
+    
+    function handleMouseMove(e) {
+      const now = Date.now();
+      if (now - lastPixelTime > pixelThrottle) {
+        createPixel(e.clientX, e.clientY);
+        lastPixelTime = now;
+      }
+    }
+    
+    function handleTouchMove(e) {
+      e.preventDefault();
+      const now = Date.now();
+      if (now - lastPixelTime > pixelThrottle && e.touches[0]) {
+        createPixel(e.touches[0].clientX, e.touches[0].clientY);
+        lastPixelTime = now;
+      }
+    }
+    
+    // Add event listeners for cursor movement
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
     const container = document.querySelector('.eye-chart-container');
-    const letters = document.querySelectorAll('.chart-line span[data-letter]');
+    const letters = document.querySelectorAll('.content-link span[data-letter]');
     const PROXIMITY_THRESHOLD = 150; // Distance in pixels for effect to start
     
     // Scramble animation on load
