@@ -15,7 +15,28 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="keywords" content="design, technology, UX, UI, product design, web development, creative solutions" />
+    <meta name="author" content="Nolan Figueroa" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow, noarchive, nosnippet, noimageindex" />
+    <meta name="googlebot" content="index, follow, noarchive, nosnippet, noimageindex" />
+    <meta name="bingbot" content="index, follow, noarchive, nosnippet, noimageindex" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Nolan Figueroa - Design & Technology" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href={Astro.url} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +46,30 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
   </head>
   <body>
     <slot />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Nolan Figueroa",
+        "jobTitle": "Design & Technology Professional",
+        "description": "I bridge design and tech to transform how people and organizations come together. I'm driven to solve messy problems by designing experiences that map new frontiers and build better futures.",
+        "url": "https://astronolan.com",
+        "sameAs": [
+          "https://bsky.app/profile/astronolan.com",
+          "https://www.linkedin.com/in/astronolan/"
+        ],
+        "knowsAbout": [
+          "UX Design",
+          "UI Design", 
+          "Product Design",
+          "Web Development",
+          "Design Systems",
+          "Creative Solutions"
+        ]
+      }
+    </script>
   </body>
 </html>
 

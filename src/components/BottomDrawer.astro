@@ -31,7 +31,7 @@
       <div class="contact-info">
         <h3>Get in Touch</h3>
         <div class="contact-links">
-          <a href="mailto:hello@astronolan.com?subject=Let's get to work, Nolan. 🚀" class="contact-link">
+          <a href="#" class="contact-link" data-email="hello@astronolan.com" data-subject="Let's get to work, Nolan. 🚀">
             <svg class="contact-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M6 10L10 6M10 6H6M10 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -416,5 +416,17 @@
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear().toString();
     }
+    
+    // Handle obfuscated email links
+    const emailLinks = document.querySelectorAll('[data-email]');
+    emailLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = this.getAttribute('data-email');
+        const subject = this.getAttribute('data-subject') || '';
+        const mailtoUrl = `mailto:${email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
+        window.location.href = mailtoUrl;
+      });
+    });
   });
 </script>
