@@ -1,0 +1,728 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BottomDrawer from '../../components/BottomDrawer.astro';
+---
+
+<Layout title="AI Interface Study - Case Study - Nolan">
+  <article class="case-study">
+    <header class="study-header">
+      <div class="study-meta">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+        <div class="study-details">
+          <span class="study-year">2024</span>
+          <span class="study-type">Case Study</span>
+        </div>
+      </div>
+      <h1>AI Interface Study</h1>
+      <p class="study-subtitle">Designing intuitive conversational interfaces for complex AI-powered workflows</p>
+    </header>
+
+    <div class="study-content">
+      <div class="study-summary">
+        <div class="summary-grid">
+          <div class="summary-item">
+            <h3>Client</h3>
+            <p>Enterprise AI Platform</p>
+          </div>
+          <div class="summary-item">
+            <h3>Timeline</h3>
+            <p>8 weeks</p>
+          </div>
+          <div class="summary-item">
+            <h3>Role</h3>
+            <p>Lead UX Designer</p>
+          </div>
+          <div class="summary-item">
+            <h3>Team</h3>
+            <p>3 Designers, 2 Researchers</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <img src="https://picsum.photos/900/500?random=110" alt="AI interface design system" />
+        <p class="media-caption">Final interface design showcasing conversational AI workflows</p>
+      </div>
+
+      <section class="study-section">
+        <h2>The Challenge</h2>
+        <p>Users were struggling with complex AI model configuration through traditional form-based interfaces. The existing system required deep technical knowledge and resulted in high abandonment rates.</p>
+        
+        <div class="problem-metrics">
+          <div class="metric-card negative">
+            <div class="metric-value">73%</div>
+            <div class="metric-label">Task Abandonment Rate</div>
+          </div>
+          <div class="metric-card negative">
+            <div class="metric-value">4.2</div>
+            <div class="metric-label">Average Support Tickets per User</div>
+          </div>
+          <div class="metric-card negative">
+            <div class="metric-value">45min</div>
+            <div class="metric-label">Average Configuration Time</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="study-section">
+        <h2>Research & Discovery</h2>
+        <p>We conducted interviews with 24 users across different expertise levels to understand their mental models and pain points.</p>
+        
+        <div class="research-insights">
+          <div class="insight-card">
+            <div class="insight-icon">💬</div>
+            <h4>Natural Language Preference</h4>
+            <p>Users preferred describing their goals in natural language rather than navigating complex menus</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">🔄</div>
+            <h4>Iterative Workflows</h4>
+            <p>Configuration is rarely linear - users need to experiment and refine their approach</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">👥</div>
+            <h4>Collaborative Setup</h4>
+            <p>Most configurations involve input from multiple stakeholders with different expertise</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="study-section">
+        <h2>Design Process</h2>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h4>Conversation Mapping</h4>
+              <p>Mapped out natural conversation flows for different configuration scenarios</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h4>Prototype Testing</h4>
+              <p>Built conversational prototypes and tested with 12 users across 3 iterations</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h4>AI Training</h4>
+              <p>Collaborated with ML team to train conversation models on real user interactions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-media">
+          <img src="https://picsum.photos/800/400?random=111" alt="Design process artifacts" />
+          <p class="media-caption">Conversation flow diagrams and user journey maps</p>
+        </div>
+      </section>
+
+      <section class="study-section">
+        <h2>Key Design Solutions</h2>
+        
+        <div class="solution-grid">
+          <div class="solution-item">
+            <h4>Guided Conversations</h4>
+            <p>AI assistant that asks contextual questions to understand user goals and technical requirements</p>
+            <div class="solution-demo">
+              <div class="chat-interface">
+                <div class="chat-message ai">
+                  <p>What type of data are you working with for this model?</p>
+                </div>
+                <div class="chat-message user">
+                  <p>Customer support emails that need to be categorized</p>
+                </div>
+                <div class="chat-message ai">
+                  <p>Got it! For email classification, I'd recommend starting with a text classification model. How many categories do you need?</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="solution-item">
+            <h4>Visual Configuration</h4>
+            <p>Complex settings presented as simple visual choices with AI recommendations</p>
+            <div class="config-demo">
+              <img src="https://picsum.photos/400/250?random=112" alt="Visual configuration interface" />
+            </div>
+          </div>
+
+          <div class="solution-item">
+            <h4>Progressive Disclosure</h4>
+            <p>Advanced options revealed contextually based on user choices and experience level</p>
+            <div class="disclosure-demo">
+              <div class="setting-group">
+                <div class="basic-setting">✓ Automatic optimization</div>
+                <div class="advanced-setting">⚙️ Manual parameter tuning</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="study-section">
+        <h2>Results & Impact</h2>
+        <div class="results-grid">
+          <div class="result-card positive">
+            <div class="result-value">89%</div>
+            <div class="result-label">Reduction in Abandonment Rate</div>
+            <div class="result-change">↓ from 73%</div>
+          </div>
+          <div class="result-card positive">
+            <div class="result-value">12min</div>
+            <div class="result-label">Average Configuration Time</div>
+            <div class="result-change">↓ from 45min</div>
+          </div>
+          <div class="result-card positive">
+            <div class="result-value">92%</div>
+            <div class="result-label">User Satisfaction Score</div>
+            <div class="result-change">↑ from 34%</div>
+          </div>
+          <div class="result-card positive">
+            <div class="result-value">67%</div>
+            <div class="result-label">Reduction in Support Tickets</div>
+            <div class="result-change">↓ from 4.2/user</div>
+          </div>
+        </div>
+
+        <blockquote class="user-quote">
+          "This feels like having an AI expert sitting next to me, guiding me through the process. I can finally set up models without feeling lost."
+          <cite>— Senior Data Scientist, Fortune 500 Company</cite>
+        </blockquote>
+      </section>
+
+      <section class="study-section">
+        <h2>Key Learnings</h2>
+        <div class="learning-list">
+          <div class="learning-item">
+            <h4>Context is Everything</h4>
+            <p>AI interfaces must understand not just what users want, but why they want it and what constraints they're working within.</p>
+          </div>
+          <div class="learning-item">
+            <h4>Progressive Complexity</h4>
+            <p>Start simple and reveal complexity gradually based on user confidence and needs rather than front-loading all options.</p>
+          </div>
+          <div class="learning-item">
+            <h4>Human-AI Collaboration</h4>
+            <p>The best interfaces feel like collaborations between human intuition and AI capabilities, not humans serving the AI.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="study-footer">
+        <div class="study-tags">
+          <span class="tag">AI/ML</span>
+          <span class="tag">Conversational UI</span>
+          <span class="tag">Enterprise UX</span>
+          <span class="tag">User Research</span>
+          <span class="tag">Interaction Design</span>
+        </div>
+        
+        <div class="study-nav">
+          <a href="/projects/future-design" class="nav-link">← Previous</a>
+          <a href="/blog/typography-research" class="nav-link">Next →</a>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <BottomDrawer />
+</Layout>
+
+<style>
+  .case-study {
+    min-height: 100vh;
+    background: white;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+
+  .study-header {
+    margin-bottom: clamp(3rem, 6vw, 4rem);
+  }
+
+  .study-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .back-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: black;
+  }
+
+  .study-details {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .study-year,
+  .study-type {
+    color: #888;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+  }
+
+  .study-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: black;
+    line-height: 1.2;
+    text-shadow: 
+      -0.08em 0 #ff3333,
+      0.08em 0 #33ccff,
+      -0.12em 0 rgba(255, 51, 51, 0.8),
+      0.12em 0 rgba(51, 204, 255, 0.8);
+  }
+
+  .study-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .study-content {
+    line-height: 1.8;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+  }
+
+  .study-summary {
+    margin: 2rem 0;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .summary-item h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .summary-item p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .hero-media {
+    margin: clamp(2rem, 5vw, 3rem) 0;
+    text-align: center;
+  }
+
+  .hero-media img,
+  .process-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .media-caption {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 1rem;
+  }
+
+  .study-section {
+    margin: 4rem 0;
+  }
+
+  .study-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    color: black;
+  }
+
+  .study-section p {
+    color: #444;
+    margin: 1.5rem 0;
+  }
+
+  .problem-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .metric-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .metric-card.negative {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.05));
+  }
+
+  .metric-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #dc2626;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .metric-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .research-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .insight-card {
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.01);
+    text-align: center;
+  }
+
+  .insight-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .insight-card h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .insight-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    background: #3366FF;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .step-content h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .step-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .solution-item {
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.01);
+  }
+
+  .solution-item h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .solution-item p {
+    margin: 0 0 1.5rem 0;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .chat-interface {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .chat-message {
+    margin: 0.5rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .chat-message.ai {
+    background: #e3f2fd;
+    color: #1565c0;
+    margin-right: 2rem;
+  }
+
+  .chat-message.user {
+    background: #f3e5f5;
+    color: #7b1fa2;
+    margin-left: 2rem;
+  }
+
+  .config-demo img,
+  .disclosure-demo {
+    margin-top: 1rem;
+    border-radius: 6px;
+  }
+
+  .setting-group {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+
+  .basic-setting,
+  .advanced-setting {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  .basic-setting {
+    color: #22c55e;
+  }
+
+  .advanced-setting {
+    color: #666;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .result-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .result-card.positive {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(22, 163, 74, 0.05));
+  }
+
+  .result-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #16a34a;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-change {
+    font-size: 0.8rem;
+    color: #16a34a;
+    font-weight: 600;
+  }
+
+  .user-quote {
+    margin: 3rem 0;
+    padding: 2rem;
+    border-left: 4px solid #3366FF;
+    background: rgba(51, 102, 255, 0.05);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.1rem;
+  }
+
+  .user-quote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: normal;
+  }
+
+  .learning-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .learning-item {
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.01);
+  }
+
+  .learning-item h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .learning-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .study-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .study-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .study-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: black;
+  }
+
+  @media (max-width: 768px) {
+    .study-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .study-details {
+      align-self: flex-end;
+    }
+
+    .study-nav {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .solution-grid,
+    .learning-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .case-study {
+      padding: 2rem 1rem;
+    }
+
+    .results-grid,
+    .problem-metrics {
+      grid-template-columns: 1fr;
+    }
+
+    .chat-message.ai {
+      margin-right: 0;
+    }
+
+    .chat-message.user {
+      margin-left: 0;
+    }
+  }
+</style>

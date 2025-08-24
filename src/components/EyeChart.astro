@@ -26,7 +26,6 @@ function getLettersFromTitle(title) {
 }
 ---
 
-<div class="pixel-trail-container"></div>
 <div class="eye-chart-container">
   <div class="eye-chart">
     {contentItems.map((item, index) => {
@@ -46,70 +45,29 @@ function getLettersFromTitle(title) {
       );
     })}
     
-    <div class="drawer-trigger" id="drawer-trigger">
-      <div class="solid-block">SEE MORE</div>
+    <div class="drawer-trigger-wrapper">
+      <span class="line-number"></span>
+      <div class="letters-container">
+        <div class="drawer-trigger" id="drawer-trigger">
+          <div class="solid-block">ABOUT NOLAN</div>
+        </div>
+      </div>
     </div>
     
     <div class="copyright-line">
-      <span class="copyright-symbol">©</span>
-      <span class="copyright-year">2025</span>
-      <span class="copyright-text">ALL RIGHTS RESERVED</span>
-      <span class="copyright-care">MADE WITH CARE</span>
+      <span class="line-number"></span>
+      <div class="copyright-content letters-container">
+        <span class="copyright-symbol">©</span>
+        <span class="copyright-year">2025</span>
+        <span class="copyright-text">ALL RIGHTS RESERVED</span>
+        <span class="copyright-care">MADE WITH CARE</span>
+      </div>
     </div>
   </div>
   
 </div>
 
 <style>
-  .pixel-trail-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1000;
-    overflow: hidden;
-  }
-  
-  .pixel {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    opacity: 0;
-    border-radius: 2px;
-    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-    transform: scale(0);
-    animation: pixelAppear 0.6s ease-out forwards;
-  }
-  
-  @keyframes pixelAppear {
-    0% {
-      opacity: 0;
-      transform: scale(0) rotate(0deg);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.2) rotate(180deg);
-    }
-    100% {
-      opacity: 0.8;
-      transform: scale(1) rotate(360deg);
-    }
-  }
-  
-  .pixel.fade-out {
-    animation: pixelFadeOut 0.8s ease-out forwards;
-  }
-  
-  @keyframes pixelFadeOut {
-    to {
-      opacity: 0;
-      transform: scale(0.5) rotate(540deg);
-    }
-  }
-
   .eye-chart-container {
     position: fixed;
     top: 0;
@@ -182,12 +140,29 @@ function getLettersFromTitle(title) {
     color: #666 !important;
   }
   
+  .content-link::after {
+    content: '↗';
+    position: absolute;
+    right: -2rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    font-size: 1.2em;
+    color: #666;
+    pointer-events: none;
+  }
+  
+  .content-link:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
   .line-number {
     color: #000000 !important;
     font-family: 'Evolve Sans', sans-serif !important;
     font-weight: 400 !important;
     font-size: 0.8rem !important;
-    margin-right: 1.5em !important;
+    margin-right: max(1rem, 1.5em) !important;
     width: 2em !important;
     text-align: left !important;
     flex-shrink: 0 !important;
@@ -312,13 +287,26 @@ function getLettersFromTitle(title) {
     font-size: 0.4rem;
   }
   
-  .drawer-trigger {
-    cursor: pointer;
-    transition: all 0.3s ease;
+  .drawer-trigger-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+  }
+  
+  .drawer-trigger-wrapper .line-number {
+    width: 2em;
+    margin-right: 1.5em;
+    flex-shrink: 0;
+    visibility: hidden;
+  }
+  
+  .drawer-trigger {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
     transform: translateY(20px);
     animation: slideUpButton 0.6s ease forwards;
@@ -345,12 +333,12 @@ function getLettersFromTitle(title) {
     font-weight: 600;
     letter-spacing: 0.1em;
     transition: all 0.3s ease;
-    width: 100%;
+    width: auto;
     text-align: center;
     box-shadow: none !important;
     text-shadow: none !important;
     position: relative;
-    display: block;
+    display: inline-block;
   }
   
   .solid-block::before,
@@ -367,7 +355,22 @@ function getLettersFromTitle(title) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 100%;
+  }
+  
+  .copyright-line .line-number {
+    width: 2em;
+    margin-right: 1.5em;
+    flex-shrink: 0;
+    visibility: hidden;
+  }
+  
+  .copyright-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 0.3em;
+    flex: 1;
     font-size: 0.6rem;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.4);
@@ -412,75 +415,9 @@ function getLettersFromTitle(title) {
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Pixel Trail Effect
-    const pixelTrailContainer = document.querySelector('.pixel-trail-container');
-    let pixelCount = 0;
-    const maxPixels = 50;
-    
-    function createPixel(x, y) {
-      // Remove old pixels if we have too many
-      const existingPixels = pixelTrailContainer.querySelectorAll('.pixel');
-      if (existingPixels.length >= maxPixels) {
-        const oldestPixel = existingPixels[0];
-        oldestPixel.remove();
-      }
-      
-      // Create new pixel
-      const pixel = document.createElement('div');
-      pixel.className = 'pixel';
-      pixel.style.left = (x - 8) + 'px'; // Center on cursor
-      pixel.style.top = (y - 8) + 'px';
-      
-      // Add some randomness
-      const randomOffset = 10;
-      const offsetX = (Math.random() - 0.5) * randomOffset;
-      const offsetY = (Math.random() - 0.5) * randomOffset;
-      pixel.style.left = (x - 8 + offsetX) + 'px';
-      pixel.style.top = (y - 8 + offsetY) + 'px';
-      
-      pixelTrailContainer.appendChild(pixel);
-      
-      // Remove pixel after animation
-      setTimeout(() => {
-        if (pixel.parentNode) {
-          pixel.classList.add('fade-out');
-          setTimeout(() => {
-            if (pixel.parentNode) {
-              pixel.remove();
-            }
-          }, 800);
-        }
-      }, 600);
-    }
-    
-    // Throttle pixel creation to improve performance
-    let lastPixelTime = 0;
-    const pixelThrottle = 50; // Create pixel every 50ms max
-    
-    function handleMouseMove(e) {
-      const now = Date.now();
-      if (now - lastPixelTime > pixelThrottle) {
-        createPixel(e.clientX, e.clientY);
-        lastPixelTime = now;
-      }
-    }
-    
-    function handleTouchMove(e) {
-      e.preventDefault();
-      const now = Date.now();
-      if (now - lastPixelTime > pixelThrottle && e.touches[0]) {
-        createPixel(e.touches[0].clientX, e.touches[0].clientY);
-        lastPixelTime = now;
-      }
-    }
-    
-    // Add event listeners for cursor movement
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    
     const container = document.querySelector('.eye-chart-container');
     const letters = document.querySelectorAll('.content-link span[data-letter]');
-    const PROXIMITY_THRESHOLD = 150; // Distance in pixels for effect to start
+    const PROXIMITY_THRESHOLD = 150; // Distance threshold for clearing effect
     
     // Scramble animation on load
     const CHAR_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
