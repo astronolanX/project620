@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an Astro-based portfolio and blog website using Tailwind CSS for styling. The site showcases projects, blog posts, case studies, and creative explorations.
+This is an Astro-based portfolio and blog website using Tailwind CSS for styling. The site showcases projects, blog posts, case studies, and creative explorations built around a unique eye chart interface design.
 
 ## Commands
 
@@ -20,14 +20,24 @@ This is an Astro-based portfolio and blog website using Tailwind CSS for styling
 
 ## Architecture
 
-The project uses Astro's component-based architecture:
+The project uses Astro's component-based architecture with a unique dual-interface design:
 
-- **Pages** (`src/pages/`) - Astro page components that define routes
-- **Components** (`src/components/`) - Reusable Astro components (Navigation, Hero, Footer, etc.)
-- **Layouts** (`src/layouts/`) - Layout templates wrapping page content
-- **Styles** (`src/styles/`) - Global CSS and Tailwind imports
+### Core Components
+- **EyeChart.astro** - Main interface component featuring an eye chart layout with chromatic aberration effects
+- **BottomDrawer.astro** - Slide-up navigation drawer with dark theme and touch gesture support
+- **Layout.astro** - Base layout loading Google Fonts (Bebas Neue, Evolve Sans) and global styles
 
-The site is configured for static output with directory-based URLs (see `astro.config.mjs`).
+### File Structure
+- **Pages** (`src/pages/`) - Route definitions including index, blog posts, about, and contact
+- **Components** (`src/components/`) - Reusable Astro components (EyeChart, BottomDrawer)
+- **Layouts** (`src/layouts/`) - Layout template with font loading and global styles
+- **Styles** (`src/styles/`) - Tailwind imports and custom utilities
+
+### Key Architectural Patterns
+- Static site generation with directory-based URLs (`astro.config.mjs`)
+- Component-scoped CSS with global font declarations in Layout.astro
+- Interactive drawer system with vanilla JavaScript touch/swipe handling
+- Responsive eye chart scaling using CSS clamp() functions
 
 ## Design System Rules
 

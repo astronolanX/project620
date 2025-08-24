@@ -37,4 +37,7 @@ lerna-debug.log*
 
 # Vite
 vite.config.js.timestamp-*
-vite.config.ts.timestamp-*.astro/
+vite.config.ts.timestamp-*
+
+# Astro
+.astro/
