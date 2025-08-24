@@ -13,8 +13,6 @@
       <p class="bio">I bridge design and tech to transform how people and organizations come together. I'm driven to solve messy problems by designing experiences that map new frontiers and build better futures.</p>
       <ul class="nav-links">
         <li><a href="/blog">Blog</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
       </ul>
       
       <div class="contact-info">
@@ -111,7 +109,7 @@
   }
   
   .drawer-nav {
-    max-width: 600px;
+    max-width: 720px;
     margin: 0 auto;
     padding-top: 3rem;
   }
@@ -255,16 +253,20 @@
     
     function toggleDrawer() {
       isOpen = !isOpen;
-      if (isOpen) {
-        drawerContent.classList.add('open');
-      } else {
-        drawerContent.classList.remove('open');
+      if (drawerContent) {
+        if (isOpen) {
+          drawerContent.classList.add('open');
+        } else {
+          drawerContent.classList.remove('open');
+        }
       }
     }
     
     function closeDrawer() {
       isOpen = false;
-      drawerContent.classList.remove('open');
+      if (drawerContent) {
+        drawerContent.classList.remove('open');
+      }
     }
     
     if (drawerTrigger) {
@@ -277,11 +279,13 @@
     }
     
     // Close drawer when clicking outside
-    drawerContent.addEventListener('click', function(e) {
-      if (e.target === drawerContent) {
-        closeDrawer();
-      }
-    });
+    if (drawerContent) {
+      drawerContent.addEventListener('click', function(e) {
+        if (e.target === drawerContent) {
+          closeDrawer();
+        }
+      });
+    }
     
     // Close drawer on escape key
     document.addEventListener('keydown', function(e) {
@@ -291,46 +295,48 @@
     });
     
     // Touch gesture support for mobile
-    let startY = 0;
-    let currentY = 0;
-    let isDragging = false;
-    
-    drawerContent.addEventListener('touchstart', function(e) {
-      startY = e.touches[0].clientY;
-      isDragging = true;
-    }, { passive: true });
-    
-    drawerContent.addEventListener('touchmove', function(e) {
-      if (!isDragging) return;
-      currentY = e.touches[0].clientY;
-      const deltaY = currentY - startY;
+    if (drawerContent) {
+      let startY = 0;
+      let currentY = 0;
+      let isDragging = false;
       
-      // Only allow downward swipes when drawer is open
-      if (isOpen && deltaY > 0) {
-        const translateY = Math.min(deltaY, window.innerHeight);
-        drawerContent.style.transform = `translateY(${translateY}px)`;
-      }
-    }, { passive: true });
-    
-    drawerContent.addEventListener('touchend', function(e) {
-      if (!isDragging) return;
-      isDragging = false;
+      drawerContent.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+      }, { passive: true });
       
-      const deltaY = currentY - startY;
+      drawerContent.addEventListener('touchmove', function(e) {
+        if (!isDragging || !drawerContent) return;
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        
+        // Only allow downward swipes when drawer is open
+        if (isOpen && deltaY > 0) {
+          const translateY = Math.min(deltaY, window.innerHeight);
+          drawerContent.style.transform = `translateY(${translateY}px)`;
+        }
+      }, { passive: true });
       
-      // Close drawer if swiped down more than 100px
-      if (isOpen && deltaY > 100) {
-        closeDrawer();
-      }
-      
-      // Reset transform
-      drawerContent.style.transform = '';
-    }, { passive: true });
+      drawerContent.addEventListener('touchend', function(_e) {
+        if (!isDragging || !drawerContent) return;
+        isDragging = false;
+        
+        const deltaY = currentY - startY;
+        
+        // Close drawer if swiped down more than 100px
+        if (isOpen && deltaY > 100) {
+          closeDrawer();
+        }
+        
+        // Reset transform
+        drawerContent.style.transform = '';
+      }, { passive: true });
+    }
     
     // Set current year
     const currentYear = document.getElementById('current-year');
     if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
+      currentYear.textContent = new Date().getFullYear().toString();
     }
   });
 </script>
