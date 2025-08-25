@@ -44,8 +44,16 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     <link rel="manifest" href="/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Neue+Haas+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    <!-- Condensed fonts similar to Knockout -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Anton&family=Bebas+Neue&family=Barlow+Condensed:wght@700;900&family=Fjalla+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Evolve+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>{title}</title>
     
     <!-- Service Worker Registration -->
@@ -60,6 +68,14 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     </script>
   </head>
   <body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="loading-content">
+        <div class="loading-number" id="loading-number">0</div>
+        <div class="loading-text">Loading</div>
+      </div>
+    </div>
+    
     <slot />
     
     <!-- Structured Data for SEO -->
@@ -85,6 +101,54 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
         ]
       }
     </script>
+    
+    <!-- Loading Animation Script -->
+    <script>
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+      }
+      
+      function animateNumber(element, from, to, duration, onComplete) {
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = easeInOutCubic(progress);
+          
+          const current = Math.round(from + (to - from) * easedProgress);
+          element.textContent = current;
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            if (onComplete) onComplete();
+          }
+        }
+        
+        requestAnimationFrame(update);
+      }
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('loading-overlay');
+        const numberElement = document.getElementById('loading-number');
+        
+        if (overlay && numberElement) {
+          // Start the number animation
+          animateNumber(numberElement, 0, 100, 2000, function() {
+            // After number animation completes, wait a moment then hide overlay
+            setTimeout(function() {
+              overlay.classList.add('hidden');
+              
+              // Remove overlay from DOM after transition
+              setTimeout(function() {
+                overlay.remove();
+              }, 500);
+            }, 300);
+          });
+        }
+      });
+    </script>
   </body>
 </html>
 
@@ -101,5 +165,48 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
   body, p, span, div, input, textarea, button, select, label, a, li, blockquote, 
   .nav-links, .contact-link, .form-group, .submit-btn, .drawer-nav, .card-content {
     font-family: 'Evolve Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  /* Loading Overlay Styles */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  .loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .loading-content {
+    text-align: center;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+  
+  .loading-number {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .loading-text {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
   }
 </style>
