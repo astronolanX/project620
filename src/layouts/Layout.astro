@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CustomCursor from '../components/CustomCursor.astro';
 
 export interface Props {
   title: string;
@@ -77,6 +78,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     </div>
     
     <slot />
+    
+    <!-- Custom Cursor -->
+    <CustomCursor />
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
