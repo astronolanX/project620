@@ -1,0 +1,292 @@
+---
+import Layout from './Layout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  year: number;
+  type: string;
+  heroImage?: string;
+  tags: string[];
+  featured: boolean;
+}
+
+const { title, description, year, type, heroImage, tags, featured } = Astro.props;
+---
+
+<Layout title={title}>
+  <article class="project-page main-content">
+    <header class="project-header">
+      <div class="project-meta">
+        <a href="/" class="back-link">← Back to Portfolio</a>
+        <div class="project-details">
+          <span class="project-year">{year}</span>
+          <span class="project-type">{type}</span>
+          {featured && <span class="featured-badge">Featured</span>}
+        </div>
+      </div>
+      <h1>{title}</h1>
+      <p class="project-subtitle">{description}</p>
+    </header>
+
+    <div class="project-content">
+      {heroImage && (
+        <div class="hero-media">
+          <img src={heroImage} alt={title} />
+        </div>
+      )}
+      
+      <slot />
+      
+      <div class="project-footer">
+        <div class="project-tags">
+          {tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .main-content {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    background: white;
+  }
+  
+  .project-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .project-header {
+    margin-bottom: 2rem;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .back-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  .back-link:hover {
+    color: black;
+  }
+
+  .project-details {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .project-year,
+  .project-type {
+    color: #888;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  .featured-badge {
+    color: #3366FF;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(51, 102, 255, 0.1);
+    border-radius: 20px;
+    font-weight: 600;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  .project-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: black;
+    line-height: 1.2;
+    font-family: 'Neue Haas Grotesk', sans-serif;
+    text-shadow: 
+      -0.08em 0 #ff3333,
+      0.08em 0 #33ccff,
+      -0.12em 0 rgba(255, 51, 51, 0.8),
+      0.12em 0 rgba(51, 204, 255, 0.8);
+  }
+
+  .project-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  .project-content {
+    line-height: 1.8;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  .hero-media {
+    margin: clamp(2rem, 5vw, 3rem) 0;
+    text-align: center;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Style markdown content */
+  .project-content :global(h2) {
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    font-weight: 700;
+    margin: clamp(3rem, 6vw, 4rem) 0 1.5rem 0;
+    color: black;
+    font-family: 'Neue Haas Grotesk', sans-serif;
+  }
+
+  .project-content :global(h3) {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 600;
+    margin: 2.5rem 0 1rem 0;
+    color: #333;
+    font-family: 'Neue Haas Grotesk', sans-serif;
+  }
+
+  .project-content :global(h4) {
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    margin: 2rem 0 0.75rem 0;
+    color: #333;
+    font-family: 'Neue Haas Grotesk', sans-serif;
+  }
+
+  .project-content :global(p) {
+    margin: 1.5rem 0;
+    color: #444;
+  }
+
+  .project-content :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0 1rem 0;
+  }
+
+  .project-content :global(em) {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+
+  .project-content :global(ul), .project-content :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .project-content :global(li) {
+    margin: 0.5rem 0;
+  }
+
+  .project-content :global(strong) {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .project-content :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1.5rem 2rem;
+    border-left: 4px solid #22c55e;
+    background: rgba(34, 197, 94, 0.05);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .project-content :global(pre) {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .project-content :global(code) {
+    background: #f5f5f5;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+  }
+
+  .project-content :global(pre code) {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  .project-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+    font-family: 'Evolve Sans', sans-serif;
+  }
+
+  @media (max-width: 768px) {
+    .project-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .project-details {
+      align-self: flex-end;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-page {
+      padding: 1rem;
+    }
+  }
+</style>
