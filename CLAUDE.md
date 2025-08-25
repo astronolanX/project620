@@ -1,99 +1,65 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working
-with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This is an Astro-based portfolio and blog website using Tailwind CSS for
-styling. The site showcases projects, blog posts, case studies, and creative
-explorations built around a unique eye chart interface design.
+Astro-based portfolio and blog website with unique eye chart interface design, showcasing projects, blog posts, and case studies with chromatic aberration effects.
 
 ## Commands
 
-- `npm run dev` - Start the Astro development server
-- `npm run build` - Build the static site for production
-- `npm run preview` - Preview the production build locally
-- `npx @astrojs/check` - Run TypeScript type checking (no test framework configured)
-- `npx markdownlint-cli2 "src/content/**/*.md"` - Lint markdown files in content collections
+```bash
+npm run dev       # Start Astro development server
+npm run build     # Build static site for production  
+npm run preview   # Preview production build locally
 
-## Tech Stack
+npx @astrojs/check                           # Run TypeScript type checking
+npx markdownlint-cli2 "src/content/**/*.md"  # Lint markdown content files
+```
 
-- Astro - Static site generator with component-based architecture
-- Tailwind CSS - Utility-first CSS framework
-- PostCSS - CSS processing with Autoprefixer
+Note: No test framework configured - TypeScript checking via @astrojs/check only.
 
 ## Architecture
 
-The project uses Astro's content collections system with dynamic routing and a unique dual-interface design:
+### Content Collections System
 
-### Content Collections & Dynamic Routing
+Three content collections defined in `src/content/config.ts` with Zod schemas:
 
-The site is built around Astro's content collections (`src/content/config.ts`) with type-safe schemas:
-- **Blog** (`src/content/blog/`) - Articles with title, description, pubDate, tags, heroImage, and author
-- **Projects** (`src/content/projects/`) - Portfolio items with year, type, featured flag
-- **Case Studies** (`src/content/case-studies/`) - Detailed breakdowns with client, timeline, role, team info
+- **blog**: Articles with title, description, pubDate, tags, heroImage, author
+- **projects**: Portfolio items with year, type, featured flag
+- **case-studies**: Detailed work with client, timeline, role, team metadata
 
-Dynamic routes handle content rendering:
-- `src/pages/blog/[...slug].astro` - Blog post pages using BlogPost layout
-- `src/pages/projects/[...slug].astro` - Project pages using ProjectPost layout  
-- `src/pages/case-studies/[...slug].astro` - Case study pages using CaseStudy layout
+Dynamic routing via:
 
-### Core Components & Layouts
+- `src/pages/blog/[...slug].astro` → BlogPost layout
+- `src/pages/projects/[...slug].astro` → ProjectPost layout
+- `src/pages/case-studies/[...slug].astro` → CaseStudy layout
 
-- **EyeChart.astro** - Main interface component with chromatic aberration effects and content-driven letter extraction
-- **BottomDrawer.astro** - Slide-up navigation drawer with dark theme and touch gestures
-- **Header.astro** & **StickyFooter.astro** - Navigation components
-- **Layout.astro** - Base layout with Google Fonts (Neue Haas Grotesk, Evolve Sans) and global styles
-- **BlogPost.astro**, **ProjectPost.astro**, **CaseStudy.astro** - Content-specific layouts
+### Core Components
 
-### Key Architectural Patterns
+- **EyeChart.astro**: Main interface extracting 5 letters from content titles, chromatic aberration effects (red/cyan shadows)
+- **BottomDrawer.astro**: Dark-themed slide-up navigation with touch gestures
+- **Layout.astro**: Base layout loading Google Fonts (Neue Haas Grotesk Bold, Evolve Sans)
 
-- Content collections with Zod schema validation for type safety
-- Dynamic slug-based routing for all content types
-- Static site generation with directory-based URLs (`astro.config.mjs`)
-- Content-driven eye chart: Extracts 5 letters from collection titles to populate chart rows
-- Component-scoped CSS with global font declarations
-- Interactive drawer system with vanilla JavaScript touch/swipe handling
-- Build optimization: CSS code splitting, custom asset naming, inlined stylesheets
+### Build Configuration
 
-## Design System Rules
+- Static site generation with directory URLs (`astro.config.mjs`)
+- Tailwind CSS integration via @astrojs/tailwind
+- CSS code splitting and custom asset naming in `_astro/` directory
+- PWA support with service worker (`public/sw.js`)
 
-**IMPORTANT: These theming rules must be maintained unless explicitly
-overridden:**
+## Critical Design Rules
 
-### Theme Guidelines
+### Theme Requirements
 
-- **Main site/eye chart**: Always light theme with subtle pink checkerboard
-  pattern background
-- **Bottom drawer menu**: Always dark theme (dark background
-  ~rgba(15,15,15,0.98), white text)
-- **Eye chart letters**: ALWAYS include chromatic aberration effect (red/cyan
-  text shadows for double vision aesthetic) - THIS IS PERSISTENT AND MUST NEVER
-  BE REMOVED
-- **Eye chart font**: Must use 'Neue Haas Grotesk' font (Bold weight) from Google Fonts for clean,
-  modern aesthetic
-- **Body copy font**: Must use 'Evolve Sans' font for all body text,
-  interactive elements, and UI components
-- **Background pattern**: Subtle pink/white checkered pattern using CSS
-  gradients with responsive scaling
-- **Aspect ratio**: Dynamic - always taller than wide, adapts to orientation
-- **Bottom row**: "SEE MORE" black button serves as drawer trigger
+- Main site: Light theme with pink/white checkerboard background pattern
+- Bottom drawer: Dark theme (rgba(15,15,15,0.98) background, white text)
+- Eye chart letters: **MUST preserve chromatic aberration effect** (red/cyan text shadows)
+- Typography: Neue Haas Grotesk Bold for eye chart, Evolve Sans for body text
 
-### Component Integrity
+### Component Behavior
 
-- Eye chart maintains fluid responsive scaling using clamp() for all dimensions
-- Bottom drawer slides up with smooth animations and touch gestures
-- No side measurements on eye chart (removed for cleaner appearance)  
-- Drawer includes navigation (Blog) and contact links with hover effects
-
-## Development Guidelines
-
-- TypeScript checking: Use `@astrojs/check` for type validation (included in devDependencies)
-- Component structure: All interactive components use vanilla JavaScript/TypeScript within `<script>` tags
-- Astro static generation: Site uses `output: 'static'` with directory-based URLs
-- Font loading: Google Fonts (Neue Haas Grotesk, Evolve Sans) loaded through `Layout.astro`
-- Content linting: markdownlint-cli2 available for markdown validation
-- Static assets and resume stored in `public/assets/`
-- PWA features: Service worker (sw.js) and web manifest configured
-- Build optimization: CSS code splitting enabled with custom asset naming patterns in astro.config.mjs
+- Eye chart uses fluid clamp() scaling for all dimensions
+- Bottom drawer integrated with sticky footer navigation
+- All interactive components use vanilla JavaScript in `<script>` tags
+- Content-driven: Eye chart dynamically populated from collection titles

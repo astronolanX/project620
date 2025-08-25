@@ -1,9 +1,13 @@
 ---
 ---
 
-<footer class="sticky bottom-0 z-0 w-full bg-black text-white min-h-fit">
-  <div class="availability-banner">
-    Available for work
+<footer class="sticky bottom-0 z-10 w-full text-white min-h-fit" style="background: #1A1A1A;">
+  <div class="availability-banner" role="button" tabindex="0">
+    <div class="availability-content">
+      <div class="status-indicator"></div>
+      <span class="availability-text">Available for work</span>
+      <div class="availability-cta">Let's connect →</div>
+    </div>
   </div>
   <div class="footer-content">
     <div class="footer-main">
@@ -20,26 +24,23 @@
       </a>
     </div>
     
-    <div class="footer-contact">
-      <h3>Get in Touch</h3>
-      <div class="contact-links">
-        <a href="#" class="contact-link" data-email="hello@astronolan.com" data-subject="Let's get to work, Nolan. 🚀">
-          <span class="contact-text">Email</span>
-          <span class="material-icons-outlined contact-arrow">north_east</span>
-        </a>
-        <a href="https://bsky.app/profile/astronolan.com" target="_blank" class="contact-link">
-          <span class="contact-text">Bluesky</span>
-          <span class="material-icons-outlined contact-arrow">north_east</span>
-        </a>
-        <a href="https://www.linkedin.com/in/astronolan/" target="_blank" class="contact-link">
-          <span class="contact-text">LinkedIn</span>
-          <span class="material-icons-outlined contact-arrow">north_east</span>
-        </a>
-      </div>
-    </div>
     
     <div class="footer-bottom">
-      <p>&copy; <span id="current-year"></span> All rights reserved. Made with care.</p>
+      <div class="footer-links">
+        <a href="#" class="footer-link" data-email="hello@astronolan.com" data-subject="Let's get to work, Nolan. 🚀">
+          <span class="link-arrow">↗</span>
+          <span class="link-text">Email</span>
+        </a>
+        <a href="https://bsky.app/profile/astronolan.com" target="_blank" class="footer-link">
+          <span class="link-arrow">↗</span>
+          <span class="link-text">Bluesky</span>
+        </a>
+        <a href="https://www.linkedin.com/in/astronolan/" target="_blank" class="footer-link">
+          <span class="link-arrow">↗</span>
+          <span class="link-text">LinkedIn</span>
+        </a>
+      </div>
+      <p class="copyright">&copy; <span id="current-year"></span> All rights reserved. Made with care.</p>
     </div>
   </div>
 </footer>
@@ -49,10 +50,11 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    align-items: start;
+    align-items: center;
+    text-align: center;
     font-family: 'Evolve Sans', sans-serif;
     min-height: fit-content;
   }
@@ -84,15 +86,74 @@
   
   .availability-banner {
     width: 100%;
-    background: #32cd32;
+    background: #C4F82A;
     color: #000;
-    padding: 0.75rem 2rem;
+    padding: 1rem 2rem;
+    font-family: 'Evolve Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .availability-banner:hover {
+    background: #B4E81A;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(196, 248, 42, 0.3);
+  }
+  
+  .availability-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    animation: pulse 2s infinite;
+  }
+  
+  .availability-text {
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    text-align: left;
-    font-family: 'Evolve Sans', sans-serif;
+  }
+  
+  .availability-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+  
+  .availability-banner:hover .availability-cta {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  
+  @keyframes highlightPulse {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.02); }
+    50% { 
+      transform: scale(1.02);
+      background: rgba(255, 158, 0, 0.1);
+    }
+    100% { 
+      transform: scale(1);
+      background: transparent;
+    }
   }
   
   .bio {
@@ -108,81 +169,89 @@
     display: inline-flex;
     align-items: center;
     padding: 0.75rem 1.5rem;
-    background: #fff;
+    background: #C4F82A;
     color: #000;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
     transition: all 0.3s ease;
-    border: 2px solid #fff;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
   .cv-button:hover {
-    background: #000;
-    color: #fff;
-    transform: translateX(4px);
+    background: #B4E81A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 248, 42, 0.3);
   }
   
-  .footer-contact h3 {
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #fff;
-    font-family: 'Neue Haas Grotesk', sans-serif;
-  }
-  
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .contact-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    text-decoration: none;
-    color: #e0e0e0;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .contact-link:hover {
-    color: #fff;
-    transform: translateX(4px);
-  }
-  
-  .contact-text {
-    flex-grow: 1;
-  }
-  
-  .contact-arrow {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-    opacity: 0.7;
-  }
-  
-  .contact-link:hover .contact-arrow {
-    transform: translate(2px, -2px);
-    opacity: 1;
-  }
   
   .footer-bottom {
-    grid-column: 1 / -1;
     margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 2rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
   }
   
-  .footer-bottom p {
+  .footer-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #ccc;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .footer-link:hover {
+    color: #C4F82A;
+  }
+  
+  .footer-link:hover .link-arrow {
+    transform: translate(2px, -2px);
+    color: #C4F82A;
+  }
+  
+  .link-arrow {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+  
+  .link-text {
+    font-family: 'Evolve Sans', sans-serif;
+  }
+  
+  .copyright {
     color: #888;
     font-size: 0.9rem;
     font-weight: 400;
     margin: 0;
-    text-align: left;
+    text-align: right;
   }
   
   @media (max-width: 768px) {
@@ -192,26 +261,34 @@
     }
     
     .footer-content {
-      grid-template-columns: 1fr;
       gap: 1.5rem;
       padding: 2rem 1rem;
-    }
-    
-    .footer-contact {
-      order: -1;
     }
     
     .footer-main {
       text-align: left;
     }
     
-    .contact-links {
-      gap: 0.5rem;
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     
-    .contact-link {
-      padding: 0.5rem 0;
-      font-size: 0.95rem;
+    .footer-links {
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .footer-link {
+      font-size: 0.85rem;
+    }
+    
+    .copyright {
+      text-align: left;
+      font-size: 0.85rem;
     }
   }
 </style>
@@ -224,13 +301,43 @@
       currentYear.textContent = new Date().getFullYear().toString();
     }
     
-    // Handle obfuscated email links
+    // Handle availability banner click
+    const availabilityBanner = document.querySelector('.availability-banner');
+    if (availabilityBanner) {
+      availabilityBanner.addEventListener('click', function() {
+        // Scroll to contact section
+        const contactSection = document.querySelector('.footer-contact');
+        if (contactSection instanceof HTMLElement) {
+          contactSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+          });
+          // Add highlight effect
+          contactSection.style.animation = 'highlightPulse 1.5s ease-out';
+          setTimeout(() => {
+            contactSection.style.animation = '';
+          }, 1500);
+        }
+      });
+      
+      // Keyboard accessibility
+      availabilityBanner.addEventListener('keydown', function(e) {
+        const keyEvent = e as KeyboardEvent;
+        if (keyEvent.key === 'Enter' || keyEvent.key === ' ') {
+          e.preventDefault();
+          (availabilityBanner as HTMLElement).click();
+        }
+      });
+    }
+    
+    // Handle obfuscated email links (both contact section and footer)
     const emailLinks = document.querySelectorAll('[data-email]');
     emailLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
+      link.addEventListener('click', function(e: Event) {
         e.preventDefault();
-        const email = this.getAttribute('data-email');
-        const subject = this.getAttribute('data-subject') || '';
+        const target = e.currentTarget as HTMLElement;
+        const email = target.getAttribute('data-email');
+        const subject = target.getAttribute('data-subject') || '';
         const mailtoUrl = `mailto:${email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
         window.location.href = mailtoUrl;
       });

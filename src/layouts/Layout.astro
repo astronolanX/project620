@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import CustomCursor from '../components/CustomCursor.astro';
+import Header from '../components/Header.astro';
 
 export interface Props {
   title: string;
@@ -67,6 +67,29 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
         });
       }
     </script>
+    
+    <!-- Ensure page starts at top -->
+    <script>
+      // Force scroll to top on page load to prevent sticky footer from being visible
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+      }
+      
+      // Immediate scroll to top
+      window.scrollTo(0, 0);
+      
+      // Additional scroll to top after DOM loads
+      document.addEventListener('DOMContentLoaded', () => {
+        window.scrollTo(0, 0);
+      });
+      
+      // Final scroll to top after everything loads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 100);
+      });
+    </script>
   </head>
   <body>
     <!-- Loading Overlay -->
@@ -77,10 +100,11 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       </div>
     </div>
     
+    <Header />
+    
     <slot />
     
-    <!-- Custom Cursor -->
-    <CustomCursor />
+
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
