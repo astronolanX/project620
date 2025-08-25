@@ -14,6 +14,8 @@ explorations built around a unique eye chart interface design.
 - `npm run dev` - Start the Astro development server
 - `npm run build` - Build the static site for production
 - `npm run preview` - Preview the production build locally
+- `npx @astrojs/check` - Run TypeScript type checking (no test framework configured)
+- `npx markdownlint-cli2 "src/content/**/*.md"` - Lint markdown files in content collections
 
 ## Tech Stack
 
@@ -23,33 +25,37 @@ explorations built around a unique eye chart interface design.
 
 ## Architecture
 
-The project uses Astro's component-based architecture with a unique
-dual-interface design:
+The project uses Astro's content collections system with dynamic routing and a unique dual-interface design:
 
-### Core Components
+### Content Collections & Dynamic Routing
 
-- **EyeChart.astro** - Main interface component featuring an eye chart layout
-  with chromatic aberration effects
-- **BottomDrawer.astro** - Slide-up navigation drawer with dark theme and
-  touch gesture support
-- **Layout.astro** - Base layout loading Google Fonts (Neue Haas Grotesk, Evolve Sans)
-  and global styles
+The site is built around Astro's content collections (`src/content/config.ts`) with type-safe schemas:
+- **Blog** (`src/content/blog/`) - Articles with title, description, pubDate, tags, heroImage, and author
+- **Projects** (`src/content/projects/`) - Portfolio items with year, type, featured flag
+- **Case Studies** (`src/content/case-studies/`) - Detailed breakdowns with client, timeline, role, team info
 
-### File Structure
+Dynamic routes handle content rendering:
+- `src/pages/blog/[...slug].astro` - Blog post pages using BlogPost layout
+- `src/pages/projects/[...slug].astro` - Project pages using ProjectPost layout  
+- `src/pages/case-studies/[...slug].astro` - Case study pages using CaseStudy layout
 
-- **Pages** (`src/pages/`) - Route definitions including index and blog posts
-- **Components** (`src/components/`) - Reusable Astro components (EyeChart,
-  BottomDrawer)
-- **Layouts** (`src/layouts/`) - Layout template with font loading and global
-  styles
-- **Styles** (`src/styles/`) - Tailwind imports and custom utilities
+### Core Components & Layouts
+
+- **EyeChart.astro** - Main interface component with chromatic aberration effects and content-driven letter extraction
+- **BottomDrawer.astro** - Slide-up navigation drawer with dark theme and touch gestures
+- **Header.astro** & **StickyFooter.astro** - Navigation components
+- **Layout.astro** - Base layout with Google Fonts (Neue Haas Grotesk, Evolve Sans) and global styles
+- **BlogPost.astro**, **ProjectPost.astro**, **CaseStudy.astro** - Content-specific layouts
 
 ### Key Architectural Patterns
 
+- Content collections with Zod schema validation for type safety
+- Dynamic slug-based routing for all content types
 - Static site generation with directory-based URLs (`astro.config.mjs`)
-- Component-scoped CSS with global font declarations in Layout.astro
+- Content-driven eye chart: Extracts 5 letters from collection titles to populate chart rows
+- Component-scoped CSS with global font declarations
 - Interactive drawer system with vanilla JavaScript touch/swipe handling
-- Responsive eye chart scaling using CSS clamp() functions
+- Build optimization: CSS code splitting, custom asset naming, inlined stylesheets
 
 ## Design System Rules
 
@@ -87,3 +93,7 @@ overridden:**
 - Component structure: All interactive components use vanilla JavaScript/TypeScript within `<script>` tags
 - Astro static generation: Site uses `output: 'static'` with directory-based URLs
 - Font loading: Google Fonts (Neue Haas Grotesk, Evolve Sans) loaded through `Layout.astro`
+- Content linting: markdownlint-cli2 available for markdown validation
+- Static assets and resume stored in `public/assets/`
+- PWA features: Service worker (sw.js) and web manifest configured
+- Build optimization: CSS code splitting enabled with custom asset naming patterns in astro.config.mjs

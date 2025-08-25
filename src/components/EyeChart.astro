@@ -16,9 +16,7 @@ const contentItems = [
 ];
 
 function getYearDisplay(currentItem, index) {
-  if (index === 0) return currentItem.year.toString();
-  const previousYear = contentItems[index - 1]?.year;
-  return currentItem.year !== previousYear ? currentItem.year.toString() : '';
+  return '';
 }
 
 function getLettersFromTitle(title) {
@@ -35,7 +33,6 @@ function getLettersFromTitle(title) {
       
       return (
         <a href={item.slug} class={`chart-line line-${lineNumber} content-link`} data-type={item.type} title={item.title}>
-          <span class="line-number">{yearDisplay}</span>
           <div class="letters-container">
             {letters.map((letter, letterIndex) => (
               <span data-letter={letter} key={letterIndex}>{letter}</span>
@@ -46,7 +43,6 @@ function getLettersFromTitle(title) {
     })}
     
     <div class="drawer-trigger-wrapper">
-      <span class="line-number"></span>
       <div class="letters-container">
         <div class="drawer-trigger" id="drawer-trigger">
           <div class="solid-block">ABOUT NOLAN</div>
@@ -55,12 +51,15 @@ function getLettersFromTitle(title) {
     </div>
     
     <div class="copyright-line">
-      <span class="line-number"></span>
       <div class="copyright-content letters-container">
-        <span class="copyright-symbol">©</span>
-        <span class="copyright-year">2025</span>
-        <span class="copyright-text">ALL RIGHTS RESERVED</span>
-        <span class="copyright-care">MADE WITH CARE</span>
+        <div class="copyright-main">
+          <span class="copyright-symbol">©</span>
+          <div class="copyright-text-group">
+            <span class="copyright-year">2025</span>
+            <span class="copyright-text">ALL RIGHTS RESERVED</span>
+          </div>
+        </div>
+        <div class="copyright-care">MADE WITH CARE</div>
       </div>
     </div>
   </div>
@@ -81,7 +80,7 @@ function getLettersFromTitle(title) {
     height: 100vh;
     margin: 0;
     background: white;
-    padding: min(4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
     font-family: 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-weight: 700;
     box-sizing: border-box;
@@ -89,9 +88,12 @@ function getLettersFromTitle(title) {
   
   
   .eye-chart {
-    width: 100%;
-    max-width: 100vw;
-    max-height: 100vh;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   @media (orientation: landscape) {
@@ -114,14 +116,14 @@ function getLettersFromTitle(title) {
     align-items: center;
     gap: clamp(0.2rem, 0.8vw, 0.8rem);
     position: relative;
-    width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
+    width: auto;
+    height: auto;
+    justify-content: center;
   }
   
   .chart-line {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -177,7 +179,7 @@ function getLettersFromTitle(title) {
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-    flex: 1;
+    width: auto;
   }
   
   .chart-line span {
@@ -289,7 +291,7 @@ function getLettersFromTitle(title) {
   
   .drawer-trigger-wrapper {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: 100%;
   }
@@ -353,9 +355,10 @@ function getLettersFromTitle(title) {
   
   .copyright-line {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: auto;
   }
   
   .copyright-line .line-number {
@@ -367,16 +370,35 @@ function getLettersFromTitle(title) {
   
   .copyright-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.3em;
-    flex: 1;
-    font-size: 0.6rem;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.4);
-    letter-spacing: 0.1em;
+    width: auto;
+    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-weight: 500;
+    color: #000;
+    letter-spacing: 0.05em;
     margin-top: 1rem;
     font-family: 'Evolve Sans', sans-serif;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  
+  .copyright-main {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    opacity: 0.7;
+  }
+  
+  .copyright-text-group {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+  
+  .copyright-care {
+    margin-top: 0.5em;
   }
   
   .copyright-symbol {
@@ -386,24 +408,30 @@ function getLettersFromTitle(title) {
   
   .copyright-year {
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.6);
+    color: #000;
   }
   
   .copyright-text {
-    font-size: 0.9em;
-    letter-spacing: 0.15em;
+    font-size: 1em;
+    letter-spacing: 0.05em;
   }
   
   .copyright-care {
-    font-size: 0.9em;
-    font-style: italic;
-    color: rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+    font-style: normal;
+    color: #000;
     letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 768px) {
+    .eye-chart-container {
+      padding: 1rem;
+    }
   }
   
   @media (max-width: 480px) {
     .eye-chart-container {
-      padding: min(3vw, 2rem);
+      padding: 1rem;
     }
     
     .copyright-line {
