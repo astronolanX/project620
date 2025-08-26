@@ -1,307 +1,147 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import StickyFooter from '../components/StickyFooter.astro';
-
-// Define content for each menu item
-const contentSections = {
-  home: {
-    title: "Design & Creative Technology",
-    subtitle: "Bridging design and tech to transform how people and organizations come together through innovative experiences"
-  },
-  1: {
-    title: "Future Design",
-    subtitle: "Exploring emergent technologies and their impact on human interaction",
-    year: "2024",
-    type: "Research & Prototyping",
-    description: "A deep dive into the intersection of AI, spatial computing, and human-centered design principles."
-  },
-  2: {
-    title: "UX Patterns", 
-    subtitle: "Systematic approaches to solving complex interaction challenges",
-    year: "2023-2024",
-    type: "Design Systems",
-    description: "Comprehensive pattern library for modern web applications with accessibility and performance at its core."
-  },
-  3: {
-    title: "Spatial Interfaces",
-    subtitle: "Designing for three-dimensional user experiences",
-    year: "2023",
-    type: "Creative Technology",
-    description: "Experimental interfaces that break beyond traditional screen boundaries using WebXR and spatial computing."
-  },
-  4: {
-    title: "Design Systems Scale",
-    subtitle: "Building scalable design foundations for growing teams",
-    year: "2022-2024",
-    type: "Product Strategy",
-    description: "Multi-year initiative to create cohesive design systems serving millions of users across different platforms."
-  },
-  5: {
-    title: "Micro-interactions",
-    subtitle: "The subtle details that create memorable user experiences", 
-    year: "2022-2023",
-    type: "Interface Design",
-    description: "A collection of carefully crafted micro-interactions that enhance usability and delight users."
-  },
-  archive: {
-    title: "Archive",
-    subtitle: "A collection of past experiments, thoughts, and explorations"
-  }
-};
 ---
 
 <Layout title="Nolan Figueroa - Design & Technology">
   <div class="page-wrapper">
-    <!-- SPA Content Container -->
-    <div id="spa-content" class="spa-content">
-      <!-- Home Content -->
-      <section id="content-home" class="content-section active">
-        <div class="content-header">
-          <h1 class="content-title">{contentSections.home.title}</h1>
-          <p class="content-subtitle">{contentSections.home.subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="intro-text">
-            <p>I'm a designer and technologist focused on creating meaningful experiences at the intersection of creativity and innovation.</p>
-            <p>Currently exploring the future of human-computer interaction through spatial computing, AI-enhanced design tools, and accessible interface patterns.</p>
-          </div>
-          
-          <div class="capabilities-grid">
-            <div class="capability-item">
-              <div class="capability-icon">⚡</div>
-              <h3>Design Systems</h3>
-              <p>Scalable foundations for digital products</p>
-            </div>
-            <div class="capability-item">
-              <div class="capability-icon">🔬</div>
-              <h3>Research & Strategy</h3>
-              <p>User-centered approaches to complex problems</p>
-            </div>
-            <div class="capability-item">
-              <div class="capability-icon">🛠️</div>
-              <h3>Creative Technology</h3>
-              <p>Prototyping and experimental interfaces</p>
-            </div>
-            <div class="capability-item">
-              <div class="capability-icon">🎯</div>
-              <h3>Product Strategy</h3>
-              <p>From concept to market-ready solutions</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- Home Header -->
+    <header class="home-header">
+      <div class="intro-badge">Available for new projects</div>
+      <h1 class="home-title">Design & Creative Technology</h1>
+      <p class="home-subtitle">Bridging design and tech to transform how people and organizations come together through innovative experiences</p>
+    </header>
 
-      <!-- Project Content Sections -->
-      <section id="content-1" class="content-section">
-        <div class="content-header">
-          <div class="project-meta">
-            <span class="project-year">{contentSections[1].year}</span>
-            <span class="project-type">{contentSections[1].type}</span>
-          </div>
-          <h1 class="content-title">{contentSections[1].title}</h1>
-          <p class="content-subtitle">{contentSections[1].subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="project-description">
-            <p>{contentSections[1].description}</p>
-            <p>This research project examines how emerging technologies like artificial intelligence and spatial computing are reshaping the fundamental principles of design. Through prototyping and experimentation, we explore new paradigms for human-computer interaction.</p>
-          </div>
-          
-          <div class="project-highlights">
-            <div class="highlight-item">
-              <h4>AI-Enhanced Design Tools</h4>
-              <p>Exploring how machine learning can augment the creative process without replacing human intuition.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Spatial Computing Interfaces</h4>
-              <p>Designing for three-dimensional spaces and mixed reality environments.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Ethical Technology Framework</h4>
-              <p>Developing guidelines for responsible innovation in emerging tech spaces.</p>
-            </div>
+    <!-- Bento Grid Layout -->
+    <main class="bento-container">
+      <!-- Large introduction card -->
+      <div class="bento-item large">
+        <div class="bento-content">
+          <h2>About</h2>
+          <p>I'm a designer and technologist focused on creating meaningful experiences at the intersection of creativity and innovation.</p>
+          <p>Currently exploring the future of human-computer interaction through spatial computing, AI-enhanced design tools, and accessible interface patterns.</p>
+          <div class="experience-years">
+            <span class="years-number">8+</span>
+            <span class="years-label">Years Experience</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="content-2" class="content-section">
-        <div class="content-header">
-          <div class="project-meta">
-            <span class="project-year">{contentSections[2].year}</span>
-            <span class="project-type">{contentSections[2].type}</span>
-          </div>
-          <h1 class="content-title">{contentSections[2].title}</h1>
-          <p class="content-subtitle">{contentSections[2].subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="project-description">
-            <p>{contentSections[2].description}</p>
-            <p>A comprehensive exploration of interaction patterns that solve common UX challenges while maintaining accessibility and performance standards. This collection serves as both a reference and implementation guide.</p>
-          </div>
-          
-          <div class="project-highlights">
-            <div class="highlight-item">
-              <h4>Component Architecture</h4>
-              <p>Modular, reusable patterns built with semantic HTML and progressive enhancement.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Accessibility First</h4>
-              <p>Every pattern tested with screen readers and keyboard navigation from the ground up.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Performance Metrics</h4>
-              <p>Optimized for Core Web Vitals with lazy loading and efficient rendering strategies.</p>
-            </div>
+      <!-- Medium capability cards -->
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <div class="capability-icon">⚡</div>
+          <h3>Design Systems</h3>
+          <p>Scalable foundations for digital products that serve millions of users.</p>
+          <div class="capability-metric">
+            <span class="metric-value">15+</span>
+            <span class="metric-label">Systems Built</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="content-3" class="content-section">
-        <div class="content-header">
-          <div class="project-meta">
-            <span class="project-year">{contentSections[3].year}</span>
-            <span class="project-type">{contentSections[3].type}</span>
-          </div>
-          <h1 class="content-title">{contentSections[3].title}</h1>
-          <p class="content-subtitle">{contentSections[3].subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="project-description">
-            <p>{contentSections[3].description}</p>
-            <p>Breaking free from flat screens to explore how users can interact with information in three-dimensional space. These experimental interfaces use WebXR and spatial computing principles.</p>
-          </div>
-          
-          <div class="project-highlights">
-            <div class="highlight-item">
-              <h4>WebXR Prototypes</h4>
-              <p>Browser-based VR/AR experiences that run on consumer devices without app installation.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Spatial Data Visualization</h4>
-              <p>Complex datasets presented in navigable 3D environments for better comprehension.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Gesture-Based Navigation</h4>
-              <p>Intuitive hand tracking and voice commands for natural interaction paradigms.</p>
-            </div>
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <div class="capability-icon">🔬</div>
+          <h3>Research & Strategy</h3>
+          <p>User-centered approaches to solving complex organizational challenges.</p>
+          <div class="capability-metric">
+            <span class="metric-value">120+</span>
+            <span class="metric-label">Studies Conducted</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="content-4" class="content-section">
-        <div class="content-header">
-          <div class="project-meta">
-            <span class="project-year">{contentSections[4].year}</span>
-            <span class="project-type">{contentSections[4].type}</span>
-          </div>
-          <h1 class="content-title">{contentSections[4].title}</h1>
-          <p class="content-subtitle">{contentSections[4].subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="project-description">
-            <p>{contentSections[4].description}</p>
-            <p>Leading the development of design systems that scale across multiple product lines, serving millions of users while maintaining consistency and enabling rapid iteration.</p>
-          </div>
-          
-          <div class="project-highlights">
-            <div class="highlight-item">
-              <h4>Token Architecture</h4>
-              <p>Semantic design tokens that adapt across platforms and enable automated theming.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Component Governance</h4>
-              <p>Scalable processes for contribution, review, and versioning of design system components.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Developer Experience</h4>
-              <p>Tools and documentation that make adoption seamless for engineering teams.</p>
-            </div>
+      <!-- Small highlight cards -->
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Current Focus</h4>
+          <div class="focus-list">
+            <span class="focus-item">AI Design Tools</span>
+            <span class="focus-item">Spatial Computing</span>
+            <span class="focus-item">Accessibility</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="content-5" class="content-section">
-        <div class="content-header">
-          <div class="project-meta">
-            <span class="project-year">{contentSections[5].year}</span>
-            <span class="project-type">{contentSections[5].type}</span>
-          </div>
-          <h1 class="content-title">{contentSections[5].title}</h1>
-          <p class="content-subtitle">{contentSections[5].subtitle}</p>
-        </div>
-        
-        <div class="content-body">
-          <div class="project-description">
-            <p>{contentSections[5].description}</p>
-            <p>Exploring the small moments in interface design that create emotional connections and guide user behavior through thoughtful animation and feedback systems.</p>
-          </div>
-          
-          <div class="project-highlights">
-            <div class="highlight-item">
-              <h4>Animation Principles</h4>
-              <p>Physics-based animations that feel natural and provide meaningful feedback to user actions.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>State Transitions</h4>
-              <p>Smooth transitions between interface states that maintain context and reduce cognitive load.</p>
-            </div>
-            <div class="highlight-item">
-              <h4>Performance Optimization</h4>
-              <p>60fps animations that work smoothly across devices without impacting usability.</p>
-            </div>
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Location</h4>
+          <div class="location-info">
+            <span class="location-primary">San Francisco Bay Area</span>
+            <span class="location-timezone">PST/PDT</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- Archive Content -->
-      <section id="content-archive" class="content-section">
-        <div class="content-header">
-          <h1 class="content-title">{contentSections.archive.title}</h1>
-          <p class="content-subtitle">{contentSections.archive.subtitle}</p>
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Work Style</h4>
+          <div class="work-style">
+            <span class="style-type">Remote-First</span>
+            <span class="style-detail">Global collaboration</span>
+          </div>
         </div>
-        
-        <div class="content-body">
-          <div class="archive-grid">
-            <div class="archive-item">
-              <div class="archive-meta">2021</div>
-              <h3>Experimental Typography</h3>
-              <p>Variable fonts and responsive typography systems</p>
+      </div>
+
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Tools</h4>
+          <div class="tools-list">
+            <span class="tool-item">Figma</span>
+            <span class="tool-item">React</span>
+            <span class="tool-item">Framer</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium capability cards continued -->
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <div class="capability-icon">🛠️</div>
+          <h3>Creative Technology</h3>
+          <p>Prototyping and experimental interfaces that push boundaries.</p>
+          <div class="capability-metric">
+            <span class="metric-value">50+</span>
+            <span class="metric-label">Prototypes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <div class="capability-icon">🎯</div>
+          <h3>Product Strategy</h3>
+          <p>From concept to market-ready solutions with measurable impact.</p>
+          <div class="capability-metric">
+            <span class="metric-value">25+</span>
+            <span class="metric-label">Product Launches</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wide testimonial/philosophy card -->
+      <div class="bento-item wide">
+        <div class="bento-content">
+          <h3>Design Philosophy</h3>
+          <div class="philosophy-grid">
+            <div class="philosophy-item">
+              <span class="philosophy-number">01</span>
+              <p>Human-centered design isn't just about users—it's about understanding the full ecosystem of stakeholders</p>
             </div>
-            <div class="archive-item">
-              <div class="archive-meta">2021</div>
-              <h3>Color Psychology Research</h3>
-              <p>How color choices affect user behavior and accessibility</p>
+            <div class="philosophy-item">
+              <span class="philosophy-number">02</span>
+              <p>Technology should amplify human capability, not replace human judgment</p>
             </div>
-            <div class="archive-item">
-              <div class="archive-meta">2020</div>
-              <h3>Remote Collaboration Tools</h3>
-              <p>Designing for distributed teams during the pandemic</p>
-            </div>
-            <div class="archive-item">
-              <div class="archive-meta">2020</div>
-              <h3>Voice Interface Prototypes</h3>
-              <p>Early explorations in conversational UI patterns</p>
-            </div>
-            <div class="archive-item">
-              <div class="archive-meta">2019</div>
-              <h3>Sustainable Design Framework</h3>
-              <p>Measuring and reducing the environmental impact of digital products</p>
-            </div>
-            <div class="archive-item">
-              <div class="archive-meta">2019</div>
-              <h3>Generative Art Tools</h3>
-              <p>Creative coding experiments with procedural design</p>
+            <div class="philosophy-item">
+              <span class="philosophy-number">03</span>
+              <p>The best interfaces are invisible—they fade away to let people focus on their goals</p>
             </div>
           </div>
         </div>
-      </section>
-    </div>
-    
+      </div>
+    </main>
+
     <StickyFooter />
   </div>
 </Layout>
@@ -309,424 +149,334 @@ const contentSections = {
 <style>
   .page-wrapper {
     min-height: 100vh;
-    position: relative;
-  }
-  
-  /* SPA Content Container */
-  .spa-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0.5rem;
-    padding-top: 20px; /* Minimal space for floating menu */
-    min-height: 100vh;
-    position: relative;
-  }
-
-  /* Content Sections */
-  .content-section {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(30px);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: calc(100% - 1rem);
-    min-height: 100vh;
-    padding: 2rem;
-    border-radius: 16px;
-    margin: 0.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    scroll-behavior: smooth;
-  }
-  
-  /* Section-specific backgrounds */
-  #content-home {
     background: linear-gradient(135deg, var(--color-home-lighter) 0%, var(--color-home-light) 100%);
-    border: 2px solid var(--color-home);
-  }
-  
-  #content-1 {
-    background: linear-gradient(135deg, var(--color-section-1-lighter) 0%, var(--color-section-1-light) 100%);
-    border: 2px solid var(--color-section-1);
-  }
-  
-  #content-2 {
-    background: linear-gradient(135deg, var(--color-section-2-lighter) 0%, var(--color-section-2-light) 100%);
-    border: 2px solid var(--color-section-2);
-  }
-  
-  #content-3 {
-    background: linear-gradient(135deg, var(--color-section-3-lighter) 0%, var(--color-section-3-light) 100%);
-    border: 2px solid var(--color-section-3);
-  }
-  
-  #content-4 {
-    background: linear-gradient(135deg, var(--color-section-4-lighter) 0%, var(--color-section-4-light) 100%);
-    border: 2px solid var(--color-section-4);
-  }
-  
-  #content-5 {
-    background: linear-gradient(135deg, var(--color-section-5-lighter) 0%, var(--color-section-5-light) 100%);
-    border: 2px solid var(--color-section-5);
-  }
-  
-  #content-archive {
-    background: linear-gradient(135deg, var(--color-archive-lighter) 0%, var(--color-archive-light) 100%);
-    border: 2px solid var(--color-archive);
+    padding-left: 100px; /* Space for floating menu */
   }
 
-  .content-section.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    position: relative;
-  }
-
-  .content-header {
-    margin-bottom: 2rem;
+  .home-header {
+    padding: 3rem 2rem 2rem;
     text-align: center;
   }
 
-  .project-meta {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .project-year, .project-type {
+  .intro-badge {
+    display: inline-block;
+    background: var(--color-home);
+    color: white;
     font-family: 'Roboto Mono', monospace;
     font-size: 0.875rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #666;
-    background: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
-  .content-title {
+  .home-title {
     font-family: 'Roboto', sans-serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: 900;
     line-height: 1.1;
     margin: 0 0 1rem;
+    color: var(--color-home);
   }
 
-  .content-subtitle {
+  .home-subtitle {
     font-size: 1.25rem;
     line-height: 1.5;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .content-body {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  /* Home Content Styles */
-  .intro-text {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .intro-text p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
     color: #333;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .capabilities-grid {
+  .bento-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(6, minmax(200px, auto));
     gap: 1.5rem;
-    margin-top: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .capability-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 16px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Bento grid layouts */
+  .bento-item.large {
+    grid-column: span 8;
+    grid-row: span 2;
   }
 
-  .capability-item:hover {
+  .bento-item.medium {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .bento-item.small {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .bento-item.wide {
+    grid-column: span 12;
+    grid-row: span 2;
+  }
+
+  .bento-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-home);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .bento-item:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 119, 255, 0.2);
+    border-color: var(--color-home-light);
   }
 
-  .capability-icon {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .capability-item h3 {
+  .bento-content h2 {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin: 0 0 0.5rem;
+    margin: 0 0 1rem;
+    color: var(--color-home);
   }
 
-  .capability-item p {
-    color: #666;
-    margin: 0;
-    font-size: 0.95rem;
+  .bento-content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--color-home);
   }
 
-  /* Project Content Styles */
-  .project-description {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .project-description p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-
-  .project-highlights {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .highlight-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .highlight-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .highlight-item h4 {
+  .bento-content h4 {
     font-family: 'Roboto', sans-serif;
     font-size: 1.125rem;
     font-weight: 700;
     margin: 0 0 0.75rem;
+    color: var(--color-home);
   }
 
-  .highlight-item p {
+  .bento-content p {
     color: #666;
-    margin: 0;
-    line-height: 1.5;
+    line-height: 1.6;
+    margin: 0 0 1rem;
   }
 
-  /* Archive Content Styles */
-  .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+  /* Experience years styling */
+  .experience-years {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--color-home-lighter);
   }
 
-  .archive-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 16px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-
-  .archive-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-  }
-
-  .archive-meta {
+  .years-number {
     font-family: 'Roboto Mono', monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-home);
+    line-height: 1;
+  }
+
+  .years-label {
     font-size: 0.875rem;
     font-weight: 600;
     color: #666;
-    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
-  .archive-item h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem;
+  /* Capability icons */
+  .capability-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
   }
 
-  .archive-item p {
+  /* Metrics styling */
+  .capability-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--color-home-lighter);
+  }
+
+  .metric-value {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-home);
+    line-height: 1;
+  }
+
+  .metric-label {
+    font-size: 0.875rem;
+    font-weight: 600;
     color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Focus items */
+  .focus-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .focus-item {
+    background: var(--color-home-lighter);
+    color: var(--color-home);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-home-light);
+    text-align: center;
+  }
+
+  /* Location info */
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .location-primary {
+    font-weight: 600;
+    color: var(--color-home);
+  }
+
+  .location-timezone {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  /* Work style */
+  .work-style {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .style-type {
+    font-weight: 600;
+    color: var(--color-home);
+  }
+
+  .style-detail {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  /* Tools */
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tool-item {
+    background: var(--color-home-lighter);
+    color: var(--color-home);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-home-light);
+    text-align: center;
+  }
+
+  /* Philosophy */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .philosophy-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .philosophy-number {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-home);
+    flex-shrink: 0;
+  }
+
+  .philosophy-item p {
     margin: 0;
+    font-size: 0.95rem;
     line-height: 1.5;
+    font-style: italic;
   }
 
   /* Responsive Design */
   @media (max-width: 768px) {
-    .spa-content {
-      padding: 0.25rem;
-      padding-top: 20px;
+    .page-wrapper {
+      padding-left: 0;
     }
 
-    .content-section {
-      padding: 1.5rem;
-      margin: 0.25rem;
-      width: calc(100% - 0.5rem);
-      min-height: 100vh;
-    }
-
-    .content-header {
-      margin-bottom: 1.5rem;
-    }
-
-    .project-meta {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .capabilities-grid,
-    .project-highlights,
-    .archive-grid {
+    .bento-container {
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      padding: 1rem;
+      gap: 1rem;
     }
 
-    .capability-item,
-    .highlight-item,
-    .archive-item {
-      padding: 1.25rem;
+    .bento-item.large,
+    .bento-item.medium,
+    .bento-item.small,
+    .bento-item.wide {
+      grid-column: span 1;
+      grid-row: span 1;
     }
 
-    .content-title {
-      font-size: 2.5rem;
+    .bento-item {
+      padding: 1.5rem;
     }
 
-    .content-subtitle {
-      font-size: 1.125rem;
+    .home-header {
+      padding: 2rem 1rem 1rem;
     }
 
-    .intro-text p,
-    .project-description p {
-      font-size: 1rem;
+    .philosophy-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
-  }
 
-  /* Smooth transitions for all interactive elements */
-  * {
-    cursor: auto;
-  }
+    .focus-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
 
-  .capability-item,
-  .highlight-item,
-  .archive-item {
-    cursor: pointer;
-  }
-
-  /* Ensure proper stacking */
-  .content-section {
-    position: relative;
-    z-index: 1;
+    .tools-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
   }
 </style>
-
-<script>
-  class SPAController {
-    private currentSection: string;
-    
-    constructor() {
-      this.currentSection = 'home';
-      this.setupEventListeners();
-      
-      // Set initial state
-      this.showSection('home');
-      
-      // Listen for custom events from FloatingMenu
-      document.addEventListener('spa-navigate', (e: Event) => {
-        this.navigateToSection((e as CustomEvent).detail.section);
-      });
-    }
-    
-    setupEventListeners() {
-      // Handle browser back/forward and hash changes
-      window.addEventListener('popstate', () => {
-        const section = this.getSectionFromURL();
-        this.showSection(section, false);
-      });
-      
-      // Handle direct hash changes
-      window.addEventListener('hashchange', () => {
-        const section = this.getSectionFromURL();
-        this.showSection(section, false);
-      });
-      
-      // Handle initial page state
-      const initialSection = this.getSectionFromURL();
-      if (initialSection !== 'home') {
-        this.showSection(initialSection, false);
-      }
-    }
-    
-    getSectionFromURL() {
-      const hash = window.location.hash.substring(1);
-      // Validate hash is one of our sections
-      if (hash && ['1', '2', '3', '4', '5', 'archive'].includes(hash) && document.getElementById(`content-${hash}`)) {
-        return hash;
-      }
-      return 'home';
-    }
-    
-    navigateToSection(section: string) {
-      if (section === this.currentSection) return;
-      
-      this.showSection(section, true);
-    }
-    
-    showSection(section: string, updateHistory = true) {
-      if (section === this.currentSection) return;
-      
-      const targetSection = document.getElementById(`content-${section}`);
-      if (!targetSection) return;
-      
-      // Hide current section with fade out
-      const currentSection = document.getElementById(`content-${this.currentSection}`);
-      if (currentSection) {
-        currentSection.classList.remove('active');
-      }
-      
-      // Show new section after a brief delay for smooth transition
-      setTimeout(() => {
-        targetSection.classList.add('active');
-      }, currentSection ? 100 : 0);
-      
-      this.currentSection = section;
-      
-      // Update URL if needed
-      if (updateHistory) {
-        const url = section === 'home' ? '/' : `/#${section}`;
-        if (window.location.pathname + window.location.hash !== url) {
-          window.history.pushState({ section }, '', url);
-        }
-      }
-      
-      // Scroll to top smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-      // Dispatch event for FloatingMenu to update its state
-      document.dispatchEvent(new CustomEvent('spa-section-changed', {
-        detail: { section }
-      }));
-    }
-  }
-  
-  // Initialize SPA controller when DOM is ready
-  document.addEventListener('DOMContentLoaded', () => {
-    new SPAController();
-  });
-</script>

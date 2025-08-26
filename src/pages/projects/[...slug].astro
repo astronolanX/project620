@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import ProjectPost from '../../layouts/ProjectPost.astro';
+import Layout from '../../layouts/Layout.astro';
+import StickyFooter from '../../components/StickyFooter.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -16,6 +17,393 @@ const project = Astro.props;
 const { Content } = await project.render();
 ---
 
-<ProjectPost {...project.data}>
-  <Content />
-</ProjectPost>
+<Layout title={`${project.data.title} - Nolan Figueroa`}>
+  <div class="page-wrapper" 
+       style={`--project-color: ${project.data.color}; --project-light: ${project.data.colorLight}; --project-lighter: ${project.data.colorLighter};`}>
+    
+    <!-- Project Header -->
+    <header class="project-header">
+      <div class="project-meta">
+        <span class="project-year">{project.data.year}</span>
+        <span class="project-type">{project.data.type}</span>
+        <span class="project-number">/{project.data.number}</span>
+      </div>
+      <h1 class="project-title">{project.data.title}</h1>
+      <p class="project-subtitle">{project.data.subtitle}</p>
+    </header>
+
+    <!-- Bento Grid Layout -->
+    <main class="bento-container">
+      <!-- Large feature card -->
+      <div class="bento-item large">
+        <div class="bento-content">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Medium cards -->
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <h3>Research</h3>
+          <p>In-depth exploration of user needs and technological possibilities.</p>
+          <div class="metric">
+            <span class="metric-value">180+</span>
+            <span class="metric-label">Hours</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-item medium">
+        <div class="bento-content">
+          <h3>Prototyping</h3>
+          <p>Rapid iteration and validation of design concepts.</p>
+          <div class="metric">
+            <span class="metric-value">45</span>
+            <span class="metric-label">Iterations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Small cards -->
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Tools</h4>
+          <div class="tag-list">
+            <span class="tag">Figma</span>
+            <span class="tag">Framer</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Timeline</h4>
+          <div class="timeline-item">
+            <span class="timeline-phase">Discovery</span>
+            <span class="timeline-duration">2 weeks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Impact</h4>
+          <div class="impact-metric">
+            <span class="impact-value">2.3x</span>
+            <span class="impact-label">Efficiency</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bento-item small">
+        <div class="bento-content">
+          <h4>Team</h4>
+          <div class="team-size">
+            <span class="team-count">6</span>
+            <span class="team-label">Members</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wide card -->
+      <div class="bento-item wide">
+        <div class="bento-content">
+          <h3>Key Insights</h3>
+          <div class="insights-grid">
+            <div class="insight-item">
+              <span class="insight-number">01</span>
+              <p>User behavior patterns change significantly in 3D environments</p>
+            </div>
+            <div class="insight-item">
+              <span class="insight-number">02</span>
+              <p>Accessibility considerations become more complex but more impactful</p>
+            </div>
+            <div class="insight-item">
+              <span class="insight-number">03</span>
+              <p>Performance optimization is critical for user adoption</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <StickyFooter />
+  </div>
+</Layout>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--project-lighter) 0%, var(--project-light) 100%);
+    padding-left: 100px; /* Space for floating menu */
+  }
+
+  .project-header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-year, .project-type, .project-number {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: var(--project-color);
+    border: 2px solid var(--project-color);
+  }
+
+  .project-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    color: var(--project-color);
+  }
+
+  .project-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #333;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .bento-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(6, minmax(200px, auto));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Bento grid layouts */
+  .bento-item.large {
+    grid-column: span 8;
+    grid-row: span 3;
+  }
+
+  .bento-item.medium {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .bento-item.small {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .bento-item.wide {
+    grid-column: span 12;
+    grid-row: span 2;
+  }
+
+  .bento-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bento-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--project-color);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .bento-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: var(--project-light);
+  }
+
+  .bento-content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--project-color);
+  }
+
+  .bento-content h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--project-color);
+  }
+
+  .bento-content p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+
+  /* Metrics styling */
+  .metric, .impact-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .metric-value, .impact-value {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--project-color);
+    line-height: 1;
+  }
+
+  .metric-label, .impact-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Tags */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: var(--project-lighter);
+    color: var(--project-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--project-light);
+  }
+
+  /* Timeline */
+  .timeline-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .timeline-phase {
+    font-weight: 600;
+    color: var(--project-color);
+  }
+
+  .timeline-duration {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  /* Team */
+  .team-size {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-count {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--project-color);
+  }
+
+  .team-label {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  /* Insights */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .insight-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .insight-number {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--project-color);
+    flex-shrink: 0;
+  }
+
+  .insight-item p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      padding-left: 0;
+    }
+
+    .bento-container {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .bento-item.large,
+    .bento-item.medium,
+    .bento-item.small,
+    .bento-item.wide {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .bento-item {
+      padding: 1.5rem;
+    }
+
+    .project-header {
+      padding: 2rem 1rem 1rem;
+    }
+
+    .project-meta {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .insights-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

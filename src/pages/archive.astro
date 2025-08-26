@@ -1,0 +1,303 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyFooter from '../components/StickyFooter.astro';
+---
+
+<Layout title="Archive - Nolan Figueroa">
+  <div class="page-wrapper">
+    <!-- Archive Header -->
+    <header class="archive-header">
+      <h1 class="archive-title">Archive</h1>
+      <p class="archive-subtitle">A collection of past experiments, thoughts, and explorations</p>
+    </header>
+
+    <!-- Bento Archive Grid -->
+    <main class="bento-container">
+      <!-- Archive items in bento style -->
+      <div class="archive-item large">
+        <div class="archive-content">
+          <div class="archive-year">2021</div>
+          <h3>Experimental Typography</h3>
+          <p>Variable fonts and responsive typography systems that adapt to user preferences and screen capabilities.</p>
+          <div class="archive-tags">
+            <span class="archive-tag">Typography</span>
+            <span class="archive-tag">WebFont</span>
+            <span class="archive-tag">CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="archive-item medium">
+        <div class="archive-content">
+          <div class="archive-year">2021</div>
+          <h3>Color Psychology Research</h3>
+          <p>How color choices affect user behavior and accessibility in digital interfaces.</p>
+        </div>
+      </div>
+
+      <div class="archive-item medium">
+        <div class="archive-content">
+          <div class="archive-year">2020</div>
+          <h3>Remote Collaboration Tools</h3>
+          <p>Designing for distributed teams during the pandemic era.</p>
+        </div>
+      </div>
+
+      <div class="archive-item small">
+        <div class="archive-content">
+          <div class="archive-year">2020</div>
+          <h4>Voice UI</h4>
+          <p>Early explorations in conversational interfaces.</p>
+        </div>
+      </div>
+
+      <div class="archive-item small">
+        <div class="archive-content">
+          <div class="archive-year">2019</div>
+          <h4>Sustainable Design</h4>
+          <p>Measuring environmental impact of digital products.</p>
+        </div>
+      </div>
+
+      <div class="archive-item small">
+        <div class="archive-content">
+          <div class="archive-year">2019</div>
+          <h4>Generative Art</h4>
+          <p>Creative coding experiments with procedural design.</p>
+        </div>
+      </div>
+
+      <div class="archive-item small">
+        <div class="archive-content">
+          <div class="archive-year">2018</div>
+          <h4>Mobile First</h4>
+          <p>Progressive enhancement strategies for mobile web.</p>
+        </div>
+      </div>
+
+      <div class="archive-item wide">
+        <div class="archive-content">
+          <h3>Early Work Timeline</h3>
+          <div class="timeline-grid">
+            <div class="timeline-item">
+              <span class="timeline-year">2018</span>
+              <span class="timeline-event">Started exploring mobile-first design</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2019</span>
+              <span class="timeline-event">First generative art installations</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2020</span>
+              <span class="timeline-event">Pivot to remote collaboration tools</span>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2021</span>
+              <span class="timeline-event">Typography and color research published</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <StickyFooter />
+  </div>
+</Layout>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--color-archive-lighter) 0%, var(--color-archive-light) 100%);
+    padding-left: 100px; /* Space for floating menu */
+  }
+
+  .archive-header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .archive-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    color: var(--color-archive);
+  }
+
+  .archive-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: #333;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .bento-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(4, minmax(200px, auto));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* Bento layouts for archive */
+  .archive-item.large {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .archive-item.medium {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  .archive-item.small {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .archive-item.wide {
+    grid-column: span 12;
+    grid-row: span 1;
+  }
+
+  .archive-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .archive-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-archive);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .archive-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-archive);
+  }
+
+  .archive-year {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-archive);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .archive-content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--color-archive);
+  }
+
+  .archive-content h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--color-archive);
+  }
+
+  .archive-content p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+  }
+
+  .archive-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .archive-tag {
+    background: var(--color-archive-lighter);
+    color: var(--color-archive);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-archive-light);
+  }
+
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timeline-year {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--color-archive);
+  }
+
+  .timeline-event {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      padding-left: 0;
+    }
+
+    .bento-container {
+      grid-template-columns: 1fr;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .archive-item.large,
+    .archive-item.medium,
+    .archive-item.small,
+    .archive-item.wide {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .archive-item {
+      padding: 1.5rem;
+    }
+
+    .archive-header {
+      padding: 2rem 1rem 1rem;
+    }
+
+    .timeline-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

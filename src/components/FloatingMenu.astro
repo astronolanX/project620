@@ -14,6 +14,9 @@ const selectedWorks = [
 // Get current page info for highlighting
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === '/';
+const isArchivePage = currentPath === '/archive' || currentPath === '/archive/';
+const isProjectPage = currentPath.startsWith('/projects/');
+const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.replace('/', '') : null;
 ---
 
 <div class="floating-menu">
@@ -23,13 +26,13 @@ const isHomePage = currentPath === '/';
   
   <nav class="menu-numbers">
     {selectedWorks.map((work) => (
-      <a href={`/#${work.number}`} class={`menu-number`} data-number={work.number}>
+      <a href={`/projects/${work.slug}`} class={`menu-number ${currentProjectSlug === work.slug ? 'active' : ''}`} data-number={work.number}>
         <span class="number" data-number={`/${work.number}`}>/{work.number}</span>
       </a>
     ))}
   </nav>
   
-  <a href="/#archive" class={`menu-archive`}>
+  <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
     <span class="material-icons archive-icon" data-icon="folder">folder</span>
   </a>
   
@@ -48,28 +51,23 @@ const isHomePage = currentPath === '/';
     left: 20px;
     transform: translateY(-50%);
     z-index: 1000;
-    background: rgba(0, 0, 0, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 10px 8px;
+    background: var(--bg-white);
+    padding: 12px 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: center;
     border-radius: 9999px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
     transition: all 0.3s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
   
   .floating-menu:hover {
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transform: translateY(-50%) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
-  
+
   .menu-home {
     display: flex;
     align-items: center;
@@ -79,16 +77,14 @@ const isHomePage = currentPath === '/';
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
   }
   
   .menu-home:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--gray-200);
     transform: scale(1.25);
-    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: var(--gray-400);
   }
   
   .menu-home.active:hover .initials {
@@ -103,7 +99,7 @@ const isHomePage = currentPath === '/';
   }
   
   .menu-home:hover .initials {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--gray-700);
   }
   
   .menu-home.active .initials {
@@ -116,7 +112,7 @@ const isHomePage = currentPath === '/';
     font-size: 14px;
     font-weight: 700;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--gray-600);
     letter-spacing: 0.5px;
     line-height: 1;
     display: flex;
@@ -137,7 +133,7 @@ const isHomePage = currentPath === '/';
   }
   
   .menu-archive:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--gray-200);
     transform: scale(1.25);
   }
   
@@ -153,13 +149,13 @@ const isHomePage = currentPath === '/';
   
   .archive-icon {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--gray-600);
     transition: all 0.3s ease;
     line-height: 1;
   }
   
   .menu-archive:hover .archive-icon {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--gray-700);
   }
   
   .menu-archive.active .archive-icon {
@@ -185,7 +181,7 @@ const isHomePage = currentPath === '/';
   }
   
   .menu-number:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--gray-200);
     transform: scale(1.25);
   }
   
@@ -196,7 +192,7 @@ const isHomePage = currentPath === '/';
   .number {
     font-family: 'Roboto Mono', monospace;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--gray-600);
     transition: all 0.3s ease;
     line-height: 1;
     display: flex;
@@ -205,7 +201,7 @@ const isHomePage = currentPath === '/';
   }
   
   .menu-number:hover .number {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--gray-700);
   }
   
   .menu-number.active .number {
@@ -287,12 +283,12 @@ const isHomePage = currentPath === '/';
   }
   
   .menu-footer-toggle:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--gray-200);
     transform: scale(1.25);
   }
   
   .menu-footer-toggle.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--gray-900);
     transform: scale(1.1);
   }
   
@@ -306,17 +302,17 @@ const isHomePage = currentPath === '/';
   
   .menu-footer-toggle .copyright-icon {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--gray-600);
     transition: all 0.3s ease;
   }
   
   .menu-footer-toggle:hover .copyright-icon {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--gray-700);
     transform: rotate(-15deg);
   }
   
   .menu-footer-toggle.active .copyright-icon {
-    color: rgba(0, 0, 0, 0.9);
+    color: var(--gray-100);
   }
   
   /* Loading indicator */
@@ -354,6 +350,7 @@ const isHomePage = currentPath === '/';
     100% { transform: scale(1); }
   }
   
+  
   .menu-home.active.shrink {
     animation: shrink 0.15s ease-out;
   }
@@ -377,8 +374,8 @@ const isHomePage = currentPath === '/';
       top: 50%;
       left: 16px;
       transform: translateY(-50%);
-      padding: 8px 6px;
-      gap: 5px;
+      padding: 10px 8px;
+      gap: 6px;
     }
     
     .menu-home {
@@ -415,15 +412,11 @@ const isHomePage = currentPath === '/';
 <script>
   class FloatingMenu {
     private footerToggle: HTMLElement | null;
-    private menuNumbers: HTMLElement | null;
     private footerVisible: boolean = false;
     
     constructor() {
       this.footerToggle = document.getElementById('footerToggle');
-      this.menuNumbers = document.querySelector('.menu-numbers');
       this.initFooterToggle();
-      this.initLogmarSizing();
-      this.initBrowserNavigation();
       this.initKeyboardHandlers();
     }
     
@@ -450,93 +443,6 @@ const isHomePage = currentPath === '/';
       }
     }
     
-    
-    initLogmarSizing() {
-      if (!this.menuNumbers) return;
-      
-      // Set initial state based on current page
-      this.updateLogmarState();
-      
-      // Add click handlers for seamless transitions
-      this.addTransitionHandlers();
-    }
-    
-    updateLogmarState() {
-      // Get current section from URL hash or default to home
-      const hash = window.location.hash.substring(1);
-      let selectedState = 'home';
-      
-      if (hash === 'archive') {
-        selectedState = 'archive';
-      } else if (['1', '2', '3', '4', '5'].includes(hash)) {
-        selectedState = hash;
-      }
-      
-      // Apply the data-selected attribute
-      if (this.menuNumbers) {
-        this.menuNumbers.setAttribute('data-selected', selectedState);
-      }
-      
-      // Update active states
-      this.updateActiveStates(selectedState);
-    }
-    
-    addTransitionHandlers() {
-      // Add click handlers to all menu items for real-time transitions
-      const homeLink = document.querySelector('.menu-home');
-      const archiveLink = document.querySelector('.menu-archive');
-      const numberLinks = document.querySelectorAll('.menu-number');
-      
-      // Home click handler
-      if (homeLink) {
-        homeLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          
-          // If already active, show bounce feedback
-          if (homeLink.classList.contains('active')) {
-            this.addShrinkEffect(homeLink as HTMLElement);
-            return;
-          }
-          
-          this.navigateToContent('/', 'home');
-        });
-      }
-      
-      // Archive click handler
-      if (archiveLink) {
-        archiveLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          
-          // If already active, show bounce feedback
-          if (archiveLink.classList.contains('active')) {
-            this.addShrinkEffect(archiveLink as HTMLElement);
-            return;
-          }
-          
-          this.navigateToContent('/#archive', 'archive');
-        });
-      }
-      
-      // Number click handlers
-      numberLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          
-          const number = link.getAttribute('data-number');
-          
-          // If already active, show bounce feedback
-          if (link.classList.contains('active')) {
-            this.addShrinkEffect(link as HTMLElement);
-            return;
-          }
-          
-          if (number) {
-            this.navigateToContent(`/#${number}`, number);
-          }
-        });
-      });
-    }
-    
     initKeyboardHandlers() {
       document.addEventListener('keydown', (e) => {
         // Close footer on Escape key
@@ -550,98 +456,6 @@ const isHomePage = currentPath === '/';
         if (this.footerVisible) {
           this.toggleFooter();
         }
-      });
-    }
-    
-    addShrinkEffect(element: HTMLElement) {
-      // Add shrink class
-      element.classList.add('shrink');
-      
-      // Remove shrink class after animation completes
-      setTimeout(() => {
-        element.classList.remove('shrink');
-      }, 150);
-    }
-    
-    animateToState(newState: string) {
-      // Smoothly transition to new state
-      if (this.menuNumbers) {
-        this.menuNumbers.setAttribute('data-selected', newState);
-        
-        // Update active states immediately for visual feedback
-        this.updateActiveStates(newState);
-      }
-    }
-    
-    updateActiveStates(selectedState: string) {
-      // Remove all active classes
-      document.querySelectorAll('.menu-home, .menu-archive, .menu-number').forEach(el => {
-        el.classList.remove('active');
-      });
-      
-      // Add active class to selected item
-      if (selectedState === 'home') {
-        document.querySelector('.menu-home')?.classList.add('active');
-      } else if (selectedState === 'archive') {
-        document.querySelector('.menu-archive')?.classList.add('active');
-      } else if (['1', '2', '3', '4', '5'].includes(selectedState)) {
-        document.querySelector(`.menu-number[data-number="${selectedState}"]`)?.classList.add('active');
-      }
-    }
-    
-    navigateToContent(_url: string, state: string) {
-      // Extract section from state or URL
-      let section;
-      if (state === 'home') {
-        section = 'home';
-      } else if (state === 'archive') {
-        section = 'archive';
-      } else if (['1', '2', '3', '4', '5'].includes(state)) {
-        section = state;
-      } else {
-        section = 'home';
-      }
-      
-      // Animate to new state immediately for visual feedback
-      this.animateToState(state);
-      
-      // Dispatch SPA navigation event
-      document.dispatchEvent(new CustomEvent('spa-navigate', {
-        detail: { section }
-      }));
-    }
-    
-    initBrowserNavigation() {
-      // Listen for SPA section changes to update menu state
-      document.addEventListener('spa-section-changed', (e: Event) => {
-        const section = (e as CustomEvent).detail.section;
-        let state;
-        
-        if (section === 'home') {
-          state = 'home';
-        } else if (section === 'archive') {
-          state = 'archive';
-        } else if (['1', '2', '3', '4', '5'].includes(section)) {
-          state = section;
-        } else {
-          state = 'home';
-        }
-        
-        this.animateToState(state);
-      });
-      
-      // Handle browser back/forward buttons and hash changes
-      window.addEventListener('popstate', () => {
-        this.updateLogmarState();
-      });
-      
-      window.addEventListener('hashchange', () => {
-        this.updateLogmarState();
-      });
-      
-      // Handle page load/refresh to ensure menu state is correct
-      window.addEventListener('load', () => {
-        this.updateLogmarState();
       });
     }
   }
