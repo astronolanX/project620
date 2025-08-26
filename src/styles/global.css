@@ -36,17 +36,45 @@
   }
   
   /* Use pointer cursor for interactive elements */
-  button, a, [role="button"], [tabindex]:not([tabindex="-1"]) {
-    cursor: pointer;
+  button, a, [role="button"], [tabindex]:not([tabindex="-1"]), .clickable {
+    cursor: pointer !important;
   }
   
   input, textarea, select {
     cursor: text;
   }
   
+  /* Ensure clickable text elements have pointer cursor */
+  .contact-link, .footer-link, .nav-links a, .btn, .contact-button, 
+  .cv-button, .drawer-trigger, .chart-line, .learn-more, .view-all, 
+  .project-card, .blog-item, .menu-home, .menu-number, .social-links a,
+  .drawer-close-btn, .contact-btn {
+    cursor: pointer !important;
+  }
+  
+  /* Ensure ALL child elements of clickable containers inherit pointer cursor */
+  .contact-link *, .footer-link *, .nav-links a *, .btn *, .contact-button *, 
+  .cv-button *, .drawer-trigger *, .chart-line *, .learn-more *, .view-all *, 
+  .project-card *, .blog-item *, .menu-home *, .menu-number *, .social-links a *,
+  .drawer-close-btn *, .contact-btn * {
+    cursor: pointer !important;
+  }
+  
   /* Disable cursor changes on non-interactive elements */
   .no-cursor-change {
     cursor: auto !important;
+  }
+  
+  /* Prevent text selection on clickable elements */
+  button, .btn, .contact-button, .cv-button, .drawer-trigger, 
+  .drawer-close-btn, .contact-btn, .menu-home, .menu-number {
+    user-select: none;
+  }
+  
+  /* Force pointer cursor on common child elements that might inherit text cursor */
+  .number, .initials, .material-icons, .material-icons-outlined,
+  span, em, strong, i, b {
+    cursor: inherit !important;
   }
 }
 
