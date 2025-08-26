@@ -21,19 +21,19 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 
 <div class="floating-menu">
   <a href="/" class={`menu-home ${isHomePage ? 'active' : ''}`}>
-    <span class="initials">{initials}</span>
+    <span class="initials" data-text={initials}>{initials}</span>
   </a>
   
   <nav class="menu-numbers">
     {selectedWorks.map((work) => (
       <a href={`/projects/${work.slug}`} class={`menu-number ${currentProjectSlug === work.slug ? 'active' : ''}`} data-number={work.number}>
-        <span class="number">{work.number}</span>
+        <span class="number" data-number={work.number}>{work.number}</span>
       </a>
     ))}
   </nav>
   
   <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
-    <span class="material-icons archive-icon">folder</span>
+    <span class="material-icons archive-icon" data-icon="folder">folder</span>
   </a>
 </div>
 
@@ -41,6 +41,9 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 <button class="footer-toggle" id="footerToggle">
   <span class="material-icons copyright-icon">copyright</span>
 </button>
+
+<!-- Navigation Loading Indicator -->
+<div class="navigation-loading" id="navigationLoading"></div>
 
 <style>
   .floating-menu {
@@ -88,22 +91,66 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     transform: scale(1.1);
   }
   
+  .menu-home:hover .initials {
+    --clarity: 0.7;
+  }
+  
   .menu-home.active .initials {
     opacity: 1;
     font-weight: 900;
+    --clarity: 1;
     color: #191314;
+  }
+  
+  .menu-home.active .initials::before,
+  .menu-home.active .initials::after {
+    opacity: 0;
   }
   
   .initials {
     font-family: 'Roboto Mono', monospace;
     font-size: 16px;
     font-weight: 700;
-    color: #ffffff;
+    color: transparent;
     letter-spacing: 0.5px;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    --clarity: 0.4;
+  }
+  
+  .initials::before,
+  .initials::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .initials::before {
+    color: rgba(255, 0, 0, 0.8);
+    transform: translateX(calc(-0.02em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.8 * (1 - var(--clarity)));
+  }
+  
+  .initials::after {
+    color: rgba(0, 255, 255, 0.8);
+    transform: translateX(calc(0.02em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.8 * (1 - var(--clarity)));
+  }
+  
+  .initials {
+    color: rgba(255, 255, 255, var(--clarity));
   }
 
   .menu-archive {
@@ -128,19 +175,62 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-archive.active .archive-icon {
+    --clarity: 1;
     color: #191314;
+  }
+  
+  .menu-archive.active .archive-icon::before,
+  .menu-archive.active .archive-icon::after {
+    opacity: 0;
   }
   
   .archive-icon {
     font-size: 18px;
-    color: #ffffff;
+    color: transparent;
     opacity: 0.7;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1;
+    position: relative;
+    --clarity: 0.4;
+  }
+  
+  .archive-icon::before,
+  .archive-icon::after {
+    content: attr(data-icon);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Material Icons';
+    font-size: inherit;
+  }
+  
+  .archive-icon::before {
+    color: rgba(255, 0, 0, 0.8);
+    transform: translateX(calc(-0.02em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.8 * (1 - var(--clarity)));
+  }
+  
+  .archive-icon::after {
+    color: rgba(0, 255, 255, 0.8);
+    transform: translateX(calc(0.02em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.8 * (1 - var(--clarity)));
+  }
+  
+  .archive-icon {
+    color: rgba(255, 255, 255, var(--clarity));
   }
   
   .menu-archive:hover .archive-icon {
     opacity: 1;
+    --clarity: 0.7;
   }
   
   .menu-numbers {
@@ -148,14 +238,13 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     flex-direction: column;
     gap: 8px;
     align-items: center;
+    --logmar-ratio: 1.25;
   }
   
   .menu-number {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
     text-decoration: none;
     transition: all 0.3s ease;
     border-radius: 50%;
@@ -169,30 +258,338 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   .number {
     font-family: 'Roboto Mono', monospace;
-    font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: transparent;
     opacity: 0.7;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    --clarity: 0.3;
+  }
+  
+  .number::before,
+  .number::after {
+    content: attr(data-number);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .number::before {
+    color: rgba(255, 0, 0, 0.8);
+    transform: translateX(calc(-0.03em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.9 * (1 - var(--clarity)));
+  }
+  
+  .number::after {
+    color: rgba(0, 255, 255, 0.8);
+    transform: translateX(calc(0.03em * (1 - var(--clarity))));
+    mix-blend-mode: screen;
+    opacity: calc(0.9 * (1 - var(--clarity)));
+  }
+  
+  .number {
+    color: rgba(255, 255, 255, var(--clarity));
   }
   
   .menu-number:hover .number {
     opacity: 1;
-  }
-  
-  .menu-number.active {
-    background: #ecf95a;
-    transform: scale(1.1);
+    --clarity: 0.6;
   }
   
   .menu-number.active .number {
     opacity: 1;
     font-weight: 700;
-    color: #191314;
+    --clarity: 1;
+    color: rgba(25, 19, 20, 1);
+  }
+  
+  .menu-number.active .number::before,
+  .menu-number.active .number::after {
+    opacity: 0;
+  }
+  
+  .menu-number.active {
+    background: #ecf95a;
+  }
+  
+  /* Smooth transitions for all sizing and background changes */
+  .menu-number {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .menu-number .number {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Enhanced transitions for size changes */
+  .menu-numbers[data-selected] .menu-number {
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .menu-numbers[data-selected] .menu-number .number {
+    transition: font-size 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Default state (home/archive selected): Progressive decrease 1->5 */
+  .menu-numbers:not([data-selected]) .menu-number[data-number="1"],
+  .menu-numbers[data-selected="home"] .menu-number[data-number="1"],
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="1"] {
+    width: 48px;
+    height: 48px;
+  }
+  .menu-numbers:not([data-selected]) .menu-number[data-number="1"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="1"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="1"] .number {
+    font-size: 18px;
+  }
+  
+  .menu-numbers:not([data-selected]) .menu-number[data-number="2"],
+  .menu-numbers[data-selected="home"] .menu-number[data-number="2"],
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="2"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers:not([data-selected]) .menu-number[data-number="2"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="2"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="2"] .number {
+    font-size: 16px;
+  }
+  
+  .menu-numbers:not([data-selected]) .menu-number[data-number="3"],
+  .menu-numbers[data-selected="home"] .menu-number[data-number="3"],
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="3"] {
+    width: 40px;
+    height: 40px;
+  }
+  .menu-numbers:not([data-selected]) .menu-number[data-number="3"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="3"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="3"] .number {
+    font-size: 14px;
+  }
+  
+  .menu-numbers:not([data-selected]) .menu-number[data-number="4"],
+  .menu-numbers[data-selected="home"] .menu-number[data-number="4"],
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="4"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers:not([data-selected]) .menu-number[data-number="4"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="4"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="4"] .number {
+    font-size: 12px;
+  }
+  
+  .menu-numbers:not([data-selected]) .menu-number[data-number="5"],
+  .menu-numbers[data-selected="home"] .menu-number[data-number="5"],
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="5"] {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-numbers:not([data-selected]) .menu-number[data-number="5"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="5"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="5"] .number {
+    font-size: 10px;
+  }
+  
+  /* Selected state 1: 1 is largest, progressive smaller above/below */
+  .menu-numbers[data-selected="1"] .menu-number[data-number="1"] {
+    width: 52px;
+    height: 52px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="1"] .number {
+    font-size: 20px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="2"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="2"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="3"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="3"] .number {
+    font-size: 12px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="4"] {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="4"] .number {
+    font-size: 10px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="5"] {
+    width: 28px;
+    height: 28px;
+  }
+  .menu-numbers[data-selected="1"] .menu-number[data-number="5"] .number {
+    font-size: 9px;
+  }
+  
+  /* Selected state 2: 2 is largest */
+  .menu-numbers[data-selected="2"] .menu-number[data-number="1"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="1"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="2"] {
+    width: 52px;
+    height: 52px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="2"] .number {
+    font-size: 20px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="3"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="3"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="4"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="4"] .number {
+    font-size: 12px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="5"] {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-numbers[data-selected="2"] .menu-number[data-number="5"] .number {
+    font-size: 10px;
+  }
+  
+  /* Selected state 3: 3 is largest */
+  .menu-numbers[data-selected="3"] .menu-number[data-number="1"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="1"] .number {
+    font-size: 12px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="2"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="2"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="3"] {
+    width: 52px;
+    height: 52px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="3"] .number {
+    font-size: 20px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="4"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="4"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="5"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="3"] .menu-number[data-number="5"] .number {
+    font-size: 12px;
+  }
+  
+  /* Selected state 4: 4 is largest */
+  .menu-numbers[data-selected="4"] .menu-number[data-number="1"] {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="1"] .number {
+    font-size: 10px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="2"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="2"] .number {
+    font-size: 12px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="3"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="3"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="4"] {
+    width: 52px;
+    height: 52px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="4"] .number {
+    font-size: 20px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="5"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="5"] .number {
+    font-size: 16px;
+  }
+  
+  /* Selected state 5: 5 is largest */
+  .menu-numbers[data-selected="5"] .menu-number[data-number="1"] {
+    width: 28px;
+    height: 28px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="1"] .number {
+    font-size: 9px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="2"] {
+    width: 32px;
+    height: 32px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="2"] .number {
+    font-size: 10px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="3"] {
+    width: 36px;
+    height: 36px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="3"] .number {
+    font-size: 12px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="4"] {
+    width: 44px;
+    height: 44px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="4"] .number {
+    font-size: 16px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="5"] {
+    width: 52px;
+    height: 52px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="5"] .number {
+    font-size: 20px;
   }
   
   .footer-toggle {
@@ -228,9 +625,121 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     transition: all 0.3s ease;
   }
   
+  /* Loading indicator */
+  .navigation-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+      90deg, 
+      transparent 0%, 
+      #ecf95a 50%, 
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: loading-slide 1s ease-in-out infinite;
+    z-index: 10001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .navigation-loading.active {
+    opacity: 1;
+  }
+  
+  @keyframes loading-slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+  }
+  
   .footer-toggle:hover .copyright-icon {
     opacity: 1;
     transform: rotate(-15deg);
+  }
+  
+  /* Glitch animation for enhanced effect */
+  @keyframes chromatic-glitch {
+    0%, 90%, 100% {
+      transform: translateX(0);
+    }
+    92% {
+      transform: translateX(-0.1em);
+    }
+    94% {
+      transform: translateX(0.1em);
+    }
+    96% {
+      transform: translateX(-0.05em);
+    }
+    98% {
+      transform: translateX(0.05em);
+    }
+  }
+  
+  @keyframes chromatic-glitch-after {
+    0%, 90%, 100% {
+      transform: translateX(0);
+    }
+    92% {
+      transform: translateX(0.1em);
+    }
+    94% {
+      transform: translateX(-0.1em);
+    }
+    96% {
+      transform: translateX(0.05em);
+    }
+    98% {
+      transform: translateX(-0.05em);
+    }
+  }
+  
+  /* Add subtle glitch effect occasionally */
+  .floating-menu:hover .number::before,
+  .floating-menu:hover .initials::before,
+  .floating-menu:hover .archive-icon::before {
+    animation: chromatic-glitch 3s ease-in-out infinite;
+  }
+  
+  .floating-menu:hover .number::after,
+  .floating-menu:hover .initials::after,
+  .floating-menu:hover .archive-icon::after {
+    animation: chromatic-glitch-after 3s ease-in-out infinite;
+  }
+  
+  /* Enhanced chromatic effect on menu hover */
+  .floating-menu:hover .number,
+  .floating-menu:hover .initials,
+  .floating-menu:hover .archive-icon {
+    --clarity: 0.2;
+  }
+  
+  /* Subtle pulsing chromatic effect */
+  @keyframes chromatic-pulse {
+    0%, 100% {
+      --clarity: 0.4;
+    }
+    50% {
+      --clarity: 0.2;
+    }
+  }
+  
+  .number,
+  .initials,
+  .archive-icon {
+    animation: chromatic-pulse 4s ease-in-out infinite;
+  }
+  
+  /* Stop pulsing when active or hovered */
+  .menu-number:hover .number,
+  .menu-home:hover .initials,
+  .menu-archive:hover .archive-icon,
+  .menu-number.active .number,
+  .menu-home.active .initials,
+  .menu-archive.active .archive-icon {
+    animation: none;
   }
   
   /* Responsive adjustments */
@@ -285,9 +794,15 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 
 <script>
   class FloatingMenu {
+    private footerToggle: HTMLElement | null;
+    private menuNumbers: HTMLElement | null;
+    
     constructor() {
       this.footerToggle = document.getElementById('footerToggle');
+      this.menuNumbers = document.querySelector('.menu-numbers');
       this.initFooterToggle();
+      this.initLogmarSizing();
+      this.initBrowserNavigation();
     }
     
     initFooterToggle() {
@@ -300,6 +815,151 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
           });
         });
       }
+    }
+    
+    initLogmarSizing() {
+      if (!this.menuNumbers) return;
+      
+      // Set initial state based on current page
+      this.updateLogmarState();
+      
+      // Add click handlers for seamless transitions
+      this.addTransitionHandlers();
+    }
+    
+    updateLogmarState() {
+      // Get current section from URL hash or default to home
+      const hash = window.location.hash.substring(1);
+      let selectedState = 'home';
+      
+      if (hash === 'archive') {
+        selectedState = 'archive';
+      } else if (['1', '2', '3', '4', '5'].includes(hash)) {
+        selectedState = hash;
+      } else if (hash === '' || hash === 'home') {
+        selectedState = 'home';
+      }
+      
+      // Apply the data-selected attribute
+      if (this.menuNumbers) {
+        this.menuNumbers.setAttribute('data-selected', selectedState);
+      }
+      
+      // Update active states
+      this.updateActiveStates(selectedState);
+    }
+    
+    addTransitionHandlers() {
+      // Add click handlers to all menu items for real-time transitions
+      const homeLink = document.querySelector('.menu-home');
+      const archiveLink = document.querySelector('.menu-archive');
+      const numberLinks = document.querySelectorAll('.menu-number');
+      
+      // Home click handler
+      if (homeLink) {
+        homeLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.navigateToContent('/', 'home');
+        });
+      }
+      
+      // Archive click handler
+      if (archiveLink) {
+        archiveLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.navigateToContent('/archive', 'archive');
+        });
+      }
+      
+      // Number click handlers
+      numberLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const number = link.getAttribute('data-number');
+          const href = link.getAttribute('href');
+          if (number && href) {
+            this.navigateToContent(href, number);
+          }
+        });
+      });
+    }
+    
+    animateToState(newState: string) {
+      // Smoothly transition to new state
+      if (this.menuNumbers) {
+        this.menuNumbers.setAttribute('data-selected', newState);
+        
+        // Update active states immediately for visual feedback
+        this.updateActiveStates(newState);
+      }
+    }
+    
+    updateActiveStates(selectedState: string) {
+      // Remove all active classes
+      document.querySelectorAll('.menu-home, .menu-archive, .menu-number').forEach(el => {
+        el.classList.remove('active');
+      });
+      
+      // Add active class to selected item
+      if (selectedState === 'home') {
+        document.querySelector('.menu-home')?.classList.add('active');
+      } else if (selectedState === 'archive') {
+        document.querySelector('.menu-archive')?.classList.add('active');
+      } else if (['1', '2', '3', '4', '5'].includes(selectedState)) {
+        document.querySelector(`.menu-number[data-number="${selectedState}"]`)?.classList.add('active');
+      }
+    }
+    
+    navigateToContent(url: string, state: string) {
+      // Extract section from state or URL
+      let section;
+      if (state === 'home') {
+        section = 'home';
+      } else if (state === 'archive') {
+        section = 'archive';
+      } else if (['1', '2', '3', '4', '5'].includes(state)) {
+        section = state;
+      } else {
+        section = 'home';
+      }
+      
+      // Animate to new state immediately for visual feedback
+      this.animateToState(state);
+      
+      // Dispatch SPA navigation event
+      document.dispatchEvent(new CustomEvent('spa-navigate', {
+        detail: { section }
+      }));
+    }
+    
+    initBrowserNavigation() {
+      // Listen for SPA section changes to update menu state
+      document.addEventListener('spa-section-changed', (e: Event) => {
+        const section = (e as CustomEvent).detail.section;
+        let state;
+        
+        if (section === 'home') {
+          state = 'home';
+        } else if (section === 'archive') {
+          state = 'archive';
+        } else if (['1', '2', '3', '4', '5'].includes(section)) {
+          state = section;
+        } else {
+          state = 'home';
+        }
+        
+        this.animateToState(state);
+      });
+      
+      // Handle browser back/forward buttons
+      window.addEventListener('popstate', (e) => {
+        this.updateLogmarState();
+      });
+      
+      // Handle page load/refresh to ensure menu state is correct
+      window.addEventListener('load', () => {
+        this.updateLogmarState();
+      });
     }
   }
   
