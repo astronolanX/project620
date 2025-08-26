@@ -16,9 +16,6 @@
   --gray-800: #343a40;
   --gray-900: #212529;
   
-  /* Chromatic aberration effects (preserved for anyglyphic vibes) */
-  --chromatic-red: rgba(255, 0, 0, 0.6);
-  --chromatic-cyan: rgba(0, 255, 255, 0.6);
   
   /* Updated checkerboard pattern */
   --checkerboard-size: 40px;
@@ -53,17 +50,17 @@
   
   /* Ensure clickable text elements have pointer cursor */
   .contact-link, .footer-link, .nav-links a, .btn, .contact-button, 
-  .cv-button, .drawer-trigger, .chart-line, .learn-more, .view-all, 
+  .cv-button, .learn-more, .view-all, 
   .project-card, .blog-item, .menu-home, .menu-number, .social-links a,
-  .drawer-close-btn, .contact-btn {
+  .contact-btn {
     cursor: pointer !important;
   }
   
   /* Ensure ALL child elements of clickable containers inherit pointer cursor */
   .contact-link *, .footer-link *, .nav-links a *, .btn *, .contact-button *, 
-  .cv-button *, .drawer-trigger *, .chart-line *, .learn-more *, .view-all *, 
+  .cv-button *, .learn-more *, .view-all *, 
   .project-card *, .blog-item *, .menu-home *, .menu-number *, .social-links a *,
-  .drawer-close-btn *, .contact-btn * {
+  .contact-btn * {
     cursor: pointer !important;
   }
   
@@ -73,8 +70,8 @@
   }
   
   /* Prevent text selection on clickable elements */
-  button, .btn, .contact-button, .cv-button, .drawer-trigger, 
-  .drawer-close-btn, .contact-btn, .menu-home, .menu-number {
+  button, .btn, .contact-button, .cv-button, 
+  .contact-btn, .menu-home, .menu-number {
     -webkit-user-select: none;
     user-select: none;
   }
@@ -88,11 +85,6 @@
 
 @layer utilities {
 /* stylelint-enable at-rule-no-unknown */
-  .chromatic-text {
-    text-shadow: 
-      -2px 0 var(--chromatic-red),
-      2px 0 var(--chromatic-cyan);
-  }
   
   .line-clamp-3 {
     overflow: hidden;

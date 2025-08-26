@@ -37,19 +37,16 @@ Dynamic routing via:
 
 ### Core Components
 
-- **EyeChart.astro**: Dynamic eye chart interface that extracts 5 letters from content titles, features chromatic aberration effects, proximity-based clearing, idle glitch animations
 - **FloatingMenu.astro**: Fixed navigation menu with logmar scaling effect, dynamically sized numbered navigation (1-5), integrated archive section, and smooth page transitions with preloading
-- **BottomDrawer.astro**: Dark-themed slide-up navigation with touch gestures
 - **StickyFooter.astro**: Footer component with navigation and contact links
 - **Layout.astro**: Base layout loading Roboto font family, PWA setup, simplified loading overlay
 
 ### Optimized Structure
 
-- **Removed redundancies**: Deleted unused Header.astro component and duplicate index.css file
-- **Consolidated styles**: CSS variables for chromatic effects and checkerboard pattern in global.css
-- **Dynamic content**: Eye chart now pulls from content collections instead of hardcoded data
-- **Simplified loading**: Removed complex number animation in favor of simple fade overlay
-- **Reduced font loading**: Only loads necessary Material Icons variant
+- **Removed redundancies**: Deleted unused EyeChart.astro, BottomDrawer.astro, Header.astro components and duplicate index.css file
+- **Consolidated styles**: Streamlined CSS selectors and removed unused style classes
+- **Simplified loading**: Clean loading overlay with fade transition
+- **Optimized font loading**: Single consolidated Google Fonts request for all font families
 
 ### Build Configuration
 
@@ -63,23 +60,17 @@ Dynamic routing via:
 
 ### Theme Requirements
 
-- Main site: Light theme with pink/white checkerboard background pattern (CSS variables: --checkerboard-color: #ffc0cb)
-- Floating menu: Dark theme (rgba(25,19,20,0.95) background, white text, blur backdrop)
-- Bottom drawer: Dark theme (rgba(15,15,15,0.98) background, white text)
-- Eye chart letters: **MUST preserve chromatic aberration effect** (var(--chromatic-red) and var(--chromatic-cyan))
-- Typography: Roboto family for all text (body, menu, eye chart)
+- Main site: Light theme with gray background pattern (CSS variables: --gray-100)
+- Floating menu: Light theme with chromatic aberration effects on interactive elements
+- Typography: Roboto family for all text, Roboto Mono for headings and code
 
 ### Component Behavior
 
-- Eye chart uses fluid clamp() scaling for all dimensions
-- Eye chart dynamically populated from content collections
 - Floating menu features logmar scaling effect with active project highlighting
 - Floating menu projects mapped to specific slugs: 1=future-design, 2=ux-patterns, 3=spatial-interfaces, 4=design-systems-scale, 5=micro-interactions
-- Bottom drawer integrated with sticky footer navigation  
+- SPA-style navigation with smooth content transitions on home page
 - All interactive components use vanilla JavaScript in `<script>` tags
 - Loading overlay simplified to basic fade transition (500ms delay)
-- Proximity-based clearing effect on eye chart (150px threshold)
-- Idle glitch animations after 3 seconds of inactivity
 - Consistent pointer cursor behavior enforced via global CSS for all interactive elements
 
 ### Performance Optimizations
