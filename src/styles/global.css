@@ -75,6 +75,7 @@
   /* Prevent text selection on clickable elements */
   button, .btn, .contact-button, .cv-button, .drawer-trigger, 
   .drawer-close-btn, .contact-btn, .menu-home, .menu-number {
+    -webkit-user-select: none;
     user-select: none;
   }
   

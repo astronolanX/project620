@@ -67,10 +67,7 @@ function getLettersFromTitle(title: string) {
 <style>
   .eye-chart-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -84,14 +81,17 @@ function getLettersFromTitle(title: string) {
     box-sizing: border-box;
   }
   
-  
   .eye-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.2rem, 0.8vw, 0.8rem);
+    position: relative;
     width: auto;
     max-width: 100%;
     max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: auto;
+    justify-content: center;
   }
   
   @media (orientation: landscape) {
@@ -106,17 +106,6 @@ function getLettersFromTitle(title: string) {
       width: 100%;
       max-width: 100vw;
     }
-  }
-  
-  .eye-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(0.2rem, 0.8vw, 0.8rem);
-    position: relative;
-    width: auto;
-    height: auto;
-    justify-content: center;
   }
   
   .chart-line {
@@ -209,21 +198,22 @@ function getLettersFromTitle(title: string) {
   }
   
   .chart-line span::before {
-    color: #FF0000;
+    color: #ff0000;
     transform: translateX(calc(-0.05em * (1 - var(--clarity))));
     mix-blend-mode: multiply;
-    opacity: calc(1 - var(--clarity));
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .chart-line span::after {
-    color: #00FFFF;
+    color: #00ffff;
     transform: translateX(calc(0.05em * (1 - var(--clarity))));
     mix-blend-mode: multiply;
-    opacity: calc(1 - var(--clarity));
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .chart-line span {
-    color: rgba(33, 37, 41, var(--clarity));
+    color: rgba(0, 0, 0, 1);
+    filter: contrast(1.3);
   }
   
   .chart-line span.glitching {
@@ -235,57 +225,20 @@ function getLettersFromTitle(title: string) {
     transition: none !important;
   }
   
-  .line-1 {
-    font-size: 5rem;
-  }
-  
-  .line-2 {
-    font-size: 4rem;
-  }
-  
-  .line-3 {
-    font-size: 3.2rem;
-  }
-  
-  .line-4 {
-    font-size: 2.6rem;
-  }
-  
-  .line-5 {
-    font-size: 2.1rem;
-  }
-  
-  .line-6 {
-    font-size: 1.7rem;
-  }
-  
-  .line-7 {
-    font-size: 1.4rem;
-  }
-  
-  .line-8 {
-    font-size: 1.1rem;
-  }
-  
-  .line-9 {
-    font-size: 0.9rem;
-  }
-  
-  .line-10 {
-    font-size: 0.75rem;
-  }
-  
-  .line-11 {
-    font-size: 0.6rem;
-  }
-  
-  .line-12 {
-    font-size: 0.5rem;
-  }
-  
-  .line-13 {
-    font-size: 0.4rem;
-  }
+  /* Line sizes with calculated scaling */
+  .line-1 { font-size: 5rem; }
+  .line-2 { font-size: 4rem; }
+  .line-3 { font-size: 3.2rem; }
+  .line-4 { font-size: 2.6rem; }
+  .line-5 { font-size: 2.1rem; }
+  .line-6 { font-size: 1.7rem; }
+  .line-7 { font-size: 1.4rem; }
+  .line-8 { font-size: 1.1rem; }
+  .line-9 { font-size: 0.9rem; }
+  .line-10 { font-size: 0.75rem; }
+  .line-11 { font-size: 0.6rem; }
+  .line-12 { font-size: 0.5rem; }
+  .line-13 { font-size: 0.4rem; }
   
   .drawer-trigger-wrapper {
     display: flex;
@@ -314,10 +267,7 @@ function getLettersFromTitle(title: string) {
   }
   
   @keyframes slideUpButton {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
   }
   
   .drawer-trigger:hover {
@@ -358,12 +308,6 @@ function getLettersFromTitle(title: string) {
     margin-top: auto;
   }
   
-  .copyright-line .line-number {
-    width: 2em;
-    margin-right: 1.5em;
-    flex-shrink: 0;
-    visibility: hidden;
-  }
   
   .copyright-content {
     display: flex;
@@ -445,12 +389,13 @@ function getLettersFromTitle(title: string) {
     const letters = document.querySelectorAll('.content-link span[data-letter]');
     const PROXIMITY_THRESHOLD = 150; // Distance threshold for clearing effect
     
-    // Scramble animation on load
+    // Optimized scramble animation
     const CHAR_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const getRandomChar = () => CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
     
     function scrambleInLetter(element: HTMLElement) {
       const finalLetter = element.getAttribute('data-original');
-      const duration = 800 + Math.random() * 400; // 800-1200ms per letter
+      const duration = 800 + Math.random() * 400;
       const startTime = Date.now();
       let frameCount = 0;
       
@@ -459,16 +404,14 @@ function getLettersFromTitle(title: string) {
         const progress = Math.min(elapsed / duration, 1);
         
         if (progress < 1) {
-          // Scramble phase - change character every few frames for better effect
           frameCount++;
-          if (frameCount % 3 === 0) { // Change every 3 frames
-            const randomChar = CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
+          if (frameCount % 3 === 0) {
+            const randomChar = getRandomChar();
             element.textContent = randomChar;
             element.setAttribute('data-letter', randomChar);
           }
           requestAnimationFrame(animate);
         } else {
-          // Final letter
           element.textContent = finalLetter;
           if (finalLetter) {
             element.setAttribute('data-letter', finalLetter);
@@ -481,92 +424,70 @@ function getLettersFromTitle(title: string) {
     
     // Stagger the scramble animation for each letter
     letters.forEach((letter, index) => {
-      // Store original letter
       const originalLetter = letter.getAttribute('data-letter');
       if (originalLetter) {
         letter.setAttribute('data-original', originalLetter);
+        
+        // Set initial random character
+        const randomChar = getRandomChar();
+        letter.textContent = randomChar;
+        letter.setAttribute('data-letter', randomChar);
+        
+        // Trigger fade in and scramble with stagger
+        setTimeout(() => {
+          (letter as HTMLElement).style.opacity = '1';
+          scrambleInLetter(letter as HTMLElement);
+        }, index * 30);
       }
-      
-      // Set initial random character
-      const randomChar = CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
-      letter.textContent = randomChar;
-      letter.setAttribute('data-letter', randomChar);
-      
-      // Trigger fade in and scramble with stagger
-      const delay = index * 30; // 30ms stagger between each letter
-      setTimeout(() => {
-        (letter as HTMLElement).style.opacity = '1';
-        scrambleInLetter(letter as HTMLElement);
-      }, delay);
     });
     
-    function updateLetterClarity(mouseX: number, mouseY: number, _isTouchDevice = false) {
+    function updateLetterClarity(mouseX: number, mouseY: number) {
       letters.forEach(letter => {
         const rect = letter.getBoundingClientRect();
-        const letterCenterX = rect.left + rect.width / 2;
-        const letterCenterY = rect.top + rect.height / 2;
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
         
-        // Calculate distance from cursor/touch to letter center
-        const distance = Math.sqrt(
-          Math.pow(mouseX - letterCenterX, 2) + 
-          Math.pow(mouseY - letterCenterY, 2)
-        );
-        
-        // Calculate clarity based on proximity (0 = anaglyphic, 1 = clear)
+        const distance = Math.hypot(mouseX - centerX, mouseY - centerY);
         const clarity = Math.max(0, Math.min(1, 1 - (distance / PROXIMITY_THRESHOLD)));
         
-        // Apply the effect using CSS custom properties
         (letter as HTMLElement).style.setProperty('--clarity', clarity.toString());
-        
-        // Apply clearing class for smooth transition
-        if (clarity > 0.1) {
-          letter.classList.add('clearing');
-        } else {
-          letter.classList.remove('clearing');
-        }
+        letter.classList.toggle('clearing', clarity > 0.1);
       });
     }
     
-    // Mouse move handler for cursor devices
-    container.addEventListener('mousemove', function(e) {
+    // Mouse move handler
+    container.addEventListener('mousemove', (e: Event) => {
       const mouseEvent = e as MouseEvent;
       updateLetterClarity(mouseEvent.clientX, mouseEvent.clientY);
     });
     
-    // Touch move handler for touch devices
-    container.addEventListener('touchmove', function(e) {
+    // Touch handlers
+    container.addEventListener('touchmove', (e: Event) => {
       const touchEvent = e as TouchEvent;
       touchEvent.preventDefault();
       const touch = touchEvent.touches[0];
-      updateLetterClarity(touch.clientX, touch.clientY, true);
+      updateLetterClarity(touch.clientX, touch.clientY);
     }, { passive: false });
     
-    // Touch start handler for touch devices
-    container.addEventListener('touchstart', function(e) {
+    container.addEventListener('touchstart', (e: Event) => {
       const touchEvent = e as TouchEvent;
       const touch = touchEvent.touches[0];
-      updateLetterClarity(touch.clientX, touch.clientY, true);
+      updateLetterClarity(touch.clientX, touch.clientY);
     });
     
-    // Reset when mouse leaves (cursor devices)
-    container.addEventListener('mouseleave', function() {
+    // Reset on leave/end
+    const resetClarity = () => {
       letters.forEach(letter => {
         letter.classList.remove('clearing');
         (letter as HTMLElement).style.removeProperty('--clarity');
       });
-    });
+    };
     
-    // Reset when touch ends (touch devices)
-    container.addEventListener('touchend', function() {
-      letters.forEach(letter => {
-        letter.classList.remove('clearing');
-        (letter as HTMLElement).style.removeProperty('--clarity');
-      });
-    });
+    container.addEventListener('mouseleave', resetClarity);
+    container.addEventListener('touchend', resetClarity);
     
     // Idle glitch effect
     let idleTimer: NodeJS.Timeout | null = null;
-    // let _glitchInterval: number | null = null;
     let currentGlitchingLetter: HTMLElement | null = null;
     
     function startIdleGlitch() {
@@ -589,36 +510,32 @@ function getLettersFromTitle(title: string) {
         currentGlitchingLetter.classList.add('glitching');
       }
       
-      // Glitch animation - oscillate clarity
-      // let _glitchPhase = 0;
-      const glitchDuration = 2000; // 2 seconds per glitch
+      // Optimized glitch animation
+      const glitchDuration = 2000;
       const startTime = Date.now();
       
       function animateGlitch() {
         const elapsed = Date.now() - startTime;
         
-        if (elapsed < glitchDuration) {
-          // Create glitchy oscillation between clear and anaglyphic
+        if (elapsed < glitchDuration && currentGlitchingLetter) {
           const progress = elapsed / glitchDuration;
           const glitchValue = Math.random() > 0.5 ? 
-            Math.sin(progress * Math.PI * 8) * 0.5 + 0.5 : // Smooth oscillation
-            Math.random(); // Random glitch
+            Math.sin(progress * Math.PI * 8) * 0.5 + 0.5 :
+            Math.random();
           
-          if (currentGlitchingLetter) {
-            currentGlitchingLetter.style.setProperty('--clarity', String(glitchValue));
-          }
+          currentGlitchingLetter.style.setProperty('--clarity', String(glitchValue));
           requestAnimationFrame(animateGlitch);
         } else {
-          // End glitch, return to anaglyphic state
+          // End glitch
           if (currentGlitchingLetter) {
             currentGlitchingLetter.style.setProperty('--clarity', '0');
             currentGlitchingLetter.classList.remove('glitching');
           }
           
-          // Schedule next glitch after a pause
+          // Schedule next glitch
           setTimeout(() => {
             if (idleTimer) startIdleGlitch();
-          }, 1000 + Math.random() * 2000); // 1-3 seconds between glitches
+          }, 1000 + Math.random() * 2000);
         }
       }
       

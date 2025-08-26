@@ -43,15 +43,13 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     <link rel="manifest" href="/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Google Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Roboto font family -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Optimized font loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;600;700&family=Material+Icons&display=swap" rel="stylesheet">
     <title>{title}</title>
     
-    <!-- Service Worker Registration -->
+    <!-- Optimized initialization script -->
     <script>
+      // Service Worker Registration
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
@@ -59,29 +57,17 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
             .catch(error => console.log('SW registration failed:', error));
         });
       }
-    </script>
-    
-    <!-- Ensure page starts at top -->
-    <script>
-      // Force scroll to top on page load to prevent sticky footer from being visible
+      
+      // Ensure page starts at top
       if (history.scrollRestoration) {
         history.scrollRestoration = 'manual';
       }
       
-      // Immediate scroll to top
-      window.scrollTo(0, 0);
+      const scrollToTop = () => window.scrollTo(0, 0);
+      scrollToTop(); // Immediate scroll
       
-      // Additional scroll to top after DOM loads
-      document.addEventListener('DOMContentLoaded', () => {
-        window.scrollTo(0, 0);
-      });
-      
-      // Final scroll to top after everything loads
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 100);
-      });
+      document.addEventListener('DOMContentLoaded', scrollToTop);
+      window.addEventListener('load', () => setTimeout(scrollToTop, 100));
     </script>
   </head>
   <body>
@@ -121,7 +107,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     
     <!-- Loading Animation Script -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.getElementById('loading-overlay');
         if (overlay) {
           setTimeout(() => {

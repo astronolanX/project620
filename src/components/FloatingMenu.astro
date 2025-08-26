@@ -35,12 +35,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
     <span class="material-icons archive-icon" data-icon="folder">folder</span>
   </a>
+  
+  <button class="menu-footer-toggle" id="footerToggle">
+    <span class="material-icons copyright-icon">copyright</span>
+  </button>
 </div>
-
-<!-- Separate Bottom Right Footer Toggle -->
-<button class="footer-toggle" id="footerToggle">
-  <span class="material-icons copyright-icon">copyright</span>
-</button>
 
 <!-- Navigation Loading Indicator -->
 <div class="navigation-loading" id="navigationLoading"></div>
@@ -51,44 +50,51 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     top: 20px;
     left: 20px;
     z-index: 1000;
-    background: rgba(33, 37, 41, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 16px 12px;
+    padding: 10px 8px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     align-items: center;
     border-radius: 9999px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
   }
   
   .floating-menu:hover {
-    background: rgba(33, 37, 41, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   }
   
   .menu-home {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
   }
   
   .menu-home:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.08);
     transform: scale(1.25);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.08);
   }
   
   .menu-home.active {
     background: var(--gray-400);
     transform: scale(1.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.1);
   }
   
   .menu-home:hover .initials {
@@ -109,7 +115,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   .initials {
     font-family: 'Roboto Mono', monospace;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     color: transparent;
     letter-spacing: 0.5px;
@@ -136,36 +142,37 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .initials::before {
-    color: rgba(255, 0, 0, 0.8);
+    color: #ff0000;
     transform: translateX(calc(-0.02em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.8 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .initials::after {
-    color: rgba(0, 255, 255, 0.8);
+    color: #00ffff;
     transform: translateX(calc(0.02em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.8 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .initials {
-    color: rgba(255, 255, 255, var(--clarity));
+    color: rgba(0, 0, 0, 1);
+    filter: contrast(1.2);
   }
 
   .menu-archive {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.3s ease;
   }
   
   .menu-archive:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
     transform: scale(1.25);
   }
   
@@ -185,7 +192,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .archive-icon {
-    font-size: 18px;
+    font-size: 16px;
     color: transparent;
     opacity: 0.7;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -211,21 +218,22 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .archive-icon::before {
-    color: rgba(255, 0, 0, 0.8);
+    color: #ff0000;
     transform: translateX(calc(-0.02em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.8 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .archive-icon::after {
-    color: rgba(0, 255, 255, 0.8);
+    color: #00ffff;
     transform: translateX(calc(0.02em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.8 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .archive-icon {
-    color: rgba(255, 255, 255, var(--clarity));
+    color: rgba(0, 0, 0, 1);
+    filter: contrast(1.2);
   }
   
   .menu-archive:hover .archive-icon {
@@ -236,7 +244,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   .menu-numbers {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     --logmar-ratio: 1.25;
   }
@@ -252,7 +260,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-number:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
     transform: scale(1.25);
   }
   
@@ -285,21 +293,22 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .number::before {
-    color: rgba(255, 0, 0, 0.8);
+    color: #ff0000;
     transform: translateX(calc(-0.03em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.9 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .number::after {
-    color: rgba(0, 255, 255, 0.8);
+    color: #00ffff;
     transform: translateX(calc(0.03em * (1 - var(--clarity))));
-    mix-blend-mode: screen;
-    opacity: calc(0.9 * (1 - var(--clarity)));
+    mix-blend-mode: multiply;
+    opacity: calc(1 * (1 - var(--clarity)));
   }
   
   .number {
-    color: rgba(255, 255, 255, var(--clarity));
+    color: rgba(0, 0, 0, 1);
+    filter: contrast(1.2);
   }
   
   .menu-number:hover .number {
@@ -346,283 +355,170 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
                 opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* Default state (home/archive selected): Progressive decrease 1->5 */
-  .menu-numbers:not([data-selected]) .menu-number[data-number="1"],
-  .menu-numbers[data-selected="home"] .menu-number[data-number="1"],
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="1"] {
-    width: 48px;
-    height: 48px;
+  /* Default state (home/archive selected): All bubbles same size, only font varies */
+  .menu-numbers:not([data-selected]) .menu-number,
+  .menu-numbers[data-selected="home"] .menu-number,
+  .menu-numbers[data-selected="archive"] .menu-number {
+    width: 34px;
+    height: 34px;
   }
+  
   .menu-numbers:not([data-selected]) .menu-number[data-number="1"] .number,
   .menu-numbers[data-selected="home"] .menu-number[data-number="1"] .number,
   .menu-numbers[data-selected="archive"] .menu-number[data-number="1"] .number {
-    font-size: 18px;
+    font-size: 16px;
   }
   
-  .menu-numbers:not([data-selected]) .menu-number[data-number="2"],
-  .menu-numbers[data-selected="home"] .menu-number[data-number="2"],
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="2"] {
-    width: 44px;
-    height: 44px;
-  }
   .menu-numbers:not([data-selected]) .menu-number[data-number="2"] .number,
   .menu-numbers[data-selected="home"] .menu-number[data-number="2"] .number,
   .menu-numbers[data-selected="archive"] .menu-number[data-number="2"] .number {
-    font-size: 16px;
-  }
-  
-  .menu-numbers:not([data-selected]) .menu-number[data-number="3"],
-  .menu-numbers[data-selected="home"] .menu-number[data-number="3"],
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="3"] {
-    width: 40px;
-    height: 40px;
-  }
-  .menu-numbers:not([data-selected]) .menu-number[data-number="3"] .number,
-  .menu-numbers[data-selected="home"] .menu-number[data-number="3"] .number,
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="3"] .number {
     font-size: 14px;
   }
   
-  .menu-numbers:not([data-selected]) .menu-number[data-number="4"],
-  .menu-numbers[data-selected="home"] .menu-number[data-number="4"],
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="4"] {
-    width: 36px;
-    height: 36px;
+  .menu-numbers:not([data-selected]) .menu-number[data-number="3"] .number,
+  .menu-numbers[data-selected="home"] .menu-number[data-number="3"] .number,
+  .menu-numbers[data-selected="archive"] .menu-number[data-number="3"] .number {
+    font-size: 12px;
   }
+  
   .menu-numbers:not([data-selected]) .menu-number[data-number="4"] .number,
   .menu-numbers[data-selected="home"] .menu-number[data-number="4"] .number,
   .menu-numbers[data-selected="archive"] .menu-number[data-number="4"] .number {
-    font-size: 12px;
+    font-size: 10px;
   }
   
-  .menu-numbers:not([data-selected]) .menu-number[data-number="5"],
-  .menu-numbers[data-selected="home"] .menu-number[data-number="5"],
-  .menu-numbers[data-selected="archive"] .menu-number[data-number="5"] {
-    width: 32px;
-    height: 32px;
-  }
   .menu-numbers:not([data-selected]) .menu-number[data-number="5"] .number,
   .menu-numbers[data-selected="home"] .menu-number[data-number="5"] .number,
   .menu-numbers[data-selected="archive"] .menu-number[data-number="5"] .number {
-    font-size: 10px;
+    font-size: 8px;
   }
   
-  /* Selected state 1: 1 is largest, progressive smaller above/below */
-  .menu-numbers[data-selected="1"] .menu-number[data-number="1"] {
-    width: 52px;
-    height: 52px;
+  /* Selected state 1: All bubbles same size, selected gets larger font */
+  .menu-numbers[data-selected="1"] .menu-number {
+    width: 34px;
+    height: 34px;
   }
   .menu-numbers[data-selected="1"] .menu-number[data-number="1"] .number {
-    font-size: 20px;
-  }
-  .menu-numbers[data-selected="1"] .menu-number[data-number="2"] {
-    width: 44px;
-    height: 44px;
+    font-size: 18px;
   }
   .menu-numbers[data-selected="1"] .menu-number[data-number="2"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="1"] .menu-number[data-number="3"] {
-    width: 36px;
-    height: 36px;
+    font-size: 14px;
   }
   .menu-numbers[data-selected="1"] .menu-number[data-number="3"] .number {
-    font-size: 12px;
-  }
-  .menu-numbers[data-selected="1"] .menu-number[data-number="4"] {
-    width: 32px;
-    height: 32px;
+    font-size: 11px;
   }
   .menu-numbers[data-selected="1"] .menu-number[data-number="4"] .number {
-    font-size: 10px;
-  }
-  .menu-numbers[data-selected="1"] .menu-number[data-number="5"] {
-    width: 28px;
-    height: 28px;
+    font-size: 9px;
   }
   .menu-numbers[data-selected="1"] .menu-number[data-number="5"] .number {
-    font-size: 9px;
+    font-size: 7px;
   }
   
-  /* Selected state 2: 2 is largest */
-  .menu-numbers[data-selected="2"] .menu-number[data-number="1"] {
-    width: 44px;
-    height: 44px;
+  /* All selected states: Uniform bubble size, only font varies */
+  .menu-numbers[data-selected="2"] .menu-number,
+  .menu-numbers[data-selected="3"] .menu-number,
+  .menu-numbers[data-selected="4"] .menu-number,
+  .menu-numbers[data-selected="5"] .menu-number {
+    width: 34px;
+    height: 34px;
   }
+  
+  /* Selected state 2: 2 is largest font */
   .menu-numbers[data-selected="2"] .menu-number[data-number="1"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="2"] .menu-number[data-number="2"] {
-    width: 52px;
-    height: 52px;
+    font-size: 14px;
   }
   .menu-numbers[data-selected="2"] .menu-number[data-number="2"] .number {
-    font-size: 20px;
-  }
-  .menu-numbers[data-selected="2"] .menu-number[data-number="3"] {
-    width: 44px;
-    height: 44px;
+    font-size: 18px;
   }
   .menu-numbers[data-selected="2"] .menu-number[data-number="3"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="2"] .menu-number[data-number="4"] {
-    width: 36px;
-    height: 36px;
+    font-size: 14px;
   }
   .menu-numbers[data-selected="2"] .menu-number[data-number="4"] .number {
-    font-size: 12px;
-  }
-  .menu-numbers[data-selected="2"] .menu-number[data-number="5"] {
-    width: 32px;
-    height: 32px;
+    font-size: 11px;
   }
   .menu-numbers[data-selected="2"] .menu-number[data-number="5"] .number {
-    font-size: 10px;
-  }
-  
-  /* Selected state 3: 3 is largest */
-  .menu-numbers[data-selected="3"] .menu-number[data-number="1"] {
-    width: 36px;
-    height: 36px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="1"] .number {
-    font-size: 12px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="2"] {
-    width: 44px;
-    height: 44px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="2"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="3"] {
-    width: 52px;
-    height: 52px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="3"] .number {
-    font-size: 20px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="4"] {
-    width: 44px;
-    height: 44px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="4"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="5"] {
-    width: 36px;
-    height: 36px;
-  }
-  .menu-numbers[data-selected="3"] .menu-number[data-number="5"] .number {
-    font-size: 12px;
-  }
-  
-  /* Selected state 4: 4 is largest */
-  .menu-numbers[data-selected="4"] .menu-number[data-number="1"] {
-    width: 32px;
-    height: 32px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="1"] .number {
-    font-size: 10px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="2"] {
-    width: 36px;
-    height: 36px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="2"] .number {
-    font-size: 12px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="3"] {
-    width: 44px;
-    height: 44px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="3"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="4"] {
-    width: 52px;
-    height: 52px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="4"] .number {
-    font-size: 20px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="5"] {
-    width: 44px;
-    height: 44px;
-  }
-  .menu-numbers[data-selected="4"] .menu-number[data-number="5"] .number {
-    font-size: 16px;
-  }
-  
-  /* Selected state 5: 5 is largest */
-  .menu-numbers[data-selected="5"] .menu-number[data-number="1"] {
-    width: 28px;
-    height: 28px;
-  }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="1"] .number {
     font-size: 9px;
   }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="2"] {
-    width: 32px;
-    height: 32px;
+  
+  /* Selected state 3: 3 is largest font */
+  .menu-numbers[data-selected="3"] .menu-number[data-number="1"] .number {
+    font-size: 11px;
   }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="2"] .number {
-    font-size: 10px;
+  .menu-numbers[data-selected="3"] .menu-number[data-number="2"] .number {
+    font-size: 14px;
   }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="3"] {
-    width: 36px;
-    height: 36px;
+  .menu-numbers[data-selected="3"] .menu-number[data-number="3"] .number {
+    font-size: 18px;
   }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="3"] .number {
-    font-size: 12px;
+  .menu-numbers[data-selected="3"] .menu-number[data-number="4"] .number {
+    font-size: 14px;
   }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="4"] {
-    width: 44px;
-    height: 44px;
-  }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="4"] .number {
-    font-size: 16px;
-  }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="5"] {
-    width: 52px;
-    height: 52px;
-  }
-  .menu-numbers[data-selected="5"] .menu-number[data-number="5"] .number {
-    font-size: 20px;
+  .menu-numbers[data-selected="3"] .menu-number[data-number="5"] .number {
+    font-size: 11px;
   }
   
-  .footer-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+  /* Selected state 4: 4 is largest font */
+  .menu-numbers[data-selected="4"] .menu-number[data-number="1"] .number {
+    font-size: 9px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="2"] .number {
+    font-size: 11px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="3"] .number {
+    font-size: 14px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="4"] .number {
+    font-size: 18px;
+  }
+  .menu-numbers[data-selected="4"] .menu-number[data-number="5"] .number {
+    font-size: 14px;
+  }
+  
+  /* Selected state 5: 5 is largest font */
+  .menu-numbers[data-selected="5"] .menu-number[data-number="1"] .number {
+    font-size: 7px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="2"] .number {
+    font-size: 9px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="3"] .number {
+    font-size: 11px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="4"] .number {
+    font-size: 14px;
+  }
+  .menu-numbers[data-selected="5"] .menu-number[data-number="5"] .number {
+    font-size: 18px;
+  }
+  
+  .menu-footer-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: rgba(33, 37, 41, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: none;
     border-radius: 50%;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
+    padding: 0;
   }
   
-  .footer-toggle:hover {
-    background: rgba(33, 37, 41, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px) scale(1.05);
+  .menu-footer-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.25);
   }
   
-  .footer-toggle .copyright-icon {
-    font-size: 18px;
-    color: var(--gray-100);
-    opacity: 0.8;
+  .menu-footer-toggle .copyright-icon {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease;
+  }
+  
+  .menu-footer-toggle:hover .copyright-icon {
+    color: rgba(0, 0, 0, 0.7);
+    transform: rotate(-15deg);
   }
   
   /* Loading indicator */
@@ -652,11 +548,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   @keyframes loading-slide {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100vw); }
-  }
-  
-  .footer-toggle:hover .copyright-icon {
-    opacity: 1;
-    transform: rotate(-15deg);
   }
   
   /* Glitch animation for enhanced effect */
@@ -747,47 +638,37 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     .floating-menu {
       top: 16px;
       left: 16px;
-      padding: 12px 8px;
-      gap: 10px;
+      padding: 8px 6px;
+      gap: 5px;
     }
     
     .menu-home {
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
     }
     
     .initials {
-      font-size: 14px;
-    }
-    
-    .menu-archive {
-      width: 36px;
-      height: 36px;
-    }
-    
-    .archive-icon {
-      font-size: 16px;
-    }
-    
-    .menu-number {
-      width: 36px;
-      height: 36px;
-    }
-    
-    .number {
       font-size: 12px;
     }
     
-    .footer-toggle {
-      bottom: 16px;
-      right: 16px;
-      width: 44px;
-      height: 44px;
+    .menu-archive {
+      width: 30px;
+      height: 30px;
     }
     
-    .footer-toggle .copyright-icon {
-      font-size: 16px;
+    .archive-icon {
+      font-size: 14px;
     }
+    
+    .menu-footer-toggle {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .menu-footer-toggle .copyright-icon {
+      font-size: 14px;
+    }
+    
   }
   
 </style>
