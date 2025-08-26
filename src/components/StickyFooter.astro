@@ -6,6 +6,18 @@
     <span class="material-icons">close</span>
   </button>
   <div class="footer-content">
+    <div class="job-opportunity-banner">
+      <div class="banner-content">
+        <div class="banner-text">
+          <h4>Got a project in mind? Let's work together!</h4>
+          <p>Always open to discussing new opportunities and interesting challenges.</p>
+        </div>
+        <a href="mailto:hello@astronolan.com?subject=What's your bandwidth look like, Nolan? 😄" class="banner-cta">
+          Reach Out →
+        </a>
+      </div>
+    </div>
+    
     <div class="footer-main">
       <div class="footer-logo">NF</div>
       
@@ -106,6 +118,58 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 3rem 2rem 1.5rem;
+  }
+
+  .job-opportunity-banner {
+    background: var(--gray-400);
+    color: var(--gray-900);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+  }
+
+  .banner-text h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--gray-900);
+  }
+
+  .banner-text p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    margin: 0;
+    color: var(--gray-700);
+    line-height: 1.5;
+  }
+
+  .banner-cta {
+    background: var(--gray-900);
+    color: var(--gray-100);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .banner-cta:hover {
+    background: var(--gray-800);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 37, 41, 0.2);
   }
 
   .footer-main {
@@ -246,6 +310,19 @@
   }
 
   @media (max-width: 768px) {
+    .banner-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .banner-cta {
+      align-self: stretch;
+      text-align: center;
+      justify-content: center;
+    }
+
     .footer-main {
       grid-template-columns: 1fr;
       gap: 2rem;

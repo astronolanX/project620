@@ -16,6 +16,30 @@
   --gray-800: #343a40;
   --gray-900: #212529;
   
+  /* Section-specific bright colors */
+  --color-home: #0077FF;
+  --color-section-1: #8B3DFF;
+  --color-section-2: #10B981;
+  --color-section-3: #FF1B8D;
+  --color-section-4: #FF8C00;
+  --color-section-5: #FF3366;
+  --color-archive: #6B7280;
+  
+  /* Color variations for each section */
+  --color-home-light: #3399FF;
+  --color-home-lighter: #E6F3FF;
+  --color-section-1-light: #A366FF;
+  --color-section-1-lighter: #F0E6FF;
+  --color-section-2-light: #34D399;
+  --color-section-2-lighter: #ECFDF5;
+  --color-section-3-light: #FF4DA6;
+  --color-section-3-lighter: #FFE6F2;
+  --color-section-4-light: #FFA133;
+  --color-section-4-lighter: #FFF4E6;
+  --color-section-5-light: #FF5577;
+  --color-section-5-lighter: #FFEBEE;
+  --color-archive-light: #9CA3AF;
+  --color-archive-lighter: #F9FAFB;
   
   /* Updated checkerboard pattern */
   --checkerboard-size: 40px;
@@ -31,7 +55,7 @@
   body {
     @apply antialiased;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: var(--gray-100);
+    background-color: var(--gray-200);
   }
   
   /* Normalize cursor behavior across the app */

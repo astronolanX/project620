@@ -14,9 +14,6 @@ const selectedWorks = [
 // Get current page info for highlighting
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === '/';
-const isArchivePage = currentPath === '/archive' || currentPath === '/archive/';
-const isProjectPage = currentPath.startsWith('/projects/');
-const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.replace('/', '') : null;
 ---
 
 <div class="floating-menu">
@@ -26,13 +23,13 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   <nav class="menu-numbers">
     {selectedWorks.map((work) => (
-      <a href={`/projects/${work.slug}`} class={`menu-number ${currentProjectSlug === work.slug ? 'active' : ''}`} data-number={work.number}>
+      <a href={`/#${work.number}`} class={`menu-number`} data-number={work.number}>
         <span class="number" data-number={`/${work.number}`}>/{work.number}</span>
       </a>
     ))}
   </nav>
   
-  <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
+  <a href="/#archive" class={`menu-archive`}>
     <span class="material-icons archive-icon" data-icon="folder">folder</span>
   </a>
   
@@ -99,10 +96,10 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-home.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--color-home);
     transform: scale(1.1);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 119, 255, 0.4);
+    border-color: var(--color-home-light);
   }
   
   .menu-home:hover .initials {
@@ -110,7 +107,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-home.active .initials {
-    color: rgba(0, 0, 0, 0.9);
+    color: white;
     font-weight: 900;
   }
   
@@ -149,8 +146,9 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-archive.active {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--color-archive);
     transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(107, 114, 128, 0.4);
   }
   
   .archive-icon {
@@ -165,7 +163,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-archive.active .archive-icon {
-    color: rgba(0, 0, 0, 0.9);
+    color: white;
   }
   
   .menu-numbers {
@@ -211,12 +209,34 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-number.active .number {
-    color: rgba(0, 0, 0, 0.9);
+    color: white;
     font-weight: 900;
   }
   
-  .menu-number.active {
-    background: rgba(255, 255, 255, 0.9);
+  /* Dynamic coloring for active numbered sections */
+  .menu-number[data-number="1"].active {
+    background: var(--color-section-1);
+    box-shadow: 0 4px 16px rgba(139, 61, 255, 0.4);
+  }
+  
+  .menu-number[data-number="2"].active {
+    background: var(--color-section-2);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  }
+  
+  .menu-number[data-number="3"].active {
+    background: var(--color-section-3);
+    box-shadow: 0 4px 16px rgba(255, 27, 141, 0.4);
+  }
+  
+  .menu-number[data-number="4"].active {
+    background: var(--color-section-4);
+    box-shadow: 0 4px 16px rgba(255, 140, 0, 0.4);
+  }
+  
+  .menu-number[data-number="5"].active {
+    background: var(--color-section-5);
+    box-shadow: 0 4px 16px rgba(255, 51, 102, 0.4);
   }
   
   /* Smooth transitions for all sizing and background changes */
@@ -450,8 +470,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
         selectedState = 'archive';
       } else if (['1', '2', '3', '4', '5'].includes(hash)) {
         selectedState = hash;
-      } else if (hash === '' || hash === 'home') {
-        selectedState = 'home';
       }
       
       // Apply the data-selected attribute
@@ -495,7 +513,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
             return;
           }
           
-          this.navigateToContent('/archive', 'archive');
+          this.navigateToContent('/#archive', 'archive');
         });
       }
       
@@ -504,16 +522,16 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
         link.addEventListener('click', (e) => {
           e.preventDefault();
           
+          const number = link.getAttribute('data-number');
+          
           // If already active, show bounce feedback
           if (link.classList.contains('active')) {
             this.addShrinkEffect(link as HTMLElement);
             return;
           }
           
-          const number = link.getAttribute('data-number');
-          const href = link.getAttribute('href');
-          if (number && href) {
-            this.navigateToContent(href, number);
+          if (number) {
+            this.navigateToContent(`/#${number}`, number);
           }
         });
       });
@@ -571,7 +589,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       }
     }
     
-    navigateToContent(url: string, state: string) {
+    navigateToContent(_url: string, state: string) {
       // Extract section from state or URL
       let section;
       if (state === 'home') {
@@ -612,8 +630,12 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
         this.animateToState(state);
       });
       
-      // Handle browser back/forward buttons
+      // Handle browser back/forward buttons and hash changes
       window.addEventListener('popstate', () => {
+        this.updateLogmarState();
+      });
+      
+      window.addEventListener('hashchange', () => {
         this.updateLogmarState();
       });
       
