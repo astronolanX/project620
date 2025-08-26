@@ -14,6 +14,7 @@ const selectedWorks = [
 // Get current page info for highlighting
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === '/';
+const isArchivePage = currentPath === '/archive' || currentPath === '/archive/';
 const isProjectPage = currentPath.startsWith('/projects/');
 const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.replace('/', '') : null;
 ---
@@ -23,8 +24,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     <span class="initials">{initials}</span>
   </a>
   
-  <div class="menu-divider"></div>
-  
   <nav class="menu-numbers">
     {selectedWorks.map((work) => (
       <a href={`/projects/${work.slug}`} class={`menu-number ${currentProjectSlug === work.slug ? 'active' : ''}`} data-number={work.number}>
@@ -32,6 +31,10 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       </a>
     ))}
   </nav>
+  
+  <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
+    <span class="material-icons archive-icon">folder</span>
+  </a>
 </div>
 
 <!-- Separate Bottom Right Footer Toggle -->
@@ -54,7 +57,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     flex-direction: column;
     gap: 12px;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 9999px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
   }
@@ -71,16 +74,18 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     width: 40px;
     height: 40px;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
   
   .menu-home:hover {
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.25);
   }
   
   .menu-home.active {
     background: #ecf95a;
-    transform: scale(1.02);
+    transform: scale(1.1);
   }
   
   .menu-home.active .initials {
@@ -90,17 +95,52 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .initials {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Roboto Mono', monospace;
     font-size: 16px;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 0.5px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-archive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: all 0.3s ease;
   }
   
-  .menu-divider {
-    width: 24px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.3);
+  .menu-archive:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.25);
+  }
+  
+  .menu-archive.active {
+    background: #ecf95a;
+    transform: scale(1.1);
+  }
+  
+  .menu-archive.active .archive-icon {
+    color: #191314;
+  }
+  
+  .archive-icon {
+    font-size: 18px;
+    color: #ffffff;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    line-height: 1;
+  }
+  
+  .menu-archive:hover .archive-icon {
+    opacity: 1;
   }
   
   .menu-numbers {
@@ -114,42 +154,45 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 4px;
+    border-radius: 50%;
+    line-height: 1;
   }
   
   .menu-number:hover {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateX(2px);
+    transform: scale(1.25);
   }
   
   .number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Roboto Mono', monospace;
     font-size: 14px;
     font-weight: 600;
     color: #ffffff;
     opacity: 0.7;
     transition: all 0.3s ease;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .menu-number:hover .number {
     opacity: 1;
-    transform: rotate(5deg);
   }
   
   .menu-number.active {
     background: #ecf95a;
-    transform: translateX(2px) scale(1.05);
+    transform: scale(1.1);
   }
   
   .menu-number.active .number {
     opacity: 1;
     font-weight: 700;
     color: #191314;
-    transform: rotate(2deg);
   }
   
   .footer-toggle {
@@ -179,7 +222,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .footer-toggle .copyright-icon {
-    font-size: 20px;
+    font-size: 18px;
     color: #ffffff;
     opacity: 0.8;
     transition: all 0.3s ease;
@@ -208,9 +251,18 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       font-size: 14px;
     }
     
+    .menu-archive {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .archive-icon {
+      font-size: 16px;
+    }
+    
     .menu-number {
-      width: 28px;
-      height: 28px;
+      width: 36px;
+      height: 36px;
     }
     
     .number {
@@ -225,62 +277,17 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     }
     
     .footer-toggle .copyright-icon {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   
-  /* Animation for rotating numbers on idle */
-  @keyframes rotate-number {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-  }
-  
-  .menu-number.rotating .number {
-    animation: rotate-number 2s ease-in-out infinite;
-  }
 </style>
 
 <script>
   class FloatingMenu {
     constructor() {
-      this.menuNumbers = document.querySelectorAll('.menu-number');
       this.footerToggle = document.getElementById('footerToggle');
-      this.rotationInterval = null;
-      this.isIdle = false;
-      
-      this.startIdleRotation();
       this.initFooterToggle();
-    }
-    
-    startIdleRotation() {
-      // Start rotating numbers after 3 seconds of no interaction
-      this.rotationInterval = setInterval(() => {
-        if (!this.isIdle) {
-          this.isIdle = true;
-          this.startRandomRotation();
-        }
-      }, 3000);
-      
-      // Reset idle state on any interaction
-      document.addEventListener('mousemove', () => this.resetIdle());
-      document.addEventListener('click', () => this.resetIdle());
-      document.addEventListener('scroll', () => this.resetIdle());
-    }
-    
-    startRandomRotation() {
-      this.menuNumbers.forEach((number, index) => {
-        setTimeout(() => {
-          number.classList.add('rotating');
-        }, index * 200); // Stagger the rotation
-      });
-    }
-    
-    resetIdle() {
-      this.isIdle = false;
-      this.menuNumbers.forEach(number => {
-        number.classList.remove('rotating');
-      });
     }
     
     initFooterToggle() {
