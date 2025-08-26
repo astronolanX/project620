@@ -1,16 +1,16 @@
 ---
-title: "Micro-Interaction Design"
-description: "Crafting delightful micro-interactions that enhance usability and create emotional connections with users through thoughtful motion design."
+title: "Micro-Interactions Library"
+description: "A comprehensive library of purposeful micro-interactions designed to enhance user engagement and provide meaningful feedback"
 year: 2024
-type: "Design Research"
-heroImage: "https://picsum.photos/900/500?random=150"
-tags: ["Motion Design", "Micro-Interactions", "User Psychology", "Animation", "UX Details"]
+type: "Component Library"
+heroImage: "https://picsum.photos/900/500?random=160"
+tags: ["Micro-interactions", "Animation", "User Experience", "Component Library", "Engagement"]
 featured: false
 ---
 
-The difference between good and great user experiences often lies in the details. This project explores how carefully crafted micro-interactions can transform mundane digital interactions into moments of delight.
+Great interfaces feel alive. They respond to user actions with personality, provide clear feedback, and create moments of delight that keep users engaged. This project involved building a comprehensive micro-interactions library that transforms static interfaces into dynamic, engaging experiences.
 
-A comprehensive study of micro-interaction design principles, implementation patterns, and psychological impact on user engagement and satisfaction.
+The library contains over 200 carefully crafted micro-interactions, each designed with specific psychological principles and usability goals in mind.
 
 ![Collection of micro-interaction examples showing various UI animations](https://picsum.photos/900/500?random=150)
 *Micro-interactions that provide feedback, guide attention, and create delight*

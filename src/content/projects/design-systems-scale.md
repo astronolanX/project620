@@ -1,16 +1,16 @@
 ---
 title: "Design Systems at Scale"
-description: "Building and maintaining design systems that support hundreds of teams across global organizations while staying coherent and usable."
+description: "Building scalable design infrastructure for global products with 50M+ users across web, mobile, and emerging platforms"
 year: 2024
-type: "Enterprise Project"
-heroImage: "https://picsum.photos/900/500?random=140"
-tags: ["Design Systems", "Enterprise UX", "Scalability", "Team Collaboration", "Process Design"]
+type: "Platform Project"
+heroImage: "https://picsum.photos/900/500?random=130"
+tags: ["Design Systems", "Scale", "Infrastructure", "Cross-Platform", "Developer Experience"]
 featured: true
 ---
 
-How do you maintain consistency across 200+ teams and 50+ products? This project explores the organizational, technical, and cultural challenges of design systems at enterprise scale.
+As products grow from thousands to millions of users, design systems must evolve from simple component libraries to sophisticated design infrastructure. This project explores how we built a design system that powers consistent experiences across 15 products, 6 platforms, and 12 international markets.
 
-A comprehensive approach to design system governance, tooling, and culture that enables both consistency and innovation across massive organizations.
+The challenge wasn't just creating components—it was building a platform that could adapt to diverse needs while maintaining coherence at unprecedented scale.
 
 ![Enterprise design system architecture showing component relationships](https://picsum.photos/900/500?random=140)
 *Complex design system architecture supporting multiple product families*
