@@ -1,25 +1,24 @@
 ---
-const contentItems = [
-  { year: 2025, title: "Future Design Systems", slug: "/projects/future-design", type: "project" },
-  { year: 2024, title: "AI Interface Study", slug: "/case-studies/ai-interface", type: "case-study" },
-  { year: 2024, title: "Typography Research", slug: "/blog/typography-research", type: "blog" },
-  { year: 2024, title: "User Experience Patterns", slug: "/projects/ux-patterns", type: "project" },
-  { year: 2023, title: "Design Token Workshop", slug: "/blog/design-tokens", type: "blog" },
-  { year: 2023, title: "Component Architecture", slug: "/projects/component-arch", type: "project" },
-  { year: 2023, title: "Accessibility Audit", slug: "/case-studies/a11y-audit", type: "case-study" },
-  { year: 2022, title: "Creative Coding Experiments", slug: "/blog/creative-coding", type: "blog" },
-  { year: 2022, title: "Brand Identity System", slug: "/projects/brand-identity", type: "project" },
-  { year: 2022, title: "Mobile App Redesign", slug: "/case-studies/mobile-redesign", type: "case-study" },
-  { year: 2021, title: "Design System Migration", slug: "/projects/design-migration", type: "project" },
-  { year: 2021, title: "User Research Methods", slug: "/blog/research-methods", type: "blog" },
-  { year: 2020, title: "Remote Design Process", slug: "/blog/remote-design", type: "blog" }
-];
-
-function getYearDisplay(currentItem, index) {
-  return '';
+export interface Props {
+  content?: Array<{
+    title: string;
+    slug: string;
+    type: string;
+  }>;
 }
 
-function getLettersFromTitle(title) {
+const { content = [] } = Astro.props;
+
+// Use provided content or fallback to default
+const contentItems = content.length > 0 ? content : [
+  { title: "Future Design Systems", slug: "/projects/future-design", type: "project" },
+  { title: "AI Interface Study", slug: "/case-studies/ai-interface", type: "case-study" },
+  { title: "Typography Research", slug: "/blog/typography-research", type: "blog" },
+  { title: "User Experience Patterns", slug: "/projects/ux-patterns", type: "project" },
+  { title: "Design Token Workshop", slug: "/blog/design-tokens", type: "blog" }
+];
+
+function getLettersFromTitle(title: string) {
   return title.toUpperCase().replace(/[^A-Z]/g, '').substring(0, 5).split('');
 }
 ---
@@ -28,14 +27,13 @@ function getLettersFromTitle(title) {
   <div class="eye-chart">
     {contentItems.map((item, index) => {
       const letters = getLettersFromTitle(item.title);
-      const yearDisplay = getYearDisplay(item, index);
       const lineNumber = index + 1;
       
       return (
         <a href={item.slug} class={`chart-line line-${lineNumber} content-link`} data-type={item.type} title={item.title}>
           <div class="letters-container">
-            {letters.map((letter, letterIndex) => (
-              <span data-letter={letter} key={letterIndex}>{letter}</span>
+            {letters.map((letter: string) => (
+              <span data-letter={letter}>{letter}</span>
             ))}
           </div>
         </a>
@@ -443,6 +441,7 @@ function getLettersFromTitle(title) {
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.eye-chart-container');
+    if (!container) return;
     const letters = document.querySelectorAll('.content-link span[data-letter]');
     const PROXIMITY_THRESHOLD = 150; // Distance threshold for clearing effect
     
@@ -471,7 +470,9 @@ function getLettersFromTitle(title) {
         } else {
           // Final letter
           element.textContent = finalLetter;
-          element.setAttribute('data-letter', finalLetter);
+          if (finalLetter) {
+            element.setAttribute('data-letter', finalLetter);
+          }
         }
       }
       
@@ -482,7 +483,9 @@ function getLettersFromTitle(title) {
     letters.forEach((letter, index) => {
       // Store original letter
       const originalLetter = letter.getAttribute('data-letter');
-      letter.setAttribute('data-original', originalLetter);
+      if (originalLetter) {
+        letter.setAttribute('data-original', originalLetter);
+      }
       
       // Set initial random character
       const randomChar = CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
@@ -525,20 +528,23 @@ function getLettersFromTitle(title) {
     }
     
     // Mouse move handler for cursor devices
-    container.addEventListener('mousemove', function(e: MouseEvent) {
-      updateLetterClarity(e.clientX, e.clientY);
+    container.addEventListener('mousemove', function(e) {
+      const mouseEvent = e as MouseEvent;
+      updateLetterClarity(mouseEvent.clientX, mouseEvent.clientY);
     });
     
     // Touch move handler for touch devices
-    container.addEventListener('touchmove', function(e: TouchEvent) {
-      e.preventDefault();
-      const touch = e.touches[0];
+    container.addEventListener('touchmove', function(e) {
+      const touchEvent = e as TouchEvent;
+      touchEvent.preventDefault();
+      const touch = touchEvent.touches[0];
       updateLetterClarity(touch.clientX, touch.clientY, true);
     }, { passive: false });
     
     // Touch start handler for touch devices
-    container.addEventListener('touchstart', function(e: TouchEvent) {
-      const touch = e.touches[0];
+    container.addEventListener('touchstart', function(e) {
+      const touchEvent = e as TouchEvent;
+      const touch = touchEvent.touches[0];
       updateLetterClarity(touch.clientX, touch.clientY, true);
     });
     
@@ -559,9 +565,9 @@ function getLettersFromTitle(title) {
     });
     
     // Idle glitch effect
-    let idleTimer = null;
+    let idleTimer: NodeJS.Timeout | null = null;
     // let _glitchInterval: number | null = null;
-    let currentGlitchingLetter = null;
+    let currentGlitchingLetter: HTMLElement | null = null;
     
     function startIdleGlitch() {
       // Select a random letter that's not currently being interacted with
@@ -578,8 +584,10 @@ function getLettersFromTitle(title) {
       }
       
       // Pick a random letter
-      currentGlitchingLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)];
-      currentGlitchingLetter.classList.add('glitching');
+      currentGlitchingLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)] as HTMLElement;
+      if (currentGlitchingLetter) {
+        currentGlitchingLetter.classList.add('glitching');
+      }
       
       // Glitch animation - oscillate clarity
       // let _glitchPhase = 0;
@@ -596,12 +604,16 @@ function getLettersFromTitle(title) {
             Math.sin(progress * Math.PI * 8) * 0.5 + 0.5 : // Smooth oscillation
             Math.random(); // Random glitch
           
-          currentGlitchingLetter.style.setProperty('--clarity', glitchValue);
+          if (currentGlitchingLetter) {
+            currentGlitchingLetter.style.setProperty('--clarity', String(glitchValue));
+          }
           requestAnimationFrame(animateGlitch);
         } else {
           // End glitch, return to anaglyphic state
-          currentGlitchingLetter.style.setProperty('--clarity', '0');
-          currentGlitchingLetter.classList.remove('glitching');
+          if (currentGlitchingLetter) {
+            currentGlitchingLetter.style.setProperty('--clarity', '0');
+            currentGlitchingLetter.classList.remove('glitching');
+          }
           
           // Schedule next glitch after a pause
           setTimeout(() => {
