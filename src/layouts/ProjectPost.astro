@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import StickyFooter from '../components/StickyFooter.astro';
 
 export interface Props {
   title: string;
@@ -14,279 +15,436 @@ export interface Props {
 const { title, description, year, type, heroImage, tags, featured } = Astro.props;
 ---
 
-<Layout title={title}>
-  <article class="project-page main-content">
-    <header class="project-header">
-      <div class="project-meta">
-        <a href="/" class="back-link">← Back to Portfolio</a>
-        <div class="project-details">
-          <span class="project-year">{year}</span>
-          <span class="project-type">{type}</span>
-          {featured && <span class="featured-badge">Featured</span>}
-        </div>
-      </div>
-      <h1>{title}</h1>
-      <p class="project-subtitle">{description}</p>
-    </header>
+<Layout title={title} description={description}>
+  <div class="page-wrapper">
+    <div class="container">
+      <article class="project-article">
+        <header class="project-header">
+          <nav class="breadcrumb">
+            <a href="/" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">→</span>
+            <a href="/projects" class="breadcrumb-link">Projects</a>
+            <span class="breadcrumb-separator">→</span>
+            <span class="breadcrumb-current">Project</span>
+          </nav>
 
-    <div class="project-content">
-      {heroImage && (
-        <div class="hero-media">
-          <img src={heroImage} alt={title} />
+          <div class="project-meta">
+            <div class="meta-cards">
+              <div class="meta-card">
+                <span class="meta-label">Project Type</span>
+                <span class="meta-value">{type}</span>
+              </div>
+              <div class="meta-card">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">{year}</span>
+              </div>
+              {featured && (
+                <div class="meta-card featured">
+                  <span class="meta-label">Status</span>
+                  <span class="meta-value">Featured</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <h1 class="project-title">{title}</h1>
+          <p class="project-description">{description}</p>
+        </header>
+
+        <div class="project-content">
+          {heroImage && (
+            <div class="hero-image-container">
+              <img src={heroImage} alt={title} class="hero-image" />
+            </div>
+          )}
+          
+          <div class="content-wrapper">
+            <slot />
+          </div>
         </div>
-      )}
-      
-      <slot />
-      
-      <div class="project-footer">
-        <div class="project-tags">
-          {tags.map((tag) => (
-            <span class="tag">{tag}</span>
-          ))}
-        </div>
-      </div>
+
+        <footer class="project-footer">
+          <div class="project-tags">
+            <h3>Technologies & Skills</h3>
+            <div class="tags-list">
+              {tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="project-navigation">
+            <a href="/projects" class="nav-button">← All Projects</a>
+            <a href="/" class="nav-button">Home →</a>
+          </div>
+        </footer>
+      </article>
     </div>
-  </article>
+
+    <StickyFooter />
+  </div>
 </Layout>
 
 <style>
-  .main-content {
-    position: relative;
-    z-index: 10;
+  .page-wrapper {
     min-height: 100vh;
-    background: white;
-  }
-  
-  .project-page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem;
+    background: var(--bg-sage);
   }
 
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .project-article {
+    background: var(--bg-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Header */
   .project-header {
+    padding: 3rem;
+    border-bottom: 1px solid var(--bg-off-white);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 2rem;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb-link {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--text-black);
+  }
+
+  .breadcrumb-separator {
+    color: #999;
+  }
+
+  .breadcrumb-current {
+    color: var(--text-black);
+    font-weight: 500;
   }
 
   .project-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
   }
 
-  .back-link {
-    color: #666;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    font-family: 'Evolve Sans', sans-serif;
-  }
-
-  .back-link:hover {
-    color: black;
-  }
-
-  .project-details {
+  .meta-cards {
     display: flex;
     gap: 1rem;
-    align-items: center;
+    flex-wrap: wrap;
   }
 
-  .project-year,
-  .project-type {
-    color: #888;
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-    background: rgba(0, 0, 0, 0.05);
-    
-    font-family: 'Evolve Sans', sans-serif;
+  .meta-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: var(--bg-off-white);
+    border-radius: var(--border-radius-sm);
+    min-width: 120px;
   }
 
-  .featured-badge {
-    color: #3366FF;
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-    background: rgba(51, 102, 255, 0.1);
-    
+  .meta-card.featured {
+    background: var(--accent-lime);
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
     font-weight: 600;
-    font-family: 'Evolve Sans', sans-serif;
-  }
-
-  .project-header h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 1rem;
-    color: black;
-    line-height: 1.2;
-    font-family: 'Neue Haas Grotesk', sans-serif;
-    text-shadow: 
-      -0.08em 0 #ff3333,
-      0.08em 0 #33ccff,
-      -0.12em 0 rgba(255, 51, 51, 0.8),
-      0.12em 0 rgba(51, 204, 255, 0.8);
-  }
-
-  .project-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: #666;
+  }
+
+  .meta-card.featured .meta-label {
+    color: var(--text-black);
+  }
+
+  .meta-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-black);
+  }
+
+  .project-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    color: var(--text-black);
+  }
+
+  .project-description {
+    font-size: 1.25rem;
     line-height: 1.6;
+    color: #666;
     margin: 0;
-    font-family: 'Evolve Sans', sans-serif;
   }
 
-  .project-content {
-    line-height: 1.8;
-    font-size: clamp(1rem, 2vw, 1.1rem);
-    font-family: 'Evolve Sans', sans-serif;
+  /* Hero Image */
+  .hero-image-container {
+    padding: 0 3rem;
+    margin-bottom: 2rem;
   }
 
-  .hero-media {
-    margin: clamp(2rem, 5vw, 3rem) 0;
-    text-align: center;
-  }
-
-  .hero-media img {
+  .hero-image {
     width: 100%;
     height: auto;
-    
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-md);
   }
 
-  /* Style markdown content */
-  .project-content :global(h2) {
-    font-size: clamp(1.8rem, 4vw, 2.2rem);
+  /* Content */
+  .content-wrapper {
+    padding: 0 3rem 2rem;
+    line-height: 1.7;
+    font-size: 1.125rem;
+  }
+
+  /* Content Styles */
+  .content-wrapper :global(h2) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.75rem;
     font-weight: 700;
-    margin: clamp(3rem, 6vw, 4rem) 0 1.5rem 0;
-    color: black;
-    font-family: 'Neue Haas Grotesk', sans-serif;
+    margin: 3rem 0 1rem;
+    color: var(--text-black);
   }
 
-  .project-content :global(h3) {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
+  .content-wrapper :global(h3) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin: 2.5rem 0 1rem 0;
-    color: #333;
-    font-family: 'Neue Haas Grotesk', sans-serif;
+    margin: 2.5rem 0 1rem;
+    color: var(--text-black);
   }
 
-  .project-content :global(h4) {
-    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  .content-wrapper :global(h4) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.25rem;
     font-weight: 600;
-    margin: 2rem 0 0.75rem 0;
-    color: #333;
-    font-family: 'Neue Haas Grotesk', sans-serif;
+    margin: 2rem 0 0.75rem;
+    color: var(--text-black);
   }
 
-  .project-content :global(p) {
+  .content-wrapper :global(p) {
     margin: 1.5rem 0;
     color: #444;
   }
 
-  .project-content :global(img) {
+  .content-wrapper :global(img) {
     width: 100%;
     height: auto;
-    
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin: 2rem 0 1rem 0;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-md);
+    margin: 2rem 0;
   }
 
-  .project-content :global(em) {
-    font-size: 0.9rem;
-    color: #666;
+  .content-wrapper :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--accent-lime);
+    border-radius: var(--border-radius-sm);
+    border-left: 4px solid var(--text-black);
     font-style: italic;
-    display: block;
-    text-align: center;
-    margin-top: 0.5rem;
   }
 
-  .project-content :global(ul), .project-content :global(ol) {
+  .content-wrapper :global(blockquote p) {
+    margin: 0.5rem 0;
+    color: var(--text-black);
+  }
+
+  .content-wrapper :global(pre) {
+    background: var(--text-black);
+    color: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-sm);
+    margin: 2rem 0;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+  }
+
+  .content-wrapper :global(code) {
+    background: var(--bg-off-white);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em;
+  }
+
+  .content-wrapper :global(pre code) {
+    background: transparent;
+    padding: 0;
+    color: var(--bg-white);
+  }
+
+  .content-wrapper :global(ul),
+  .content-wrapper :global(ol) {
     margin: 1.5rem 0;
     padding-left: 2rem;
   }
 
-  .project-content :global(li) {
-    margin: 0.5rem 0;
+  .content-wrapper :global(li) {
+    margin: 0.75rem 0;
   }
 
-  .project-content :global(strong) {
+  .content-wrapper :global(strong) {
     font-weight: 600;
-    color: #333;
+    color: var(--text-black);
   }
 
-  .project-content :global(blockquote) {
-    margin: 2rem 0;
-    padding: 1.5rem 2rem;
-    border-left: 4px solid #22c55e;
-    background: rgba(34, 197, 94, 0.05);
-    font-style: italic;
-    
+  .content-wrapper :global(a) {
+    color: var(--text-black);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-lime);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    transition: all 0.3s;
   }
 
-  .project-content :global(pre) {
-    background: #1e1e1e;
-    color: #d4d4d4;
-    padding: 1.5rem;
-    
-    margin: 2rem 0;
-    overflow-x: auto;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
+  .content-wrapper :global(a:hover) {
+    background: var(--accent-lime);
+    text-decoration: none;
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
   }
 
-  .project-content :global(code) {
-    background: #f5f5f5;
-    padding: 0.2rem 0.4rem;
-    
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9em;
-  }
-
-  .project-content :global(pre code) {
-    background: none;
-    padding: 0;
-    color: inherit;
-  }
-
+  /* Footer */
   .project-footer {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 2rem 3rem 3rem;
+    border-top: 1px solid var(--bg-off-white);
+    background: var(--bg-off-white);
   }
 
   .project-tags {
+    margin-bottom: 2rem;
+  }
+
+  .project-tags h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  .tags-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
   .tag {
-    padding: 0.3rem 0.8rem;
-    background: rgba(0, 0, 0, 0.05);
-    
-    font-size: 0.85rem;
-    color: #666;
+    padding: 0.5rem 1rem;
+    background: var(--bg-white);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.875rem;
     font-weight: 500;
-    font-family: 'Evolve Sans', sans-serif;
+    color: var(--text-black);
+    box-shadow: var(--shadow-sm);
   }
 
+  .project-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .nav-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--text-black);
+    color: var(--bg-white);
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .project-meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+    .container {
+      padding: 1rem;
     }
 
-    .project-details {
-      align-self: flex-end;
+    .project-header,
+    .hero-image-container,
+    .content-wrapper,
+    .project-footer {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .project-header {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .content-wrapper {
+      padding-bottom: 1rem;
+    }
+
+    .project-footer {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .meta-cards {
+      justify-content: center;
+    }
+
+    .meta-card {
+      min-width: auto;
+      flex: 1;
+      text-align: center;
+    }
+
+    .project-navigation {
+      flex-direction: column;
+    }
+
+    .nav-button {
+      text-align: center;
     }
   }
 
   @media (max-width: 480px) {
-    .project-page {
-      padding: 1rem;
+    .project-header,
+    .hero-image-container,
+    .content-wrapper,
+    .project-footer {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .meta-cards {
+      flex-direction: column;
+    }
+
+    .meta-card {
+      min-width: auto;
+    }
+
+    .breadcrumb {
+      flex-wrap: wrap;
     }
   }
 </style>
