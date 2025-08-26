@@ -432,8 +432,8 @@
     emailLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const email = this.getAttribute('data-email');
-        const subject = this.getAttribute('data-subject') || '';
+        const email = link.getAttribute('data-email');
+        const subject = link.getAttribute('data-subject') || '';
         const mailtoUrl = `mailto:${email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
         window.location.href = mailtoUrl;
       });
