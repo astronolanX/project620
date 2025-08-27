@@ -1,12 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import StickyFooter from '../components/StickyFooter.astro';
+import { getCollection } from 'astro:content';
+
+// Get all microblog posts, sorted by date (newest first)
+const microblogPosts = await getCollection('microblog');
+const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Layout title="Nolan Figueroa - Design & Technology">
   <div class="page-wrapper">
     <main class="portfolio-main">
-      <!-- Grid pattern is now visible -->
+      <div class="intro-section">
+        <h1 class="main-title">Nolan Figueroa</h1>
+        <p class="intro-text">
+          Designer and technologist exploring the intersection of human experience and digital systems. 
+          Currently focused on spatial interfaces, design systems, and the future of interactive media.
+        </p>
+      </div>
+
+      <section class="microblog-section">
+        <h2 class="microblog-title">Recent Notes</h2>
+        <div class="microblog-list">
+          {sortedPosts.map(async (post) => {
+            const { Content } = await post.render();
+            return (
+              <article class="microblog-entry">
+                <div class="entry-header">
+                  <h3 class="entry-title">{post.data.title}</h3>
+                  <time class="entry-date" datetime={post.data.date.toISOString()}>
+                    {post.data.date.toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'short', 
+                      day: 'numeric' 
+                    })}
+                  </time>
+                </div>
+                <div class="entry-content">
+                  <Content />
+                </div>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="entry-tags">
+                    {post.data.tags.map((tag) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
     </main>
 
     <StickyFooter />
@@ -26,10 +70,120 @@ import StickyFooter from '../components/StickyFooter.astro';
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding: 4rem 2rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 3rem;
+  }
+
+  .intro-section {
+    margin-bottom: 2rem;
+  }
+
+  .main-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #333;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+  }
+
+  .intro-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .microblog-section {
+    width: 100%;
+  }
+
+  .microblog-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 2rem 0;
+    letter-spacing: -0.01em;
+  }
+
+  .microblog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .microblog-entry {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2rem;
+  }
+
+  .microblog-entry:last-child {
+    border-bottom: none;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .entry-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    flex: 1;
+  }
+
+  .entry-date {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .entry-content {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  .entry-content :global(p) {
+    margin: 0 0 1rem 0;
+  }
+
+  .entry-content :global(p:last-child) {
+    margin: 0;
+  }
+
+  .entry-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #666;
+    background: #f5f5f5;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
   }
 
   /* Responsive Design */
@@ -39,22 +193,54 @@ import StickyFooter from '../components/StickyFooter.astro';
     }
 
     .portfolio-main {
-      padding: 1rem;
+      padding: 2rem 1rem 1rem;
       margin-left: 64px;
+      gap: 2rem;
+    }
+
+    .main-title {
+      font-size: 2.5rem;
+    }
+
+    .intro-text {
+      font-size: 1rem;
+    }
+
+    .entry-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .entry-date {
+      order: -1;
     }
   }
 
   @media (max-width: 480px) {
     .portfolio-main {
-      padding: 0.75rem;
+      padding: 1.5rem 0.75rem 0.75rem;
       margin-left: 64px;
+      gap: 1.5rem;
+    }
+
+    .main-title {
+      font-size: 2rem;
+    }
+
+    .microblog-list {
+      gap: 2rem;
     }
   }
 
   @media (max-width: 320px) {
     .portfolio-main {
-      padding: 0.5rem;
+      padding: 1rem 0.5rem 0.5rem;
       margin-left: 64px;
+    }
+
+    .main-title {
+      font-size: 1.75rem;
     }
   }
 </style>

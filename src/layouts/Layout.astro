@@ -272,7 +272,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       });
       
       // Debounce viewport change detection
-      let viewportChangeTimeout: number | null = null;
+      let viewportChangeTimeout: ReturnType<typeof setTimeout> | null = null;
       
       // Re-evaluate cursor necessity on window resize or orientation change
       function handleViewportChange() {

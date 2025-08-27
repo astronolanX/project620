@@ -14,6 +14,16 @@ const projects = defineCollection({
   }),
 });
 
+const microblog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    tags: z.array(z.string()).optional(),
+  }),
+});
+
 export const collections = {
   projects,
+  microblog,
 };

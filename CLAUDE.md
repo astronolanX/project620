@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Astro-based portfolio website with unique blur effect title design, featuring projects with chromatic aberration effects and a floating navigation menu with logmar scaling.
+Astro-based portfolio website featuring a microblog-style homepage with project showcase and floating navigation menu with logmar scaling.
 
 ## Commands
 
@@ -23,22 +23,23 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 
 ### Content System
 
-Single content collection defined in `src/content/config.ts`:
-- **projects**: Portfolio items with title, subtitle, year, type, number (1-5), and color variations
+Two content collections defined in `src/content/config.ts`:
+- **projects**: Portfolio items with title, subtitle, year, type, number (1-3), and color variations
+- **microblog**: Blog posts with title, date, and optional tags for the homepage
 
 Dynamic routing:
 - `src/pages/projects/[...slug].astro` → Renders individual project pages with bento grid layout
 
 ### Core Components
 
-- **FloatingMenu.astro**: Fixed left-side navigation with:
-  - Home link with initials "NF"
-  - Numbered project links (1-5) mapped to specific slugs
+- **LeftNav.astro**: Fixed left-side navigation with:
+  - Home link with initials "NLN"
+  - Numbered project links (1-3) mapped to specific slugs
   - Archive folder icon
   - Footer toggle with copyright icon
   - Active state highlighting based on current route
 
-- **StickyFooter.astro**: Footer triggered by FloatingMenu toggle
+- **StickyFooter.astro**: Footer triggered by LeftNav toggle
 
 - **Layout.astro**: Base layout providing:
   - Roboto font family (normal, mono, and Material Icons)
@@ -48,7 +49,7 @@ Dynamic routing:
 
 ### Page Structure
 
-- **index.astro**: Homepage with multi-layer blur effect title "hoist the colors"
+- **index.astro**: Homepage with title, intro text, and reverse-chronological microblog list
 - **archive.astro**: Archive page listing all projects
 - **projects/[...slug].astro**: Individual project pages with bento grid layout
 
@@ -64,19 +65,17 @@ Dynamic routing:
 
 ### Project Number Mapping
 
-FloatingMenu numbers correspond to specific project slugs:
+LeftNav numbers correspond to specific project slugs:
 1. future-design
 2. ux-patterns
 3. spatial-interfaces
-4. design-systems-scale
-5. micro-interactions
 
 ### Styling Approach
 
 - Global styles in `src/styles/global.css`
 - CSS custom properties for colors and consistent theming
 - Chromatic aberration effects via text-shadow and color offsets
-- Logmar scaling effect on FloatingMenu hover states
+- Logmar scaling effect on LeftNav hover states
 
 ### JavaScript Patterns
 

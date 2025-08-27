@@ -6,9 +6,7 @@ const name = "NLN"; // Initials horizontally oriented
 const selectedWorks = [
   { number: 1, slug: "future-design" },
   { number: 2, slug: "ux-patterns" },
-  { number: 3, slug: "spatial-interfaces" },
-  { number: 4, slug: "design-systems-scale" },
-  { number: 5, slug: "micro-interactions" }
+  { number: 3, slug: "spatial-interfaces" }
 ];
 
 // Get current page info for highlighting
@@ -503,7 +501,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     document.documentElement.style.setProperty('--vh', `${vh}px`);
     
     // Force the nav to use actual viewport height
-    const nav = document.querySelector('.left-nav');
+    const nav = document.querySelector('.left-nav') as HTMLElement;
     if (nav) {
       nav.style.height = `${window.innerHeight}px`;
     }
