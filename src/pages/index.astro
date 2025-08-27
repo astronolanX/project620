@@ -5,141 +5,59 @@ import StickyFooter from '../components/StickyFooter.astro';
 
 <Layout title="Nolan Figueroa - Design & Technology">
   <div class="page-wrapper">
-    <!-- Home Header -->
-    <header class="home-header">
-      <div class="intro-badge">Available for new projects</div>
-      <h1 class="home-title">Design & Creative Technology</h1>
-      <p class="home-subtitle">Bridging design and tech to transform how people and organizations come together through innovative experiences</p>
-    </header>
-
-    <!-- Bento Grid Layout -->
-    <main class="bento-container">
-      <!-- Large introduction card -->
-      <div class="bento-item large">
-        <div class="bento-content">
-          <h2>About</h2>
-          <p>I'm a designer and technologist focused on creating meaningful experiences at the intersection of creativity and innovation.</p>
-          <p>Currently exploring the future of human-computer interaction through spatial computing, AI-enhanced design tools, and accessible interface patterns.</p>
-          <div class="experience-years">
-            <span class="years-number">8+</span>
-            <span class="years-label">Years Experience</span>
+    <main class="portfolio-main">
+      <!-- Blur effect title -->
+      <div class="blur-title-section">
+        <div class="blur-container">
+          <!-- Shadow layer 5 (most blurred, furthest back) -->
+          <div class="text-layer text-shadow-5">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
           </div>
+
+          <!-- Shadow layer 4 -->
+          <div class="text-layer text-shadow-4">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
+          </div>
+          
+          <!-- Shadow layer 3 -->
+          <div class="text-layer text-shadow-3">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
+          </div>
+          
+          <!-- Shadow layer 2 -->
+          <div class="text-layer text-shadow-2">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
+          </div>
+          
+          <!-- Shadow layer 1 (least blurred) -->
+          <div class="text-layer text-shadow-1">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
+          </div>
+          
+          <!-- Main text (sharp and bold) -->
+          <div class="text-layer text-main">
+            <div class="top">hoist the</div>
+            <div class="bottom">colors</div>
+          </div>
+        </div>
+
+        <div class="title-metadata">
+          <span class="name">NOLAN • FIGUEROA</span>
         </div>
       </div>
 
-      <!-- Medium capability cards -->
-      <div class="bento-item medium">
-        <div class="bento-content">
-          <div class="capability-icon">⚡</div>
-          <h3>Design Systems</h3>
-          <p>Scalable foundations for digital products that serve millions of users.</p>
-          <div class="capability-metric">
-            <span class="metric-value">15+</span>
-            <span class="metric-label">Systems Built</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bento-item medium">
-        <div class="bento-content">
-          <div class="capability-icon">🔬</div>
-          <h3>Research & Strategy</h3>
-          <p>User-centered approaches to solving complex organizational challenges.</p>
-          <div class="capability-metric">
-            <span class="metric-value">120+</span>
-            <span class="metric-label">Studies Conducted</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Small highlight cards -->
-      <div class="bento-item small">
-        <div class="bento-content">
-          <h4>Current Focus</h4>
-          <div class="focus-list">
-            <span class="focus-item">AI Design Tools</span>
-            <span class="focus-item">Spatial Computing</span>
-            <span class="focus-item">Accessibility</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bento-item small">
-        <div class="bento-content">
-          <h4>Location</h4>
-          <div class="location-info">
-            <span class="location-primary">San Francisco Bay Area</span>
-            <span class="location-timezone">PST/PDT</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bento-item small">
-        <div class="bento-content">
-          <h4>Work Style</h4>
-          <div class="work-style">
-            <span class="style-type">Remote-First</span>
-            <span class="style-detail">Global collaboration</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bento-item small">
-        <div class="bento-content">
-          <h4>Tools</h4>
-          <div class="tools-list">
-            <span class="tool-item">Figma</span>
-            <span class="tool-item">React</span>
-            <span class="tool-item">Framer</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Medium capability cards continued -->
-      <div class="bento-item medium">
-        <div class="bento-content">
-          <div class="capability-icon">🛠️</div>
-          <h3>Creative Technology</h3>
-          <p>Prototyping and experimental interfaces that push boundaries.</p>
-          <div class="capability-metric">
-            <span class="metric-value">50+</span>
-            <span class="metric-label">Prototypes</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bento-item medium">
-        <div class="bento-content">
-          <div class="capability-icon">🎯</div>
-          <h3>Product Strategy</h3>
-          <p>From concept to market-ready solutions with measurable impact.</p>
-          <div class="capability-metric">
-            <span class="metric-value">25+</span>
-            <span class="metric-label">Product Launches</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Wide testimonial/philosophy card -->
-      <div class="bento-item wide">
-        <div class="bento-content">
-          <h3>Design Philosophy</h3>
-          <div class="philosophy-grid">
-            <div class="philosophy-item">
-              <span class="philosophy-number">01</span>
-              <p>Human-centered design isn't just about users—it's about understanding the full ecosystem of stakeholders</p>
-            </div>
-            <div class="philosophy-item">
-              <span class="philosophy-number">02</span>
-              <p>Technology should amplify human capability, not replace human judgment</p>
-            </div>
-            <div class="philosophy-item">
-              <span class="philosophy-number">03</span>
-              <p>The best interfaces are invisible—they fade away to let people focus on their goals</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- Navigation categories -->
+      <nav class="portfolio-nav">
+        <div class="nav-category">Art Direction</div>
+        <div class="nav-category">Photography</div>
+        <div class="nav-category">Graphics and Layout</div>
+        <div class="nav-category">Fashion Design</div>
+      </nav>
     </main>
 
     <StickyFooter />
@@ -149,291 +67,193 @@ import StickyFooter from '../components/StickyFooter.astro';
 <style>
   .page-wrapper {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--color-home-lighter) 0%, var(--color-home-light) 100%);
+    background: #e5e5e5;
     padding-left: 100px; /* Space for floating menu */
+    display: flex;
+    flex-direction: column;
   }
 
-  .home-header {
-    padding: 3rem 2rem 2rem;
+  .portfolio-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-  }
-
-  .intro-badge {
-    display: inline-block;
-    background: var(--color-home);
-    color: white;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .home-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin: 0 0 1rem;
-    color: var(--color-home);
-  }
-
-  .home-subtitle {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: #333;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .bento-container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(6, minmax(200px, auto));
-    gap: 1.5rem;
     padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
   }
 
-  /* Bento grid layouts */
-  .bento-item.large {
-    grid-column: span 8;
-    grid-row: span 2;
-  }
-
-  .bento-item.medium {
-    grid-column: span 4;
-    grid-row: span 2;
-  }
-
-  .bento-item.small {
-    grid-column: span 3;
-    grid-row: span 1;
-  }
-
-  .bento-item.wide {
-    grid-column: span 12;
-    grid-row: span 2;
-  }
-
-  .bento-item {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    padding: 2rem;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+  .blur-title-section {
+    margin-bottom: 4rem;
     position: relative;
-    overflow: hidden;
   }
 
-  .bento-item::before {
-    content: '';
+  .blur-container {
+    position: relative;
+    width: 600px;
+    height: 500px;
+    margin: 0 auto;
+  }
+
+  .text-layer {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 900;
+    color: #333;
+    letter-spacing: -0.08em;
+    user-select: none;
+    text-transform: lowercase;
+    line-height: 1.2;
+    width: 100%;
+  }
+
+  /* Main text split - crisp and bold */
+  .text-main {
+    z-index: 20;
+    font-weight: 900;
+  }
+
+  .text-main .top {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--color-home);
-    border-radius: 20px 20px 0 0;
   }
 
-  .bento-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 119, 255, 0.2);
-    border-color: var(--color-home-light);
+  .text-main .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
   }
 
-  .bento-content h2 {
+  /* Heavy blur shadow layers for depth */
+  .text-shadow-1 {
+    filter: blur(2px);
+    opacity: 0.8;
+    z-index: 15;
+    transform: translate(2px, 2px);
+  }
+
+  .text-shadow-1 .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .text-shadow-1 .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+
+  .text-shadow-2 {
+    filter: blur(5px);
+    opacity: 0.6;
+    z-index: 10;
+    transform: translate(4px, 4px);
+  }
+
+  .text-shadow-2 .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .text-shadow-2 .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+
+  .text-shadow-3 {
+    filter: blur(10px);
+    opacity: 0.5;
+    z-index: 5;
+    transform: translate(6px, 6px);
+  }
+
+  .text-shadow-3 .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .text-shadow-3 .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+
+  .text-shadow-4 {
+    filter: blur(20px);
+    opacity: 0.3;
+    z-index: 2;
+    transform: translate(10px, 10px);
+  }
+
+  .text-shadow-4 .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .text-shadow-4 .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+
+  .text-shadow-5 {
+    filter: blur(30px);
+    opacity: 0.2;
+    z-index: 1;
+    transform: translate(15px, 15px);
+  }
+
+  .text-shadow-5 .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .text-shadow-5 .bottom {
+    position: absolute;
+    top: 110px;
+    left: 0;
+  }
+
+  .title-metadata {
+    margin-top: 1rem;
+  }
+
+  .name {
     font-family: 'Roboto', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0 0 1rem;
-    color: var(--color-home);
-  }
-
-  .bento-content h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0 1rem;
-    color: var(--color-home);
-  }
-
-  .bento-content h4 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 0 0 0.75rem;
-    color: var(--color-home);
-  }
-
-  .bento-content p {
-    color: #666;
-    line-height: 1.6;
-    margin: 0 0 1rem;
-  }
-
-  /* Experience years styling */
-  .experience-years {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 2px solid var(--color-home-lighter);
-  }
-
-  .years-number {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--color-home);
-    line-height: 1;
-  }
-
-  .years-label {
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
+    letter-spacing: 0.2em;
     color: #666;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
   }
 
-  /* Capability icons */
-  .capability-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  /* Metrics styling */
-  .capability-metric {
+  .portfolio-nav {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--color-home-lighter);
+    gap: 1.5rem;
+    max-width: 300px;
   }
 
-  .metric-value {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--color-home);
-    line-height: 1;
+  .nav-category {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
   }
 
-  .metric-label {
-    font-size: 0.875rem;
-    font-weight: 600;
+  .nav-category:hover {
     color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  /* Focus items */
-  .focus-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .focus-item {
-    background: var(--color-home-lighter);
-    color: var(--color-home);
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    border: 1px solid var(--color-home-light);
-    text-align: center;
-  }
-
-  /* Location info */
-  .location-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .location-primary {
-    font-weight: 600;
-    color: var(--color-home);
-  }
-
-  .location-timezone {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.875rem;
-    color: #666;
-  }
-
-  /* Work style */
-  .work-style {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .style-type {
-    font-weight: 600;
-    color: var(--color-home);
-  }
-
-  .style-detail {
-    font-size: 0.875rem;
-    color: #666;
-  }
-
-  /* Tools */
-  .tools-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .tool-item {
-    background: var(--color-home-lighter);
-    color: var(--color-home);
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    border: 1px solid var(--color-home-light);
-    text-align: center;
-  }
-
-  /* Philosophy */
-  .philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .philosophy-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .philosophy-number {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--color-home);
-    flex-shrink: 0;
-  }
-
-  .philosophy-item p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    font-style: italic;
   }
 
   /* Responsive Design */
@@ -442,41 +262,40 @@ import StickyFooter from '../components/StickyFooter.astro';
       padding-left: 0;
     }
 
-    .bento-container {
-      grid-template-columns: 1fr;
+    .portfolio-main {
       padding: 1rem;
+    }
+
+    .blur-container {
+      width: 90vw;
+      height: 300px;
+    }
+
+    .text-layer {
+      font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .blur-title-section {
+      margin-bottom: 3rem;
+    }
+
+    .portfolio-nav {
       gap: 1rem;
     }
 
-    .bento-item.large,
-    .bento-item.medium,
-    .bento-item.small,
-    .bento-item.wide {
-      grid-column: span 1;
-      grid-row: span 1;
+    .nav-category {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blur-container {
+      width: 95vw;
+      height: 250px;
     }
 
-    .bento-item {
-      padding: 1.5rem;
-    }
-
-    .home-header {
-      padding: 2rem 1rem 1rem;
-    }
-
-    .philosophy-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .focus-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .tools-list {
-      flex-direction: row;
-      flex-wrap: wrap;
+    .text-layer {
+      font-size: clamp(2.5rem, 15vw, 4rem);
     }
   }
 </style>
