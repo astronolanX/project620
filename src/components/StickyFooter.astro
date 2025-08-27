@@ -343,7 +343,8 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  // Update on each page load (SPA compatible)
+  document.addEventListener('astro:page-load', function() {
     const currentYear = document.getElementById('current-year');
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear().toString();

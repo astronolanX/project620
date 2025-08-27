@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import FloatingMenu from '../components/FloatingMenu.astro';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -46,8 +47,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     <!-- Optimized font loading -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;600;700&family=Material+Icons&display=swap" rel="stylesheet">
     <title>{title}</title>
+    <ViewTransitions />
     
-    <!-- Optimized initialization script -->
+    <!-- SPA initialization script -->
     <script>
       // Service Worker Registration
       if ('serviceWorker' in navigator) {
@@ -57,20 +59,12 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
             .catch(error => console.log('SW registration failed:', error));
         });
       }
-      
-      // Ensure page starts at top
-      if (history.scrollRestoration) {
-        history.scrollRestoration = 'manual';
-      }
-      
-      const scrollToTop = () => window.scrollTo(0, 0);
-      scrollToTop(); // Immediate scroll
-      
-      document.addEventListener('DOMContentLoaded', scrollToTop);
-      window.addEventListener('load', () => setTimeout(scrollToTop, 100));
     </script>
   </head>
   <body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+    
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay"></div>
     
@@ -82,7 +76,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
 
     
     <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
+    <script is:inline type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
@@ -105,15 +99,89 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       }
     </script>
     
-    <!-- Loading Animation Script -->
+    <!-- SPA State Management -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      // Initialize app state
+      window.appState = window.appState || {
+        currentPage: null,
+        navigationHistory: [],
+        isTransitioning: false
+      };
+
+      // Handle view transitions
+      document.addEventListener('astro:page-load', () => {
+        // Update app state
+        window.appState.currentPage = window.location.pathname;
+        window.appState.navigationHistory.push(window.location.pathname);
+        
+        // Remove loading overlay if it exists
         const overlay = document.getElementById('loading-overlay');
         if (overlay) {
-          setTimeout(() => {
-            overlay.classList.add('hidden');
-            setTimeout(() => overlay.remove(), 500);
-          }, 500);
+          overlay.classList.add('hidden');
+          setTimeout(() => overlay.remove(), 300);
+        }
+      });
+
+      // Handle transition start
+      document.addEventListener('astro:before-preparation', () => {
+        window.appState.isTransitioning = true;
+      });
+
+      // Handle transition complete
+      document.addEventListener('astro:after-swap', () => {
+        window.appState.isTransitioning = false;
+      });
+
+      // Custom Cursor Implementation
+      const cursor = document.getElementById('custom-cursor');
+      let mouseX = 0;
+      let mouseY = 0;
+      let cursorX = 0;
+      let cursorY = 0;
+      
+      // Track mouse movement
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      // Smooth cursor animation
+      function animateCursor() {
+        const speed = 0.15;
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
+        
+        if (cursor) {
+          cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        }
+        
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+      
+      // Click animation
+      document.addEventListener('mousedown', () => {
+        if (cursor) {
+          cursor.classList.add('clicking');
+        }
+      });
+      
+      document.addEventListener('mouseup', () => {
+        if (cursor) {
+          cursor.classList.remove('clicking');
+        }
+      });
+      
+      // Hide cursor when it leaves the window
+      document.addEventListener('mouseleave', () => {
+        if (cursor) {
+          cursor.style.opacity = '0';
+        }
+      });
+      
+      document.addEventListener('mouseenter', () => {
+        if (cursor) {
+          cursor.style.opacity = '1';
         }
       });
     </script>
@@ -127,6 +195,53 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  }
+
+  /* Astro View Transitions animations */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  ::view-transition-old(root) {
+    animation-name: fade-out-scale;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: fade-in-scale;
+  }
+
+  @keyframes fade-out-scale {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Persist floating menu during transitions */
+  .floating-menu {
+    view-transition-name: floating-menu;
+  }
+
+  ::view-transition-old(floating-menu),
+  ::view-transition-new(floating-menu) {
+    animation: none;
   }
   
   html, body {
@@ -190,5 +305,42 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     text-transform: uppercase;
     letter-spacing: 0.1em;
     opacity: 0.7;
+  }
+  
+  /* Custom Cursor Styles */
+  .custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(51, 51, 51, 0.5);
+    pointer-events: none;
+    z-index: 10000;
+    transform-origin: center;
+    transition: opacity 0.3s ease;
+    will-change: transform;
+    margin-left: -10px;
+    margin-top: -10px;
+  }
+  
+  .custom-cursor.clicking {
+    animation: cursor-click 0.3s ease;
+  }
+  
+  @keyframes cursor-click {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.6);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Hide default cursor globally */
+  * {
+    cursor: none !important;
   }
 </style>

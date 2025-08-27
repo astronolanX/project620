@@ -46,32 +46,7 @@
     background-color: #e5e5e5;
   }
   
-  /* Normalize cursor behavior across the app */
-  * {
-    cursor: auto;
-  }
-  
-  /* Simplified cursor behavior */
-  button, a, [role="button"], [tabindex]:not([tabindex="-1"]), .clickable,
-  .contact-link, .footer-link, .nav-links a, .btn, .contact-button, 
-  .cv-button, .learn-more, .view-all, 
-  .project-card, .blog-item, .menu-home, .menu-number, .social-links a,
-  .contact-btn {
-    cursor: pointer !important;
-  }
-  
-  /* Child elements inherit pointer cursor from parents */
-  button *, a *, [role="button"] *, .clickable *,
-  .contact-link *, .footer-link *, .nav-links a *, .btn *, .contact-button *, 
-  .cv-button *, .learn-more *, .view-all *, 
-  .project-card *, .blog-item *, .menu-home *, .menu-number *, .social-links a *,
-  .contact-btn * {
-    cursor: inherit !important;
-  }
-  
-  input, textarea, select {
-    cursor: text;
-  }
+  /* Remove all cursor styles since we're using a custom cursor */
   
   /* Prevent text selection on clickable elements */
   button, .btn, .contact-button, .cv-button, 

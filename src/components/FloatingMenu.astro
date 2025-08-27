@@ -435,15 +435,29 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 </style>
 
 <script>
+  // Initialize global SPA state for menu
+  window.menuState = window.menuState || {
+    footerVisible: false,
+    initialized: false
+  };
+
   class FloatingMenu {
     private footerToggle: HTMLElement | null;
-    private footerVisible: boolean = false;
     
     constructor() {
       this.footerToggle = document.getElementById('footerToggle');
       this.initFooterToggle();
       this.initKeyboardHandlers();
       this.initNavigationHandlers();
+      
+      // Restore footer state
+      if (window.menuState.footerVisible) {
+        const footer = document.querySelector('.footer-section');
+        if (footer) {
+          footer.classList.add('visible');
+          this.footerToggle?.classList.add('active');
+        }
+      }
     }
     
     initFooterToggle() {
@@ -458,9 +472,10 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       const footer = document.querySelector('.footer-section');
       if (!footer) return;
       
-      this.footerVisible = !this.footerVisible;
+      // Update global state
+      window.menuState.footerVisible = !window.menuState.footerVisible;
       
-      if (this.footerVisible) {
+      if (window.menuState.footerVisible) {
         footer.classList.add('visible');
         this.footerToggle?.classList.add('active');
       } else {
@@ -472,14 +487,14 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     initKeyboardHandlers() {
       document.addEventListener('keydown', (e) => {
         // Close footer on Escape key
-        if (e.key === 'Escape' && this.footerVisible) {
+        if (e.key === 'Escape' && window.menuState.footerVisible) {
           this.toggleFooter();
         }
       });
       
       // Listen for footer close button clicks
       document.addEventListener('footer-close', () => {
-        if (this.footerVisible) {
+        if (window.menuState.footerVisible) {
           this.toggleFooter();
         }
       });
@@ -499,57 +514,56 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
           if (href === currentUrl && clickedItem.classList.contains('active')) {
             e.preventDefault();
             
-            // Temporarily remove no-animation to allow click animation
-            clickedItem.classList.remove('no-animation');
-            // Add click animation class
-            clickedItem.classList.add('clicked');
+            // Add shrink animation
+            clickedItem.classList.add('shrink');
             
             // Remove animation class after animation completes
             setTimeout(() => {
-              clickedItem.classList.remove('clicked');
-              clickedItem.classList.add('no-animation');
-            }, 400);
+              clickedItem.classList.remove('shrink');
+            }, 150);
             
             // Close footer if open
-            if (this.footerVisible) {
+            if (window.menuState.footerVisible) {
               this.toggleFooter();
             }
             return;
           }
           
-          // If footer is visible, close it before navigating
-          if (this.footerVisible) {
-            e.preventDefault();
-            
-            // Close the footer with animation
-            this.footerVisible = false;
+          // Close footer if open (but don't prevent navigation in SPA mode)
+          if (window.menuState.footerVisible) {
+            window.menuState.footerVisible = false;
             this.footerToggle?.classList.remove('active');
             const footer = document.querySelector('.footer-section');
             footer?.classList.remove('visible');
-            
-            // Wait for animation to complete then navigate
-            setTimeout(() => {
-              window.location.href = href;
-            }, 400); // Match the footer transition duration
           }
         });
       });
     }
-    
   }
   
-  // Initialize when DOM loads
-  document.addEventListener('DOMContentLoaded', () => {
+  // Initialize on page load (works with View Transitions)
+  document.addEventListener('astro:page-load', () => {
     new FloatingMenu();
     
-    // After initial animation, add no-animation class to prevent re-animation
-    setTimeout(() => {
-      const activeItems = document.querySelectorAll('.floating-menu .active');
-      activeItems.forEach(item => {
-        if (!item.classList.contains('menu-footer-toggle')) {
-          item.classList.add('no-animation');
-        }
-      });
-    }, 300);
+    // Mark as initialized after first load
+    if (!window.menuState.initialized) {
+      window.menuState.initialized = true;
+    }
+  });
+  
+  // Handle before page swap to show navigation loading
+  document.addEventListener('astro:before-swap', () => {
+    const loadingBar = document.getElementById('navigationLoading');
+    if (loadingBar) {
+      loadingBar.classList.add('active');
+    }
+  });
+  
+  // Handle after swap to hide loading
+  document.addEventListener('astro:after-swap', () => {
+    const loadingBar = document.getElementById('navigationLoading');
+    if (loadingBar) {
+      loadingBar.classList.remove('active');
+    }
   });
 </script>
