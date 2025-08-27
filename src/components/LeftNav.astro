@@ -604,12 +604,21 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
             return;
           }
           
-          // Close footer if open (but don't prevent navigation in SPA mode)
+          // If footer is open, close it first and wait for animation before navigating
           if (window.menuState.footerVisible) {
+            e.preventDefault(); // Prevent immediate navigation
+            
+            // Close footer
             window.menuState.footerVisible = false;
             this.footerToggle?.classList.remove('active');
             const footer = document.querySelector('.footer-section');
             footer?.classList.remove('visible');
+            
+            // Wait for footer close animation to complete (400ms from CSS transition)
+            setTimeout(() => {
+              // Navigate after footer is closed
+              window.location.href = href;
+            }, 400);
           }
         });
       });

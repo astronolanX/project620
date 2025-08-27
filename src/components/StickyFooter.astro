@@ -69,16 +69,23 @@
 <style>
   .footer-section {
     position: fixed;
+    top: 0;
+    left: 80px; /* Account for nav menu */
+    right: 0;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    width: calc(100% - 80px);
+    height: 100vh;
+    height: 100dvh;
     background: var(--gray-900);
     color: var(--gray-100);
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    overflow: hidden;
+    border-radius: 0;
+    overflow: auto;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .footer-section.visible {
@@ -87,17 +94,17 @@
   
   .footer-close-btn {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 36px;
-    height: 36px;
+    top: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gray-300);
+    color: var(--gray-100);
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
@@ -111,21 +118,35 @@
   }
   
   .footer-close-btn .material-icons {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .footer-content {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 3rem 2rem 1.5rem;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .job-opportunity-banner {
-    background: var(--gray-400);
+    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
     color: var(--gray-900);
-    border-radius: var(--border-radius-sm);
-    margin-bottom: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
     overflow: hidden;
+    box-shadow: 0 20px 60px rgba(198, 255, 0, 0.2);
+    transform: scale(1);
+    transition: transform 0.3s ease;
+  }
+  
+  .job-opportunity-banner:hover {
+    transform: scale(1.02);
   }
 
   .banner-content {
@@ -176,31 +197,34 @@
     display: grid;
     grid-template-columns: auto 1fr auto auto;
     gap: 3rem;
-    align-items: start;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
   }
 
   .footer-logo {
-    width: 48px;
-    height: 48px;
-    background: var(--gray-400);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
     color: var(--gray-900);
-    border-radius: var(--border-radius-sm);
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Roboto Mono', monospace;
     font-weight: 900;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
+    box-shadow: 0 10px 30px rgba(198, 255, 0, 0.3);
   }
 
   .footer-info h3 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0 0 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 0.5rem;
+    color: #c6ff00;
   }
 
   .footer-info p {
@@ -241,20 +265,22 @@
   }
 
   .contact-button {
-    background: var(--gray-400);
+    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
     color: var(--gray-900);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius-sm);
+    padding: 1rem 2rem;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.125rem;
     transition: all 0.3s;
     display: inline-flex;
     align-items: center;
+    box-shadow: 0 10px 30px rgba(198, 255, 0, 0.3);
   }
 
   .contact-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(206, 212, 218, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(198, 255, 0, 0.4);
   }
 
   .social-links {
@@ -310,6 +336,26 @@
   }
 
   @media (max-width: 768px) {
+    .footer-section {
+      left: 64px; /* Smaller nav width on mobile */
+      width: calc(100% - 64px);
+    }
+
+    .footer-content {
+      padding: 3rem 2rem;
+    }
+
+    .footer-close-btn {
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+    }
+
+    .footer-close-btn .material-icons {
+      font-size: 20px;
+    }
+
     .banner-content {
       flex-direction: column;
       align-items: flex-start;
