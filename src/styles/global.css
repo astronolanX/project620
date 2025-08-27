@@ -48,6 +48,17 @@
   
   /* Remove all cursor styles since we're using a custom cursor */
   
+  /* Text selection highlighting with lime color scheme */
+  *::selection {
+    background-color: #c6ff00;
+    color: #000;
+  }
+  
+  *::-moz-selection {
+    background-color: #c6ff00;
+    color: #000;
+  }
+
   /* Prevent text selection on clickable elements */
   button, .btn, .contact-button, .cv-button, 
   .contact-btn, .menu-home, .menu-number {
