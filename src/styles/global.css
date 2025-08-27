@@ -44,12 +44,12 @@
     @apply antialiased;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: #e5e5e5;
-    margin-left: 80px; /* Account for left navigation width */
+    margin-left: 0; /* No margin needed - nav will overlay */
   }
   
   @media (max-width: 768px) {
     body {
-      margin-left: 70px; /* Smaller margin on mobile */
+      margin-left: 0; /* No margin on mobile either */
     }
   }
   

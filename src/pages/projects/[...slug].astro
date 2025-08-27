@@ -83,17 +83,17 @@ const { Content } = await project.render();
   .page-wrapper {
     min-height: 100vh;
     background: #e5e5e5;
-    padding-left: 100px; /* Space for floating menu */
+    margin-left: 80px; /* Space for left nav menu */
   }
 
   .project-header {
     padding: 3rem 2rem 2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .project-meta {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-bottom: 1.5rem;
   }
@@ -125,7 +125,7 @@ const { Content } = await project.render();
     line-height: 1.5;
     color: #333;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .bento-container {
@@ -135,7 +135,7 @@ const { Content } = await project.render();
     gap: 1.5rem;
     padding: 2rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   /* Bento grid layouts */
@@ -317,7 +317,7 @@ const { Content } = await project.render();
   /* Responsive Design */
   @media (max-width: 768px) {
     .page-wrapper {
-      padding-left: 0;
+      margin-left: 64px; /* 80% scaled nav width on mobile */
     }
 
     .bento-container {

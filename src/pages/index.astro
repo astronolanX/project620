@@ -68,7 +68,7 @@ import StickyFooter from '../components/StickyFooter.astro';
   .page-wrapper {
     min-height: 100vh;
     background: #e5e5e5;
-    padding-left: 100px; /* Space for floating menu */
+    margin-left: 80px; /* Space for left nav menu */
     display: flex;
     flex-direction: column;
   }
@@ -78,8 +78,8 @@ import StickyFooter from '../components/StickyFooter.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     padding: 2rem;
   }
 
@@ -92,7 +92,7 @@ import StickyFooter from '../components/StickyFooter.astro';
     position: relative;
     width: 600px;
     height: 500px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .text-layer {
@@ -259,7 +259,7 @@ import StickyFooter from '../components/StickyFooter.astro';
   /* Responsive Design */
   @media (max-width: 768px) {
     .page-wrapper {
-      padding-left: 0;
+      margin-left: 64px; /* 80% scaled nav width on mobile */
     }
 
     .portfolio-main {

@@ -136,9 +136,40 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       let mouseY = 0;
       let cursorX = 0;
       let cursorY = 0;
-      let animationId = null;
+      let animationId: number | null = null;
+      
+             // Detect if device has touch capability and no mouse
+       function isTouchDevice() {
+         // Check for touch capability
+         const hasTouch = ('ontouchstart' in window) || 
+                         (navigator.maxTouchPoints > 0);
+        
+        // Check if device has a fine pointer (mouse)
+        const hasMouse = window.matchMedia('(pointer: fine)').matches;
+        
+        // Check if device is primarily touch
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Only disable cursor if it's a touch device without a mouse
+        return hasTouch && !hasMouse || isMobile;
+      }
       
       function initCustomCursor() {
+        // Don't initialize cursor for touch devices
+        if (isTouchDevice()) {
+          // Remove any existing cursor
+          const existingCursor = document.getElementById('custom-cursor');
+          if (existingCursor) {
+            existingCursor.remove();
+          }
+          // Cancel any animation frames
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+          return;
+        }
+        
         const cursor = document.getElementById('custom-cursor');
         if (!cursor) {
           // Create cursor if it doesn't exist
@@ -160,7 +191,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
           cursorX = mouseX;
           cursorY = mouseY;
           
-          cursorElement.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+          if (cursorElement) {
+            cursorElement.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+          }
           
           animationId = requestAnimationFrame(animateCursor);
         }
@@ -169,6 +202,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       
       // Track mouse movement globally
       document.addEventListener('mousemove', (e) => {
+        // Skip on touch devices
+        if (isTouchDevice()) return;
+        
         mouseX = e.clientX;
         mouseY = e.clientY;
         
@@ -181,6 +217,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       
       // Click animation
       document.addEventListener('mousedown', () => {
+        // Skip on touch devices
+        if (isTouchDevice()) return;
+        
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.classList.remove('releasing');
@@ -189,6 +228,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       });
       
       document.addEventListener('mouseup', () => {
+        // Skip on touch devices
+        if (isTouchDevice()) return;
+        
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.classList.remove('clicking');
@@ -198,6 +240,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       
       // Hide cursor when it leaves the window
       document.addEventListener('mouseleave', () => {
+        // Skip on touch devices
+        if (isTouchDevice()) return;
+        
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.style.opacity = '0';
@@ -205,6 +250,9 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       });
       
       document.addEventListener('mouseenter', () => {
+        // Skip on touch devices
+        if (isTouchDevice()) return;
+        
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.style.opacity = '1';
@@ -356,6 +404,20 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     will-change: transform;
     mix-blend-mode: normal;
     view-transition-name: custom-cursor;
+  }
+  
+  /* Hide cursor on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+      display: none !important;
+    }
+  }
+  
+  /* Hide cursor on mobile devices */
+  @media (max-width: 768px) and (hover: none) {
+    .custom-cursor {
+      display: none !important;
+    }
   }
   
   /* Persist cursor during transitions */

@@ -82,12 +82,12 @@ const archiveItems = [
   .page-wrapper {
     min-height: 100vh;
     background: #e5e5e5;
-    padding-left: 100px;
+    margin-left: 80px; /* Space for left nav menu */
   }
 
   .archive-header {
     padding: 3rem 2rem 2rem;
-    text-align: center;
+    text-align: left;
   }
 
   .archive-title {
@@ -104,7 +104,7 @@ const archiveItems = [
     line-height: 1.5;
     color: #666;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   /* Masonry Grid */
@@ -115,7 +115,7 @@ const archiveItems = [
     gap: 1.5rem;
     padding: 2rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .masonry-item {
@@ -188,7 +188,7 @@ const archiveItems = [
 
   @media (max-width: 768px) {
     .page-wrapper {
-      padding-left: 0;
+      margin-left: 64px; /* 80% scaled nav width on mobile */
     }
 
     .archive-header {
