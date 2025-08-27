@@ -16,34 +16,22 @@
   --gray-800: #343a40;
   --gray-900: #212529;
   
-  /* Section-specific colors - all using gray theme */
-  --color-home: #6B7280;
-  --color-section-1: #6B7280;
-  --color-section-2: #6B7280;
-  --color-section-3: #6B7280;
-  --color-section-4: #6B7280;
-  --color-section-5: #6B7280;
-  --color-archive: #6B7280;
-  
-  /* Color variations for each section - all gray */
-  --color-home-light: #9CA3AF;
-  --color-home-lighter: #F9FAFB;
-  --color-section-1-light: #9CA3AF;
-  --color-section-1-lighter: #F9FAFB;
-  --color-section-2-light: #9CA3AF;
-  --color-section-2-lighter: #F9FAFB;
-  --color-section-3-light: #9CA3AF;
-  --color-section-3-lighter: #F9FAFB;
-  --color-section-4-light: #9CA3AF;
-  --color-section-4-lighter: #F9FAFB;
-  --color-section-5-light: #9CA3AF;
-  --color-section-5-lighter: #F9FAFB;
-  --color-archive-light: #9CA3AF;
-  --color-archive-lighter: #F9FAFB;
+  /* Consolidated section colors - all using gray theme */
+  --section-color: #6B7280;
+  --section-color-light: #9CA3AF;
+  --section-color-lighter: #F9FAFB;
   
   /* Updated checkerboard pattern */
   --checkerboard-size: 40px;
   --checkerboard-color: var(--gray-200);
+  
+  /* Common transform values */
+  --center-transform: translate(-50%, -50%);
+  --shadow-transform-1: translate(2px, 2px);
+  --shadow-transform-2: translate(4px, 4px);
+  --shadow-transform-3: translate(6px, 6px);
+  --shadow-transform-4: translate(10px, 10px);
+  --shadow-transform-5: translate(15px, 15px);
 }
 
 /* stylelint-disable at-rule-no-unknown */
@@ -63,16 +51,8 @@
     cursor: auto;
   }
   
-  /* Use pointer cursor for interactive elements */
-  button, a, [role="button"], [tabindex]:not([tabindex="-1"]), .clickable {
-    cursor: pointer !important;
-  }
-  
-  input, textarea, select {
-    cursor: text;
-  }
-  
-  /* Ensure clickable text elements have pointer cursor */
+  /* Simplified cursor behavior */
+  button, a, [role="button"], [tabindex]:not([tabindex="-1"]), .clickable,
   .contact-link, .footer-link, .nav-links a, .btn, .contact-button, 
   .cv-button, .learn-more, .view-all, 
   .project-card, .blog-item, .menu-home, .menu-number, .social-links a,
@@ -80,17 +60,17 @@
     cursor: pointer !important;
   }
   
-  /* Ensure ALL child elements of clickable containers inherit pointer cursor */
+  /* Child elements inherit pointer cursor from parents */
+  button *, a *, [role="button"] *, .clickable *,
   .contact-link *, .footer-link *, .nav-links a *, .btn *, .contact-button *, 
   .cv-button *, .learn-more *, .view-all *, 
   .project-card *, .blog-item *, .menu-home *, .menu-number *, .social-links a *,
   .contact-btn * {
-    cursor: pointer !important;
+    cursor: inherit !important;
   }
   
-  /* Disable cursor changes on non-interactive elements */
-  .no-cursor-change {
-    cursor: auto !important;
+  input, textarea, select {
+    cursor: text;
   }
   
   /* Prevent text selection on clickable elements */
@@ -98,12 +78,6 @@
   .contact-btn, .menu-home, .menu-number {
     -webkit-user-select: none;
     user-select: none;
-  }
-  
-  /* Force pointer cursor on common child elements that might inherit text cursor */
-  .number, .initials, .material-icons, .material-icons-outlined,
-  span, em, strong, i, b {
-    cursor: inherit !important;
   }
 }
 
@@ -130,6 +104,7 @@
     align-items: center;
     z-index: 9999;
     transition: opacity 0.5s ease-in-out;
+    will-change: opacity;
   }
   
   .loading-overlay.hidden {
