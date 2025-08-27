@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import FloatingMenu from '../components/FloatingMenu.astro';
+import LeftNav from '../components/LeftNav.astro';
 import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
@@ -65,8 +65,8 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay"></div>
     
-    <!-- Floating Menu -->
-    <FloatingMenu />
+    <!-- Left Navigation -->
+    <LeftNav />
     
     <slot />
     
@@ -266,13 +266,13 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     }
   }
 
-  /* Persist floating menu during transitions */
-  .floating-menu {
-    view-transition-name: floating-menu;
+  /* Persist left nav during transitions */
+  .left-nav {
+    view-transition-name: left-nav;
   }
 
-  ::view-transition-old(floating-menu),
-  ::view-transition-new(floating-menu) {
+  ::view-transition-old(left-nav),
+  ::view-transition-new(left-nav) {
     animation: none;
   }
   
@@ -345,7 +345,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(198, 255, 0, 0.75);
     pointer-events: none;
     z-index: 10000;
     left: 0;
@@ -378,21 +378,21 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(198, 255, 0, 0.75);
     }
     50% {
       width: 19px;
       height: 19px;
       margin-left: -9.5px;
       margin-top: -9.5px;
-      background-color: rgba(101, 128, 0, 0.5);
+      background-color: rgba(101, 128, 0, 0.75);
     }
     100% {
       width: 14px;
       height: 14px;
       margin-left: -7px;
       margin-top: -7px;
-      background-color: rgba(198, 255, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.75);
     }
   }
   
@@ -402,21 +402,21 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 14px;
       margin-left: -7px;
       margin-top: -7px;
-      background-color: rgba(198, 255, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.75);
     }
     50% {
       width: 19px;
       height: 19px;
       margin-left: -9.5px;
       margin-top: -9.5px;
-      background-color: rgba(101, 128, 0, 0.5);
+      background-color: rgba(101, 128, 0, 0.75);
     }
     100% {
       width: 24px;
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(198, 255, 0, 0.75);
     }
   }
   

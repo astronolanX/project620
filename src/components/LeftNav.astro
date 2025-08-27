@@ -1,6 +1,6 @@
 ---
-// Get user initials from the meta tag in Layout.astro
-const initials = "NF"; // Based on "Nolan Figueroa" from the layout meta
+// Get user initials for the nav
+const name = "NLN"; // Initials horizontally oriented
 
 // Selected works mapped to actual project slugs
 const selectedWorks = [
@@ -19,9 +19,9 @@ const isProjectPage = currentPath.startsWith('/projects/');
 const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.replace('/', '') : null;
 ---
 
-<div class="floating-menu">
+<div class="left-nav">
   <a href="/" class={`menu-home ${isHomePage ? 'active' : ''}`}>
-    <span class="initials" data-text={initials}>{initials}</span>
+    <span class="name" data-text={name}>{name}</span>
   </a>
   
   <nav class="menu-numbers">
@@ -45,24 +45,25 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 <div class="navigation-loading" id="navigationLoading"></div>
 
 <style>
-  .floating-menu {
+  .left-nav {
     position: fixed;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 80px;
     z-index: 1000;
     background: #333;
-    padding: 12px 10px;
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
     align-items: center;
-    border-radius: 9999px;
-    border: none;
+    border-right: 1px solid #555;
+    border-radius: 0;
   }
 
   /* Active states for navigation items */
-  .floating-menu .active:not(.menu-footer-toggle):not(.no-animation) {
+  .left-nav .active:not(.menu-footer-toggle):not(.no-animation) {
     background: #c6ff00;
     box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -70,7 +71,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   /* Active state without animation (for preventing double animations) */
-  .floating-menu .active.no-animation:not(.menu-footer-toggle) {
+  .left-nav .active.no-animation:not(.menu-footer-toggle) {
     background: #c6ff00;
     box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
     transition: all 0.3s ease;
@@ -89,7 +90,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   /* Click animation for active items - re-triggers the scale animation */
-  .floating-menu .active.clicked:not(.menu-footer-toggle) {
+  .left-nav .active.clicked:not(.menu-footer-toggle) {
     animation: clickPulse 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
   
@@ -109,7 +110,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   /* Click animation for non-active items */
-  .floating-menu .clicked:not(.active) {
+  .left-nav .clicked:not(.active) {
     animation: clickBounce 0.3s ease-out;
   }
   
@@ -130,10 +131,10 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 60px;
+    height: 60px;
     text-decoration: none;
-    border-radius: 50%;
+    border-radius: 8px;
     transition: all 0.3s ease;
     position: relative;
   }
@@ -142,23 +143,23 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     background: #444;
   }
   
-  .menu-home.active:hover .initials {
-    transform: var(--center-transform);
+  .menu-home.active:hover .name {
+    transform: none;
     transform-origin: center center;
   }
   
   
-  .menu-home:hover .initials {
+  .menu-home:hover .name {
     color: #ccc;
   }
   
-  .menu-home.active .initials {
+  .menu-home.active .name {
     color: #000;
     font-weight: 900;
   }
   
   /* Common centered positioning for menu items */
-  .initials,
+  .name,
   .archive-icon,
   .number,
   .copyright-icon {
@@ -176,23 +177,34 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     line-height: 1;
   }
   
-  .initials {
+  .name {
     font-family: 'Roboto Mono', monospace;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 900;
     font-style: italic;
     color: #c6ff00;
     letter-spacing: 0.5px;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: var(--center-transform);
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
 
   .menu-archive {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     text-decoration: none;
-    border-radius: 50%;
+    border-radius: 8px;
     transition: all 0.3s ease;
     position: relative;
   }
@@ -234,11 +246,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     justify-content: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 50%;
+    border-radius: 8px;
     line-height: 1;
     position: relative;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
   
   .menu-number:hover:not(.active) {
@@ -295,15 +307,16 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     background: transparent;
     border: none;
-    border-radius: 50%;
+    border-radius: 8px;
     transition: all 0.3s ease;
     cursor: pointer;
     padding: 0;
     position: relative;
+    margin-top: auto;
   }
   
   .menu-footer-toggle:hover:not(.active) {
@@ -390,20 +403,18 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .floating-menu {
-      top: 50%;
-      left: 16px;
-      transform: translateY(-50%);
-      padding: 10px 8px;
-      gap: 6px;
+    .left-nav {
+      width: 70px;
+      padding: 16px 0;
+      gap: 12px;
     }
 
     .menu-home {
-      width: 30px;
-      height: 30px;
+      width: 50px;
+      height: 50px;
     }
     
-    .initials {
+    .name {
       font-size: 12px;
     }
     
@@ -436,7 +447,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     initialized: false
   };
 
-  class FloatingMenu {
+  class LeftNav {
     private footerToggle: HTMLElement | null;
     
     constructor() {
@@ -538,7 +549,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   // Initialize on page load (works with View Transitions)
   document.addEventListener('astro:page-load', () => {
-    new FloatingMenu();
+    new LeftNav();
     
     // Mark as initialized after first load
     if (!window.menuState.initialized) {

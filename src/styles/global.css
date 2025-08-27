@@ -44,6 +44,13 @@
     @apply antialiased;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-color: #e5e5e5;
+    margin-left: 80px; /* Account for left navigation width */
+  }
+  
+  @media (max-width: 768px) {
+    body {
+      margin-left: 70px; /* Smaller margin on mobile */
+    }
   }
   
   /* Remove all cursor styles since we're using a custom cursor */
