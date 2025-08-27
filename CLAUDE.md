@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Astro-based portfolio and blog website with unique eye chart interface design, showcasing projects, blog posts, and case studies with chromatic aberration effects.
+Astro-based portfolio website with unique blur effect title design, featuring projects with chromatic aberration effects and a floating navigation menu with logmar scaling.
 
 ## Commands
 
 ```bash
-npm run dev       # Start Astro development server
+npm run dev       # Start Astro development server at http://localhost:4321
 npm run build     # Build static site for production  
 npm run preview   # Preview production build locally
 
-npx astro check                              # Run TypeScript type checking
+npx astro check                              # TypeScript type checking
 npx markdownlint-cli2 "src/content/**/*.md"  # Lint markdown content files
 ```
 
@@ -21,62 +21,72 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 
 ## Architecture
 
-### Content Collections System
+### Content System
 
-Three content collections defined in `src/content/config.ts` with Zod schemas:
+Single content collection defined in `src/content/config.ts`:
+- **projects**: Portfolio items with title, subtitle, year, type, number (1-5), and color variations
 
-- **blog**: Articles with title, description, pubDate, tags, heroImage, author
-- **projects**: Portfolio items with year, type, featured flag
-- **case-studies**: Detailed work with client, timeline, role, team metadata
-
-Dynamic routing via:
-
-- `src/pages/blog/[...slug].astro` → BlogPost layout
-- `src/pages/projects/[...slug].astro` → ProjectPost layout
-- `src/pages/case-studies/[...slug].astro` → CaseStudy layout
+Dynamic routing:
+- `src/pages/projects/[...slug].astro` → Renders individual project pages with bento grid layout
 
 ### Core Components
 
-- **FloatingMenu.astro**: Fixed navigation menu with logmar scaling effect, dynamically sized numbered navigation (1-5), integrated archive section, and smooth page transitions with preloading
-- **StickyFooter.astro**: Footer component with navigation and contact links
-- **Layout.astro**: Base layout loading Roboto font family, PWA setup, simplified loading overlay
+- **FloatingMenu.astro**: Fixed left-side navigation with:
+  - Home link with initials "NF"
+  - Numbered project links (1-5) mapped to specific slugs
+  - Archive folder icon
+  - Footer toggle with copyright icon
+  - Active state highlighting based on current route
 
-### Optimized Structure
+- **StickyFooter.astro**: Footer triggered by FloatingMenu toggle
 
-- **Removed redundancies**: Deleted unused EyeChart.astro, BottomDrawer.astro, Header.astro components and duplicate index.css file
-- **Consolidated styles**: Streamlined CSS selectors and removed unused style classes
-- **Simplified loading**: Clean loading overlay with fade transition
-- **Optimized font loading**: Single consolidated Google Fonts request for all font families
+- **Layout.astro**: Base layout providing:
+  - Roboto font family (normal, mono, and Material Icons)
+  - PWA with service worker
+  - Loading overlay with fade transition
+  - Scroll restoration management
+
+### Page Structure
+
+- **index.astro**: Homepage with multi-layer blur effect title "hoist the colors"
+- **archive.astro**: Archive page listing all projects
+- **projects/[...slug].astro**: Individual project pages with bento grid layout
 
 ### Build Configuration
 
-- Static site generation with directory URLs (`astro.config.mjs`)
-- Tailwind CSS integration via @astrojs/tailwind
-- CSS code splitting and custom asset naming in `_astro/` directory
-- PWA support with service worker (`public/sw.js`)
-- TypeScript path alias: `@/*` maps to `src/*`
+- Static site generation with directory URLs
+- Tailwind CSS integration
+- CSS code splitting with assets in `_astro/` directory
+- PWA support via `public/sw.js` service worker
+- TypeScript path alias: `@/*` → `src/*`
 
-## Critical Design Rules
+## Critical Implementation Details
 
-### Theme Requirements
+### Project Number Mapping
 
-- Main site: Light theme with gray background pattern (CSS variables: --gray-100)
-- Floating menu: Light theme with chromatic aberration effects on interactive elements
-- Typography: Roboto family for all text, Roboto Mono for headings and code
+FloatingMenu numbers correspond to specific project slugs:
+1. future-design
+2. ux-patterns
+3. spatial-interfaces
+4. design-systems-scale
+5. micro-interactions
 
-### Component Behavior
+### Styling Approach
 
-- Floating menu features logmar scaling effect with active project highlighting
-- Floating menu projects mapped to specific slugs: 1=future-design, 2=ux-patterns, 3=spatial-interfaces, 4=design-systems-scale, 5=micro-interactions
-- SPA-style navigation with smooth content transitions on home page
-- All interactive components use vanilla JavaScript in `<script>` tags
-- Loading overlay simplified to basic fade transition (500ms delay)
-- Consistent pointer cursor behavior enforced via global CSS for all interactive elements
+- Global styles in `src/styles/global.css`
+- CSS custom properties for colors and consistent theming
+- Chromatic aberration effects via text-shadow and color offsets
+- Logmar scaling effect on FloatingMenu hover states
 
-### Performance Optimizations
+### JavaScript Patterns
 
-- Single Material Icons font variant instead of five
-- Simplified scroll restoration without multiple event handlers
-- Consolidated duplicate email handling logic
-- CSS custom properties for reusable patterns
-- Dynamic content loading from collections instead of hardcoded data
+- All interactive behavior uses vanilla JavaScript in Astro `<script>` tags
+- Service worker handles offline caching with network-first strategy for pages
+- Navigation preloading for smooth transitions between project pages
+
+### Performance Considerations
+
+- Single Google Fonts request consolidating all font families
+- Optimized Material Icons usage (single variant)
+- CSS code splitting enabled in Vite configuration
+- Inline critical styles for faster initial paint
