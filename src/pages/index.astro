@@ -6,58 +6,7 @@ import StickyFooter from '../components/StickyFooter.astro';
 <Layout title="Nolan Figueroa - Design & Technology">
   <div class="page-wrapper">
     <main class="portfolio-main">
-      <!-- Blur effect title -->
-      <div class="blur-title-section">
-        <div class="blur-container">
-          <!-- Shadow layer 5 (most blurred, furthest back) -->
-          <div class="text-layer text-shadow-5">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-
-          <!-- Shadow layer 4 -->
-          <div class="text-layer text-shadow-4">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-          
-          <!-- Shadow layer 3 -->
-          <div class="text-layer text-shadow-3">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-          
-          <!-- Shadow layer 2 -->
-          <div class="text-layer text-shadow-2">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-          
-          <!-- Shadow layer 1 (least blurred) -->
-          <div class="text-layer text-shadow-1">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-          
-          <!-- Main text (sharp and bold) -->
-          <div class="text-layer text-main">
-            <div class="top">hoist the</div>
-            <div class="bottom">colors</div>
-          </div>
-        </div>
-
-        <div class="title-metadata">
-          <span class="name">NOLAN • FIGUEROA</span>
-        </div>
-      </div>
-
-      <!-- Navigation categories -->
-      <nav class="portfolio-nav">
-        <div class="nav-category">Art Direction</div>
-        <div class="nav-category">Photography</div>
-        <div class="nav-category">Graphics and Layout</div>
-        <div class="nav-category">Fashion Design</div>
-      </nav>
+      <!-- Grid pattern is now visible -->
     </main>
 
     <StickyFooter />
@@ -78,182 +27,9 @@ import StickyFooter from '../components/StickyFooter.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     padding: 2rem;
-  }
-
-  .blur-title-section {
-    margin-bottom: 4rem;
-    position: relative;
-  }
-
-  .blur-container {
-    position: relative;
-    width: 600px;
-    height: 500px;
-    margin: 0;
-  }
-
-  .text-layer {
-    position: absolute;
-    font-family: 'Roboto', sans-serif;
-    font-size: clamp(4rem, 8vw, 8rem);
-    font-weight: 900;
-    color: #333;
-    letter-spacing: -0.08em;
-    user-select: none;
-    text-transform: lowercase;
-    line-height: 1.2;
-    width: 100%;
-  }
-
-  /* Main text split - crisp and bold */
-  .text-main {
-    z-index: 20;
-    font-weight: 900;
-  }
-
-  .text-main .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-main .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  /* Heavy blur shadow layers for depth */
-  .text-shadow-1 {
-    filter: blur(2px);
-    opacity: 0.8;
-    z-index: 15;
-    transform: var(--shadow-transform-1);
-  }
-
-  .text-shadow-1 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-shadow-1 .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  .text-shadow-2 {
-    filter: blur(5px);
-    opacity: 0.6;
-    z-index: 10;
-    transform: var(--shadow-transform-2);
-  }
-
-  .text-shadow-2 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-shadow-2 .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  .text-shadow-3 {
-    filter: blur(10px);
-    opacity: 0.5;
-    z-index: 5;
-    transform: var(--shadow-transform-3);
-  }
-
-  .text-shadow-3 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-shadow-3 .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  .text-shadow-4 {
-    filter: blur(20px);
-    opacity: 0.3;
-    z-index: 2;
-    transform: var(--shadow-transform-4);
-  }
-
-  .text-shadow-4 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-shadow-4 .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  .text-shadow-5 {
-    filter: blur(30px);
-    opacity: 0.2;
-    z-index: 1;
-    transform: var(--shadow-transform-5);
-  }
-
-  .text-shadow-5 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .text-shadow-5 .bottom {
-    position: absolute;
-    top: 110px;
-    left: 0;
-  }
-
-  .title-metadata {
-    margin-top: 1rem;
-  }
-
-  .name {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    color: #666;
-    text-transform: uppercase;
-  }
-
-  .portfolio-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 300px;
-  }
-
-  .nav-category {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 0.5rem 0;
-  }
-
-  .nav-category:hover {
-    color: #666;
   }
 
   /* Responsive Design */
@@ -266,42 +42,6 @@ import StickyFooter from '../components/StickyFooter.astro';
       padding: 1rem;
       margin-left: 64px;
     }
-
-    .blur-container {
-      width: calc(100vw - 80px);
-      height: 300px;
-      max-width: 90vw;
-    }
-
-    .text-layer {
-      font-size: clamp(3rem, 10vw, 5rem);
-    }
-
-    .text-main .bottom,
-    .text-shadow-1 .bottom,
-    .text-shadow-2 .bottom,
-    .text-shadow-3 .bottom,
-    .text-shadow-4 .bottom,
-    .text-shadow-5 .bottom {
-      top: 90px;
-    }
-
-    .blur-title-section {
-      margin-bottom: 2rem;
-    }
-
-    .portfolio-nav {
-      gap: 1rem;
-      margin-left: 0;
-    }
-
-    .nav-category {
-      font-size: 0.9rem;
-    }
-
-    .name {
-      font-size: 0.8rem;
-    }
   }
 
   @media (max-width: 480px) {
@@ -309,71 +49,12 @@ import StickyFooter from '../components/StickyFooter.astro';
       padding: 0.75rem;
       margin-left: 64px;
     }
-
-    .blur-container {
-      width: calc(100vw - 80px);
-      height: 220px;
-      max-width: 95vw;
-    }
-
-    .text-layer {
-      font-size: clamp(2rem, 12vw, 3.5rem);
-    }
-
-    .text-main .bottom,
-    .text-shadow-1 .bottom,
-    .text-shadow-2 .bottom,
-    .text-shadow-3 .bottom,
-    .text-shadow-4 .bottom,
-    .text-shadow-5 .bottom {
-      top: 70px;
-    }
-
-    .blur-title-section {
-      margin-bottom: 1.5rem;
-    }
-
-    .portfolio-nav {
-      gap: 0.75rem;
-    }
-
-    .nav-category {
-      font-size: 0.85rem;
-      padding: 0.375rem 0;
-    }
   }
 
   @media (max-width: 320px) {
     .portfolio-main {
       padding: 0.5rem;
       margin-left: 64px;
-    }
-
-    .blur-container {
-      width: calc(100vw - 80px);
-      height: 180px;
-      max-width: 100vw;
-    }
-
-    .text-layer {
-      font-size: clamp(1.75rem, 14vw, 3rem);
-    }
-
-    .text-main .bottom,
-    .text-shadow-1 .bottom,
-    .text-shadow-2 .bottom,
-    .text-shadow-3 .bottom,
-    .text-shadow-4 .bottom,
-    .text-shadow-5 .bottom {
-      top: 60px;
-    }
-
-    .name {
-      font-size: 0.75rem;
-    }
-
-    .nav-category {
-      font-size: 0.8rem;
     }
   }
 </style>
