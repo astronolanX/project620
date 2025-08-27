@@ -47,9 +47,9 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 <style>
   .floating-menu {
     position: fixed;
-    top: 50%;
+    top: 20px;
     left: 20px;
-    transform: translateY(-50%);
+    transform: none;
     z-index: 1000;
     background: #333;
     padding: 12px 10px;
@@ -68,15 +68,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     transition: all 0.3s ease;
   }
   
-  .floating-menu:hover {
-    transform: translateY(-50%);
-    box-shadow: 
-      3px 3px 3px rgba(0,0,0,0.9),
-      6px 6px 8px rgba(0,0,0,0.7),
-      9px 9px 15px rgba(0,0,0,0.6),
-      15px 15px 30px rgba(0,0,0,0.4),
-      22px 22px 45px rgba(0,0,0,0.3);
-  }
 
   .menu-home {
     display: flex;
@@ -87,14 +78,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.3s ease;
-    background: #333;
-    border: 1px solid #555;
     position: relative;
   }
   
   .menu-home:hover:not(.active) {
     background: #444;
-    border-color: #666;
   }
   
   .menu-home.active:hover .initials {
@@ -105,7 +93,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   .menu-home.active {
     background: #fff;
     box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
-    border-color: #fff;
   }
   
   .menu-home:hover .initials {
@@ -411,16 +398,17 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   
+  
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .floating-menu {
-      top: 50%;
+      top: 16px;
       left: 16px;
-      transform: translateY(-50%);
+      transform: none;
       padding: 10px 8px;
       gap: 6px;
     }
-    
+
     .menu-home {
       width: 30px;
       height: 30px;
@@ -501,6 +489,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
         }
       });
     }
+    
   }
   
   // Initialize when DOM loads
