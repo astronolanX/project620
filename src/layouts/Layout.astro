@@ -62,9 +62,6 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     </script>
   </head>
   <body>
-    <!-- Custom Cursor -->
-    <div id="custom-cursor" class="custom-cursor"></div>
-    
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay"></div>
     
@@ -130,43 +127,68 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       // Handle transition complete
       document.addEventListener('astro:after-swap', () => {
         window.appState.isTransitioning = false;
+        // Reinitialize cursor after page swap
+        initCustomCursor();
       });
 
       // Custom Cursor Implementation
-      const cursor = document.getElementById('custom-cursor');
       let mouseX = 0;
       let mouseY = 0;
       let cursorX = 0;
       let cursorY = 0;
+      let animationId = null;
       
-      // Track mouse movement
+      function initCustomCursor() {
+        const cursor = document.getElementById('custom-cursor');
+        if (!cursor) {
+          // Create cursor if it doesn't exist
+          const newCursor = document.createElement('div');
+          newCursor.id = 'custom-cursor';
+          newCursor.className = 'custom-cursor';
+          document.body.insertBefore(newCursor, document.body.firstChild);
+        }
+        
+        // Cancel any existing animation frame
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
+        
+        const cursorElement = document.getElementById('custom-cursor');
+        
+        // Direct cursor positioning (matches system speed)
+        function animateCursor() {
+          cursorX = mouseX;
+          cursorY = mouseY;
+          
+          cursorElement.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+          
+          animationId = requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+      }
+      
+      // Track mouse movement globally
       document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-      });
-      
-      // Smooth cursor animation
-      function animateCursor() {
-        const speed = 0.15;
-        cursorX += (mouseX - cursorX) * speed;
-        cursorY += (mouseY - cursorY) * speed;
         
-        if (cursor) {
-          cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        // Set initial position on first move
+        if (cursorX === 0 && cursorY === 0) {
+          cursorX = mouseX;
+          cursorY = mouseY;
         }
-        
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
+      });
       
       // Click animation
       document.addEventListener('mousedown', () => {
+        const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.classList.add('clicking');
         }
       });
       
       document.addEventListener('mouseup', () => {
+        const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.classList.remove('clicking');
         }
@@ -174,16 +196,24 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       
       // Hide cursor when it leaves the window
       document.addEventListener('mouseleave', () => {
+        const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.style.opacity = '0';
         }
       });
       
       document.addEventListener('mouseenter', () => {
+        const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.style.opacity = '1';
         }
       });
+      
+      // Initialize on first load
+      document.addEventListener('DOMContentLoaded', initCustomCursor);
+      
+      // Also initialize on astro:page-load for initial page load
+      document.addEventListener('astro:page-load', initCustomCursor);
     </script>
   </body>
 </html>
@@ -310,17 +340,26 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
   /* Custom Cursor Styles */
   .custom-cursor {
     position: fixed;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background-color: rgba(51, 51, 51, 0.5);
+    background-color: rgba(68, 68, 68, 0.8);
     pointer-events: none;
     z-index: 10000;
-    transform-origin: center;
+    left: 0;
+    top: 0;
+    margin-left: -12px;
+    margin-top: -12px;
     transition: opacity 0.3s ease;
     will-change: transform;
-    margin-left: -10px;
-    margin-top: -10px;
+    mix-blend-mode: normal;
+    view-transition-name: custom-cursor;
+  }
+  
+  /* Persist cursor during transitions */
+  ::view-transition-old(custom-cursor),
+  ::view-transition-new(custom-cursor) {
+    animation: none;
   }
   
   .custom-cursor.clicking {
@@ -329,13 +368,22 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
   
   @keyframes cursor-click {
     0% {
-      transform: scale(1);
+      width: 24px;
+      height: 24px;
+      margin-left: -12px;
+      margin-top: -12px;
     }
     50% {
-      transform: scale(0.6);
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      margin-top: -7px;
     }
     100% {
-      transform: scale(1);
+      width: 24px;
+      height: 24px;
+      margin-left: -12px;
+      margin-top: -12px;
     }
   }
   

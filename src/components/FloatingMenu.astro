@@ -65,7 +65,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       10px 10px 20px rgba(0,0,0,0.3),
       15px 15px 30px rgba(0,0,0,0.2);
     border: none;
-    transition: all 0.3s ease;
   }
 
   /* Active states for navigation items */
@@ -73,12 +72,14 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     background: #c6ff00;
     box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: all 0.3s ease;
   }
   
   /* Active state without animation (for preventing double animations) */
   .floating-menu .active.no-animation:not(.menu-footer-toggle) {
     background: #c6ff00;
     box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
+    transition: all 0.3s ease;
   }
   
   
@@ -510,17 +511,17 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
           const href = clickedItem.href;
           const currentUrl = window.location.href;
           
-          // If clicking on the already active page, just animate
+          // Add shrink animation to all clicked items
+          clickedItem.classList.add('shrink');
+          
+          // Remove animation class after animation completes
+          setTimeout(() => {
+            clickedItem.classList.remove('shrink');
+          }, 150);
+          
+          // If clicking on the already active page, prevent navigation
           if (href === currentUrl && clickedItem.classList.contains('active')) {
             e.preventDefault();
-            
-            // Add shrink animation
-            clickedItem.classList.add('shrink');
-            
-            // Remove animation class after animation completes
-            setTimeout(() => {
-              clickedItem.classList.remove('shrink');
-            }, 150);
             
             // Close footer if open
             if (window.menuState.footerVisible) {
