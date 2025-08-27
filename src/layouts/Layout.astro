@@ -183,6 +183,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       document.addEventListener('mousedown', () => {
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
+          cursor.classList.remove('releasing');
           cursor.classList.add('clicking');
         }
       });
@@ -191,6 +192,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
         const cursor = document.getElementById('custom-cursor');
         if (cursor) {
           cursor.classList.remove('clicking');
+          cursor.classList.add('releasing');
         }
       });
       
@@ -343,7 +345,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-color: rgba(68, 68, 68, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
     z-index: 10000;
     left: 0;
@@ -363,27 +365,58 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
   }
   
   .custom-cursor.clicking {
-    animation: cursor-click 0.3s ease;
+    animation: cursor-shrink 0.15s ease forwards;
   }
   
-  @keyframes cursor-click {
+  .custom-cursor.releasing {
+    animation: cursor-grow 0.15s ease forwards;
+  }
+  
+  @keyframes cursor-shrink {
     0% {
       width: 24px;
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
     50% {
+      width: 19px;
+      height: 19px;
+      margin-left: -9.5px;
+      margin-top: -9.5px;
+      background-color: rgba(101, 128, 0, 0.5);
+    }
+    100% {
       width: 14px;
       height: 14px;
       margin-left: -7px;
       margin-top: -7px;
+      background-color: rgba(198, 255, 0, 0.5);
+    }
+  }
+  
+  @keyframes cursor-grow {
+    0% {
+      width: 14px;
+      height: 14px;
+      margin-left: -7px;
+      margin-top: -7px;
+      background-color: rgba(198, 255, 0, 0.5);
+    }
+    50% {
+      width: 19px;
+      height: 19px;
+      margin-left: -9.5px;
+      margin-top: -9.5px;
+      background-color: rgba(101, 128, 0, 0.5);
     }
     100% {
       width: 24px;
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
+      background-color: rgba(0, 0, 0, 0.5);
     }
   }
   
