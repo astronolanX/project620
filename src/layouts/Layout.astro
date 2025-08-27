@@ -147,11 +147,23 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
         // Check if device has a fine pointer (mouse)
         const hasMouse = window.matchMedia('(pointer: fine)').matches;
         
+        // Check viewport dimensions (tablet/mobile detection)
+        const isSmallViewport = window.innerWidth <= 768;
+        const isPortrait = window.innerHeight > window.innerWidth;
+        
         // Check if device is primarily touch
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
+        // More comprehensive detection for tablet/mobile scenarios
+        const isProbablyTouchPrimary = hasTouch && (
+          !hasMouse || 
+          isMobile || 
+          (isSmallViewport && hasTouch) ||
+          (isPortrait && hasTouch && isSmallViewport)
+        );
+        
         // Only disable cursor if it's a touch device without a mouse
-        return hasTouch && !hasMouse || isMobile;
+        return isProbablyTouchPrimary;
       }
       
       function initCustomCursor() {
@@ -259,11 +271,32 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
         }
       });
       
+      // Debounce viewport change detection
+      let viewportChangeTimeout: number | null = null;
+      
+      // Re-evaluate cursor necessity on window resize or orientation change
+      function handleViewportChange() {
+        // Clear existing timeout
+        if (viewportChangeTimeout) {
+          clearTimeout(viewportChangeTimeout);
+        }
+        
+        // Debounce re-evaluation to avoid excessive calls
+        viewportChangeTimeout = setTimeout(() => {
+          // Re-initialize cursor detection when viewport changes
+          initCustomCursor();
+        }, 150); // 150ms debounce
+      }
+      
       // Initialize on first load
       document.addEventListener('DOMContentLoaded', initCustomCursor);
       
       // Also initialize on astro:page-load for initial page load
       document.addEventListener('astro:page-load', initCustomCursor);
+      
+      // Re-evaluate cursor on viewport changes
+      window.addEventListener('resize', handleViewportChange);
+      window.addEventListener('orientationchange', handleViewportChange);
     </script>
   </body>
 </html>
