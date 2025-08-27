@@ -148,7 +148,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-home.active:hover .initials {
-    transform: translate(-50%, -50%);
+    transform: var(--center-transform);
     transform-origin: center center;
   }
   
@@ -162,6 +162,25 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     font-weight: 900;
   }
   
+  /* Common centered positioning for menu items */
+  .initials,
+  .archive-icon,
+  .number,
+  .copyright-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: var(--center-transform);
+    transform-origin: center center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+  }
+  
   .initials {
     font-family: 'Roboto Mono', monospace;
     font-size: 14px;
@@ -169,18 +188,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     font-style: italic;
     color: #c6ff00;
     letter-spacing: 0.5px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center;
-    width: 100%;
-    height: 100%;
   }
 
   .menu-archive {
@@ -200,7 +207,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-archive.active:hover .archive-icon {
-    transform: translate(-50%, -50%);
+    transform: var(--center-transform);
     transform-origin: center center;
   }
   
@@ -208,18 +215,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   .archive-icon {
     font-size: 16px;
     color: #aaa;
-    transition: all 0.3s ease;
-    line-height: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
   .menu-archive:hover .archive-icon {
@@ -256,7 +251,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-number.active:hover .number {
-    transform: translate(-50%, -50%);
+    transform: var(--center-transform);
     transform-origin: center center;
   }
   
@@ -264,18 +259,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     font-family: 'Roboto Mono', monospace;
     font-weight: 600;
     color: #aaa;
-    transition: all 0.3s ease;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center;
+    font-size: 14px;
   }
   
   .menu-number:hover .number {
@@ -311,11 +295,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
                 opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* Uniform size for all numbers - no logmar scaling */
-  
-  .menu-number .number {
-    font-size: 14px;
-  }
   
   .menu-footer-toggle {
     display: flex;
@@ -338,7 +317,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   .menu-footer-toggle.active:hover .copyright-icon {
-    transform: translate(-50%, -50%);
+    transform: var(--center-transform);
     transform-origin: center center;
   }
   
@@ -346,20 +325,9 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     animation: bounce 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
-  .menu-footer-toggle .copyright-icon {
+  .copyright-icon {
     font-size: 16px;
     color: #aaa;
-    transition: all 0.3s ease;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
   .menu-footer-toggle:hover .copyright-icon {
