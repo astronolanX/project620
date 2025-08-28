@@ -12,6 +12,18 @@ distributionList: ["SIGNALS INTELLIGENCE DIRECTORATE", "INFORMATION ASSURANCE DI
 
 Program GHOSTNET represents the most comprehensive digital surveillance infrastructure deployment in NSA history. The following manipulations in compliance with the directives outlined by <span class="redacted-line redacted-short"></span> and the United States <span class="redacted-line redacted-extra-long"></span> have been completed in full ahead of schedule.
 
+<div class="project-images triple center">
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop" alt="Server infrastructure" class="project-image" />
+  </div>
+  <div class="image-container subtle">
+    <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=600&fit=crop" alt="Blockchain network" class="project-image" />
+  </div>
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=600&h=600&fit=crop" alt="Technology architecture" class="project-image" />
+  </div>
+</div>
+
 This program establishes a global network capable of <span class="redacted-line redacted-long"></span> data interception and analysis with <span class="redacted-line redacted-medium"></span> percent coverage of international communications traffic.
 
 <div class="redacted-paragraph"></div>
@@ -82,6 +94,12 @@ This program establishes a global network capable of <span class="redacted-line 
 
 ## Phase III: Advanced Analytics
 
+<div class="project-images single left-align">
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=600&fit=crop" alt="Digital matrix" class="project-image" />
+  </div>
+</div>
+
 The deployment of advanced analytical capabilities has exceeded all performance benchmarks established in the initial planning phase. Machine learning algorithms demonstrate <span class="redacted-line redacted-short"></span> percent accuracy in threat identification with <span class="redacted-line redacted-medium"></span> false positive rate.
 
 <div class="redacted-stagger">
@@ -134,6 +152,15 @@ Integration with international partner agencies has expanded GHOSTNET coverage t
 ## Phase V: Counter-Intelligence Operations
 
 Advanced persistent threat detection systems have identified <span class="redacted-line redacted-short"></span> foreign intelligence operations targeting US infrastructure. Countermeasures deployed include <span class="redacted-line redacted-medium"></span> and active <span class="redacted-line redacted-long"></span> capabilities.
+
+<div class="project-images double center">
+  <div class="image-container subtle">
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=600&fit=crop" alt="Security operations" class="project-image" />
+  </div>
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=600&fit=crop" alt="Data security" class="project-image" />
+  </div>
+</div>
 
 <div class="redacted-stagger">
   <span class="redacted-line"></span>

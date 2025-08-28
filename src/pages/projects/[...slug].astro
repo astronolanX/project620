@@ -481,6 +481,116 @@ const { Content } = await project.render();
     letter-spacing: 0.2em;
   }
 
+  /* Project Images Styles */
+  .project-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1rem 0;
+  }
+
+  .project-images.single {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+
+  .project-images.double {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-images.triple {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .project-images.left-align {
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+  .project-images.right-align {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .project-images.center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Image container with overlay */
+  .image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 2px solid #000;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Black and white overlay layer */
+  .image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    mix-blend-mode: color;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  /* Additional grayscale filter */
+  .image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: grayscale(100%) contrast(1.1);
+    -webkit-backdrop-filter: grayscale(100%) contrast(1.1);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Lift the filter on hover */
+  .image-container:hover::after,
+  .image-container:hover::before {
+    opacity: 0;
+  }
+
+  .image-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  /* Alternative: Keep some grayscale on hover */
+  .image-container.subtle:hover::before {
+    opacity: 0.3;
+  }
+
+  /* When document is declassified, reduce the grayscale effect */
+  .document-wrapper.declassified .image-container::before {
+    backdrop-filter: grayscale(60%) contrast(1.05);
+    -webkit-backdrop-filter: grayscale(60%) contrast(1.05);
+  }
+
+  .document-wrapper.declassified .image-container:hover::before {
+    opacity: 0.2;
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .document-wrapper {

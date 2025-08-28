@@ -23,6 +23,15 @@ Operation DREAMSCAPE represents a comprehensive behavioral modification research
 
 ## Phase Alpha: Infrastructure Establishment
 
+<div class="project-images double right-align">
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=600&fit=crop" alt="Data analytics dashboard" class="project-image" />
+  </div>
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=600&fit=crop" alt="Digital interface" class="project-image" />
+  </div>
+</div>
+
 1. **Re-set Stage 1 deployment** from facility <span class="redacted-line redacted-short"></span> to ensure <span class="redacted-line redacted-medium"></span>. The <span class="redacted-line redacted-long"></span> will scrub down.
    - Operational capacity: <span class="redacted-line redacted-medium"></span> subjects per cycle
    - Duration: <span class="redacted-line redacted-short"></span> days continuous operation
@@ -83,6 +92,12 @@ Operation DREAMSCAPE represents a comprehensive behavioral modification research
 ## Phase Gamma: Social Media Integration
 
 The integration of Operation DREAMSCAPE with existing social media platforms has yielded unprecedented results in <span class="redacted-line redacted-long"></span> behavioral modification. Target demographic analysis indicates <span class="redacted-line redacted-short"></span> percent susceptibility to influence campaigns.
+
+<div class="project-images single center">
+  <div class="image-container subtle">
+    <img src="https://images.unsplash.com/photo-1560732488-6b0df240254a?w=600&h=600&fit=crop" alt="Network patterns" class="project-image" />
+  </div>
+</div>
 
 <div class="redacted-geometric">
   <span class="redacted-line"></span>

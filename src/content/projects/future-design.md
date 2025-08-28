@@ -12,6 +12,12 @@ distributionList: ["DIRECTOR OF OPERATIONS", "RESEARCH DIVISION HEAD", "SECURITY
 
 The following manipulations in compliance with the directives outlined by <span class="redacted-line redacted-long"></span> and the United States <span class="redacted-line redacted-medium"></span> have been completed in full ahead of schedule. Project MINDBRIDGE represents a significant advancement in cognitive interface technology, with implications for <span class="redacted-line redacted-extra-long"></span> and national security applications.
 
+<div class="project-images single left-align">
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=600&fit=crop" alt="Circuit board technology" class="project-image" />
+  </div>
+</div>
+
 <div class="redacted-stagger">
   <span class="redacted-line"></span>
   <span class="redacted-line"></span>
@@ -55,6 +61,15 @@ The following manipulations in compliance with the directives outlined by <span 
   <span class="redacted-line"></span>
   <span class="redacted-line"></span>
   <span class="redacted-line"></span>
+</div>
+
+<div class="project-images double center">
+  <div class="image-container">
+    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=600&fit=crop" alt="Network infrastructure" class="project-image" />
+  </div>
+  <div class="image-container subtle">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=600&fit=crop" alt="Data visualization" class="project-image" />
+  </div>
 </div>
 
 5. **Installed** quantum encryption modules on N-1 rocket <span class="redacted-line redacted-medium"></span> without incident although <span class="redacted-line redacted-long"></span> will require future testing prior to launch.
