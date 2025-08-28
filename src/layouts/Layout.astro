@@ -428,13 +428,14 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
     height: 24px;
     border-radius: 50%;
     background-color: rgba(198, 255, 0, 0.75);
+    border: 2px solid rgba(166, 217, 0, 0.75);
     pointer-events: none;
     z-index: 10000;
     left: 0;
     top: 0;
     margin-left: -12px;
     margin-top: -12px;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, border-color 0.15s ease;
     will-change: transform;
     mix-blend-mode: normal;
     view-transition-name: custom-cursor;
@@ -474,6 +475,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
+      border-color: rgba(166, 217, 0, 0.75);
       background-color: rgba(198, 255, 0, 0.75);
     }
     50% {
@@ -481,6 +483,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 19px;
       margin-left: -9.5px;
       margin-top: -9.5px;
+      border-color: rgba(140, 183, 0, 0.85);
       background-color: rgba(101, 128, 0, 0.75);
     }
     100% {
@@ -488,6 +491,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 14px;
       margin-left: -7px;
       margin-top: -7px;
+      border-color: rgba(0, 0, 0, 0.75);
       background-color: rgba(0, 0, 0, 0.75);
     }
   }
@@ -498,6 +502,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 14px;
       margin-left: -7px;
       margin-top: -7px;
+      border-color: rgba(0, 0, 0, 0.75);
       background-color: rgba(0, 0, 0, 0.75);
     }
     50% {
@@ -505,6 +510,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 19px;
       margin-left: -9.5px;
       margin-top: -9.5px;
+      border-color: rgba(140, 183, 0, 0.85);
       background-color: rgba(101, 128, 0, 0.75);
     }
     100% {
@@ -512,6 +518,7 @@ const { title, description = "Personal portfolio and blog featuring projects, ca
       height: 24px;
       margin-left: -12px;
       margin-top: -12px;
+      border-color: rgba(166, 217, 0, 0.75);
       background-color: rgba(198, 255, 0, 0.75);
     }
   }
