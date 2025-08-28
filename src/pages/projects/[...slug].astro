@@ -25,11 +25,12 @@ const { Content } = await project.render();
       <span class="page-number">/{project.data.number}</span>
     </div>
     
-    <!-- Redaction Toggle - Top Right -->
-    <div class="redaction-toggle-container">
-      <button id="redaction-toggle" class="eye-toggle" aria-label="Toggle redaction">
-        <span class="eye-icon closed">👁️‍🗨️</span>
-        <span class="eye-icon open">👁️</span>
+
+    <!-- Declassification Toggle at Top -->
+    <div class="declassify-controls-top">
+      <button id="declassify-toggle" class="declassify-btn">
+        <span class="btn-text-classified">DECLASSIFY DOCUMENT</span>
+        <span class="btn-text-classified-active" style="display: none;">CLASSIFY DOCUMENT</span>
       </button>
     </div>
 
@@ -46,17 +47,19 @@ const { Content } = await project.render();
         <div class="department">{project.data.department}</div>
         <div class="location">Huntsville, AL 35801</div>
       </div>
-    </header>
-
-    <!-- Document Content -->
-    <main class="document-content">
+      
+      <!-- Subject and Summary -->
       <div class="subject-line">
         <strong>SUBJECT:</strong> {project.data.subject}
       </div>
       
-      <div class="content-body">
+      <div class="content-summary">
         <Content />
       </div>
+    </header>
+
+    <!-- Document Content -->
+    <main class="document-content">
 
       {project.data.distributionList && project.data.distributionList.length > 0 && (
         <div class="distribution-list">
@@ -86,10 +89,9 @@ const { Content } = await project.render();
 <style>
   .document-wrapper {
     min-height: 100vh;
-    margin-left: 80px;
     font-family: 'Roboto Mono', monospace;
     color: #000;
-    max-width: 60ch;
+    max-width: 720px;
     padding: 8rem 3rem 4rem; /* Increased top padding to make room for page number */
     background: 
       radial-gradient(circle at 20% 80%, rgba(0,0,0,0.01) 0%, transparent 20%),
@@ -97,46 +99,18 @@ const { Content } = await project.render();
       linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.005) 50%, transparent 100%);
     position: relative;
     line-height: 1.6;
+    margin: 0 auto;
+    margin-left: max(80px, calc(50vw - 360px + 40px));
+  }
+
+  @media (max-width: 1000px) {
+    .document-wrapper {
+      margin-left: 80px;
+      max-width: calc(100vw - 80px - 6rem);
+    }
   }
 
 
-  /* Eye Toggle - Top Right */
-  .redaction-toggle-container {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
-    z-index: 100;
-  }
-
-  .eye-toggle {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .eye-toggle:hover {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .eye-icon {
-    display: block;
-    transition: opacity 0.2s ease;
-  }
-
-  .document-wrapper:not(.declassified) .eye-icon.open {
-    display: none;
-  }
-
-  .document-wrapper.declassified .eye-icon.closed {
-    display: none;
-  }
 
   /* Page Number Header */
   .page-number-header {
@@ -228,20 +202,64 @@ const { Content } = await project.render();
     font-weight: 400;
   }
 
+  /* Declassification Controls at Top */
+  .declassify-controls-top {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .declassify-btn {
+    background: #c6ff00;
+    color: #000;
+    border: 2px solid #a6d900;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
+  }
+
+  .declassify-btn:hover {
+    background: #a6d900;
+    border-color: #8cb700;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.4);
+  }
+
+  .declassify-btn.active {
+    background: #333;
+    color: #fff;
+    border-color: #555;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .declassify-btn.active:hover {
+    background: #555;
+    border-color: #777;
+    transform: translateY(-1px);
+  }
+
   /* Content Styles */
   .document-content {
     text-align: left;
     font-size: 0.9375rem;
     font-weight: 400;
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   .subject-line {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-size: 0.9375rem;
     font-weight: 500;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e0e0e0;
   }
 
   .subject-line strong {
@@ -249,40 +267,60 @@ const { Content } = await project.render();
     margin-right: 1rem;
   }
 
-  .content-body {
-    margin-bottom: 3rem;
+  .content-summary {
+    margin-bottom: 2rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.6;
   }
 
-  .content-body h1, 
-  .content-body h2, 
-  .content-body h3, 
-  .content-body h4 {
+  .content-summary h1, 
+  .content-summary h2, 
+  .content-summary h3, 
+  .content-summary h4 {
     font-family: 'Roboto Mono', monospace;
     font-weight: 500;
     font-size: 0.9375rem;
-    margin: 2.5rem 0 1.25rem 0;
+    margin: 1.5rem 0 0.75rem 0;
     text-transform: none;
     color: #000;
+    line-height: 1.4;
   }
 
-  .content-body p {
-    margin: 1.5rem 0;
-    line-height: 1.7;
+  .content-summary p {
+    margin: 0 0 1.25rem 0;
+    line-height: 1.6;
   }
 
-  .content-body ol, 
-  .content-body ul {
-    margin: 1.5rem 0;
+  .content-summary p:last-child {
+    margin-bottom: 0;
+  }
+
+  .content-summary ol, 
+  .content-summary ul {
+    margin: 1.25rem 0;
     padding-left: 2rem;
   }
 
-  .content-body li {
-    margin: 1rem 0;
-    line-height: 1.7;
+  .content-summary li {
+    margin: 0.75rem 0;
+    line-height: 1.6;
   }
 
-  .content-body strong {
+  .content-summary strong {
     font-weight: 600;
+  }
+
+  .content-summary div {
+    margin: 1.25rem 0;
+  }
+
+  .content-summary div:first-child {
+    margin-top: 0;
+  }
+
+  .content-summary div:last-child {
+    margin-bottom: 0;
   }
 
   /* Enhanced Redaction Styles - Varied Patterns */
@@ -295,6 +333,12 @@ const { Content } = await project.render();
     position: relative;
     border-radius: 0;
     margin: 0 0.1em;
+    cursor: pointer;
+  }
+
+  .redacted:hover {
+    background: #c6ff00;
+    color: #000;
   }
 
   .redacted-block {
@@ -302,10 +346,10 @@ const { Content } = await project.render();
     color: #000;
     font-family: 'Roboto Mono', monospace;
     line-height: 1.6;
-    margin: 2rem 0;
-    padding: 1.5rem;
+    margin: 1.25rem 0;
+    padding: 1rem;
     transition: all 0.3s ease;
-    min-height: 6rem;
+    min-height: 4rem;
     display: block;
     white-space: pre;
     border-radius: 0;
@@ -330,15 +374,15 @@ const { Content } = await project.render();
     background: #000;
     color: #000;
     display: block;
-    margin: 1em 0;
-    padding: 0.5em 0;
-    min-height: 4em;
+    margin: 1.25rem 0;
+    padding: 0.75rem 0;
+    min-height: 3rem;
     transition: all 0.3s ease;
   }
 
   .redacted-stagger {
     display: block;
-    margin: 1em 0;
+    margin: 1.25rem 0;
   }
 
   .redacted-stagger .redacted-line {
@@ -355,7 +399,7 @@ const { Content } = await project.render();
 
   .redacted-geometric {
     display: block;
-    margin: 2em 0;
+    margin: 1.25rem 0;
   }
 
   .redacted-geometric .redacted-line {
@@ -395,21 +439,25 @@ const { Content } = await project.render();
     color: #000;
   }
 
+  .document-wrapper.declassified .redacted:hover {
+    background: transparent;
+    color: #000;
+  }
+
   .distribution-list {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e0e0e0;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
     font-size: 0.875rem;
   }
 
   .distribution-list strong {
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: block;
   }
 
   .distribution-list ul {
-    margin: 1rem 0;
+    margin: 0.75rem 0;
     padding-left: 2rem;
   }
 
@@ -419,11 +467,11 @@ const { Content } = await project.render();
     font-size: 0.8125rem;
     margin: 0.5rem 0;
     letter-spacing: 0.05em;
+    line-height: 1.4;
   }
 
   .document-footer {
-    border-top: 1px solid #e0e0e0;
-    padding: 2rem 0 1rem 0;
+    padding: 1.5rem 0 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -431,7 +479,7 @@ const { Content } = await project.render();
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     position: relative;
     color: #666;
   }
@@ -465,7 +513,7 @@ const { Content } = await project.render();
   @media (max-width: 768px) {
     .document-wrapper {
       margin-left: 64px;
-      max-width: 100%;
+      max-width: calc(100% - 64px);
       padding: 6rem 1.5rem 2rem; /* Increased top padding for mobile */
     }
 
@@ -479,15 +527,6 @@ const { Content } = await project.render();
       padding: 0.4rem 0.8rem;
     }
 
-    .redaction-toggle-container {
-      top: 1rem;
-      right: 1rem;
-    }
-
-    .eye-toggle {
-      font-size: 1.25rem;
-      padding: 0.4rem;
-    }
     
     .header-classification {
       margin-bottom: 2rem;
@@ -499,6 +538,11 @@ const { Content } = await project.render();
 
     .document-header {
       margin-bottom: 3rem;
+    }
+
+    .declassify-btn {
+      font-size: 0.8125rem;
+      padding: 0.625rem 1.25rem;
     }
 
     .document-meta {
@@ -540,6 +584,7 @@ const { Content } = await project.render();
   @media (max-width: 480px) {
     .document-wrapper {
       margin-left: 64px;
+      max-width: calc(100% - 64px);
       padding: 5rem 1rem 1.5rem; /* Increased top padding for small mobile */
     }
 
@@ -566,13 +611,36 @@ const { Content } = await project.render();
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const toggleButton = document.getElementById('redaction-toggle');
+    const declassifyButton = document.getElementById('declassify-toggle');
     const documentWrapper = document.querySelector('.document-wrapper');
     
-    if (toggleButton && documentWrapper) {
-      toggleButton.addEventListener('click', () => {
+    // Get text elements for declassify button
+    const btnTextClassified = document.querySelector('.btn-text-classified');
+    const btnTextActive = document.querySelector('.btn-text-classified-active');
+    
+    if (documentWrapper && declassifyButton && btnTextClassified && btnTextActive) {
+      // Declassify button functionality
+      declassifyButton.addEventListener('click', () => {
         documentWrapper.classList.toggle('declassified');
+        updateDeclassifyButton();
       });
+      
+      function updateDeclassifyButton() {
+        const isDeclassified = documentWrapper.classList.contains('declassified');
+        
+        if (isDeclassified) {
+          declassifyButton.classList.add('active');
+          btnTextClassified.style.display = 'none';
+          btnTextActive.style.display = 'inline';
+        } else {
+          declassifyButton.classList.remove('active');
+          btnTextClassified.style.display = 'inline';
+          btnTextActive.style.display = 'none';
+        }
+      }
+      
+      // Initialize button state
+      updateDeclassifyButton();
     }
   });
 </script>
