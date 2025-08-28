@@ -3,14 +3,13 @@ import { defineCollection, z } from 'astro:content';
 const projects = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string(),
-    subtitle: z.string(),
-    year: z.string(),
-    type: z.string(),
+    classification: z.string(),
+    department: z.string(),
+    subject: z.string(),
+    date: z.string(),
+    reference: z.string(),
     number: z.number(),
-    color: z.string(),
-    colorLight: z.string(),
-    colorLighter: z.string(),
+    distributionList: z.array(z.string()).optional(),
   }),
 });
 

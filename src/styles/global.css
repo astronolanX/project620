@@ -85,6 +85,72 @@
     line-clamp: 3;
   }
   
+  /* Redacted text effects inspired by classified documents */
+  .redacted {
+    background-color: #000;
+    color: transparent;
+    padding: 0.15em 0.3em;
+    border-radius: 1px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .redacted-highlight {
+    background-color: #ff4444;
+    color: #fff;
+    padding: 0.15em 0.3em;
+    border-radius: 1px;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .redacted-partial {
+    background: linear-gradient(90deg, #000 0%, #000 70%, transparent 70%);
+    color: #333;
+    padding: 0.15em 0.3em 0.15em 0;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .redacted-block {
+    background-color: #000;
+    height: 1.2em;
+    margin: 0.2em 0;
+    border-radius: 1px;
+    position: relative;
+  }
+  
+  .redacted-line {
+    background-color: #000;
+    height: 2px;
+    margin: 0.8em 0;
+    border-radius: 1px;
+  }
+  
+  /* Stacked redacted blocks for document effect */
+  .redacted-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+  }
+  
+  .redacted-stack .redacted-block {
+    margin: 0;
+  }
+  
+  .redacted-stack .redacted-block:nth-child(odd) {
+    width: 85%;
+  }
+  
+  .redacted-stack .redacted-block:nth-child(even) {
+    width: 92%;
+  }
+  
+  .redacted-stack .redacted-block:nth-child(3n) {
+    width: 78%;
+  }
+  
   .loading-overlay {
     position: fixed;
     top: 0;

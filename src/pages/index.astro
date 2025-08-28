@@ -12,15 +12,36 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
   <div class="page-wrapper">
     <main class="portfolio-main">
       <div class="intro-section">
-        <h1 class="main-title">Nolan Figueroa</h1>
-        <p class="intro-text">
-          Designer and technologist exploring the intersection of human experience and digital systems. 
-          Currently focused on spatial interfaces, design systems, and the future of interactive media.
-        </p>
+        <div class="title-with-toggle">
+          <h1 class="main-title">Nolan Figueroa</h1>
+          <button id="redaction-toggle" class="redaction-toggle" aria-label="Toggle redacted view">
+            <span class="toggle-icon">👁️</span>
+          </button>
+        </div>
+        <div class="intro-text redacted-document" id="intro-content">
+          <div class="redacted-view">
+            <span class="redacted" data-original="Designer">████████</span> and <span class="redacted-highlight" data-original="technologist">technologist</span> exploring the intersection of <span class="redacted" data-original="human">██████</span> experience and <span class="redacted-highlight" data-original="digital systems">digital systems</span>.<br>
+            Currently focused on <span class="redacted-highlight" data-original="spatial interfaces">spatial interfaces</span>, <span class="redacted" data-original="design systems">██████ ███████</span>, and the future of <span class="redacted-partial" data-original="interactive media">interactive media</span>.
+            
+            <div class="redacted-stack" style="margin-top: 1.5rem; width: 60%;">
+              <div class="redacted-block"></div>
+              <div class="redacted-block"></div>
+              <div class="redacted-block"></div>
+            </div>
+          </div>
+          
+          <div class="normal-view" style="display: none;">
+            Designer and technologist exploring the intersection of human experience and digital systems. 
+            Currently focused on spatial interfaces, design systems, and the future of interactive media.
+          </div>
+        </div>
       </div>
 
       <section class="microblog-section">
-        <h2 class="microblog-title">Recent Notes</h2>
+        <h2 class="microblog-title" id="notes-title">
+          <span class="redacted-view"><span class="redacted" data-original="Recent">█████████</span> Notes</span>
+          <span class="normal-view" style="display: none;">Recent Notes</span>
+        </h2>
         <div class="microblog-list">
           {sortedPosts.map(async (post) => {
             const { Content } = await post.render();
@@ -100,6 +121,28 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     line-height: 1.6;
     margin: 0;
     max-width: 600px;
+  }
+  
+  .redacted-document {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    background: #f8f8f8;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    position: relative;
+  }
+  
+  .redacted-document::before {
+    content: "CLASSIFIED DOCUMENT";
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #ff4444;
+    letter-spacing: 0.1em;
   }
 
   .microblog-section {
@@ -243,4 +286,125 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
       font-size: 1.75rem;
     }
   }
+  
+  /* Toggle button styling */
+  .title-with-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .redaction-toggle {
+    background: #333;
+    border: 2px solid #666;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+  }
+  
+  .redaction-toggle:hover {
+    background: #555;
+    border-color: #888;
+    transform: scale(1.05);
+  }
+  
+  .redaction-toggle.active {
+    background: #ff4444;
+    border-color: #ff6666;
+  }
+  
+  .redaction-toggle.active .toggle-icon {
+    filter: grayscale(100%);
+  }
+  
+  .redaction-toggle.active .toggle-icon::after {
+    content: "🔍";
+    position: absolute;
+  }
+  
+  /* View transitions */
+  .redacted-view, .normal-view {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .normal-view {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  .normal-view.active {
+    display: block;
+  }
 </style>
+
+<script>
+  function initRedactionToggle() {
+    const toggle = document.getElementById('redaction-toggle');
+    const introContent = document.getElementById('intro-content');
+    
+    if (!toggle || !introContent) {
+      console.log('Toggle elements not found');
+      return;
+    }
+    
+    // Start in redacted mode by default
+    let isRedacted = localStorage.getItem('redacted-mode') === null ? true : localStorage.getItem('redacted-mode') === 'true';
+    
+    function updateView(showRedacted) {
+      console.log('Updating view to:', showRedacted ? 'redacted' : 'normal');
+      
+      const redactedViews = document.querySelectorAll('.redacted-view');
+      const normalViews = document.querySelectorAll('.normal-view');
+      
+      if (showRedacted) {
+        // Show redacted view
+        redactedViews.forEach(view => view.style.display = 'block');
+        normalViews.forEach(view => view.style.display = 'none');
+        introContent.classList.add('redacted-document');
+        toggle.classList.remove('active');
+      } else {
+        // Show normal view
+        redactedViews.forEach(view => view.style.display = 'none');
+        normalViews.forEach(view => view.style.display = 'block');
+        introContent.classList.remove('redacted-document');
+        toggle.classList.add('active');
+      }
+      
+      // Save preference
+      localStorage.setItem('redacted-mode', showRedacted.toString());
+      isRedacted = showRedacted;
+    }
+    
+    // Set initial state
+    updateView(isRedacted);
+    
+    // Toggle functionality
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Toggle clicked, current state:', isRedacted);
+      updateView(!isRedacted);
+    });
+  }
+  
+  // Try multiple ways to ensure the script runs
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRedactionToggle);
+  } else {
+    initRedactionToggle();
+  }
+  
+  // Also try after Astro's client-side routing
+  document.addEventListener('astro:page-load', initRedactionToggle);
+</script>
