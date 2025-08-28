@@ -19,13 +19,6 @@ const { Content } = await project.render();
 
 <Layout title={`${project.data.subject} - Classified Document`}>
   <div class="document-wrapper" data-project={project.data.number}>
-    
-    <!-- Page Number Header -->
-    <div class="page-number-header">
-      <span class="page-number">/{project.data.number}</span>
-    </div>
-    
-
     <!-- Declassification Toggle at Top -->
     <div class="declassify-controls-top">
       <button id="declassify-toggle" class="declassify-btn">
@@ -92,7 +85,7 @@ const { Content } = await project.render();
     font-family: 'Roboto Mono', monospace;
     color: #000;
     max-width: 720px;
-    padding: 8rem 3rem 4rem; /* Increased top padding to make room for page number */
+    padding: 4rem 3rem 4rem;
     background: 
       radial-gradient(circle at 20% 80%, rgba(0,0,0,0.01) 0%, transparent 20%),
       radial-gradient(circle at 80% 20%, rgba(0,0,0,0.01) 0%, transparent 20%),
@@ -111,27 +104,6 @@ const { Content } = await project.render();
   }
 
 
-
-  /* Page Number Header */
-  .page-number-header {
-    position: fixed;
-    top: 2rem;
-    left: 100px; /* 80px nav width + 20px margin */
-    z-index: 200;
-  }
-
-  .page-number {
-    font-family: 'Roboto', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    font-style: italic;
-    color: #fff;
-    background: #333;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    letter-spacing: -0.05em;
-    line-height: 1;
-  }
 
   /* Header Styles */
   .document-header {
@@ -514,17 +486,7 @@ const { Content } = await project.render();
     .document-wrapper {
       margin-left: 64px;
       max-width: calc(100% - 64px);
-      padding: 6rem 1.5rem 2rem; /* Increased top padding for mobile */
-    }
-
-    .page-number-header {
-      top: 1rem;
-      left: 84px; /* 64px mobile nav width + 20px margin */
-    }
-
-    .page-number {
-      font-size: 3rem;
-      padding: 0.4rem 0.8rem;
+      padding: 3rem 1.5rem 2rem;
     }
 
     
@@ -585,12 +547,7 @@ const { Content } = await project.render();
     .document-wrapper {
       margin-left: 64px;
       max-width: calc(100% - 64px);
-      padding: 5rem 1rem 1.5rem; /* Increased top padding for small mobile */
-    }
-
-    .page-number {
-      font-size: 2.5rem;
-      padding: 0.3rem 0.6rem;
+      padding: 2.5rem 1rem 1.5rem;
     }
 
     .classification-level {
