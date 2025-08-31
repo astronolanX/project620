@@ -35,7 +35,10 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   </nav>
   
   <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
-    <i class="fas fa-folder archive-icon" data-icon="folder"></i>
+    <svg class="archive-icon" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" data-icon="folder">
+      <path opacity="0.4" d="M4.25 4.25C3.00736 4.25 2 5.25736 2 6.5V18.5C2 19.7426 3.00736 20.75 4.25 20.75H19.75C20.9926 20.75 22 19.7426 22 18.5V9.5C22 8.25736 20.9926 7.25 19.75 7.25H12.25C12.0139 7.25 11.7916 7.13885 11.65 6.95L10.3 5.15C9.87508 4.58344 9.2082 4.25 8.5 4.25H4.25Z" fill="currentColor"/>
+      <path d="M2 6.5C2 5.25736 3.00736 4.25 4.25 4.25H8.5C9.2082 4.25 9.87508 4.58344 10.3 5.15L11.65 6.95C11.7916 7.13885 12.0139 7.25 12.25 7.25H19.75C20.9926 7.25 22 8.25736 22 9.5V18.5C22 19.7426 20.9926 20.75 19.75 20.75H4.25C3.00736 20.75 2 19.7426 2 18.5V6.5ZM4.25 5.75C3.83579 5.75 3.5 6.08579 3.5 6.5V18.5C3.5 18.9142 3.83579 19.25 4.25 19.25H19.75C20.1642 19.25 20.5 18.9142 20.5 18.5V9.5C20.5 9.08579 20.1642 8.75 19.75 8.75H12.25C11.5418 8.75 10.8749 8.41656 10.45 7.85L9.1 6.05C8.95836 5.86115 8.73607 5.75 8.5 5.75H4.25Z" fill="currentColor"/>
+    </svg>
   </a>
   
   <button class="menu-footer-toggle" id="footerToggle">
@@ -89,6 +92,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   /* Active states for navigation items */
   .left-nav .active:not(.menu-footer-toggle):not(.no-animation):not(.menu-home) {
     background: #000000;
+    box-shadow: 0 0 16px rgba(198, 255, 0, 0.6), 0 0 8px rgba(198, 255, 0, 0.4);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -96,29 +100,27 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   /* Active state without animation (for preventing double animations) */
   .left-nav .active.no-animation:not(.menu-footer-toggle):not(.menu-home) {
     background: #000000;
+    box-shadow: 0 0 16px rgba(198, 255, 0, 0.6), 0 0 8px rgba(198, 255, 0, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Special active state for N/N logo */
   .menu-home.active {
     background: #c6ff00;
-    border: 2px solid #a6d900;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
   }
   
   .menu-home.active.no-animation {
     background: #c6ff00;
-    border: 2px solid #a6d900;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
   }
   
   .menu-home.active:hover {
     background: #a6d900;
-    border-color: #8cb700;
-    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.4);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
   
@@ -276,7 +278,8 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   .archive-icon {
-    font-size: 18px;
+    width: 18px;
+    height: 18px;
     color: #999;
   }
   
@@ -394,14 +397,14 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .copyright-icon {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     font-size: 18px;
     font-weight: 500;
-    color: #000;
+    color: #999;
   }
   
   .menu-footer-toggle:hover .copyright-icon {
-    color: #64748b;
+    color: #666;
     transform: translate(-50%, -50%) rotate(-15deg);
   }
   
@@ -516,7 +519,8 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     }
     
     .archive-icon {
-      font-size: 16px;
+      width: 16px;
+      height: 16px;
     }
     
     .menu-footer-toggle {
