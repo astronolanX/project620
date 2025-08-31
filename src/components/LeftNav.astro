@@ -21,7 +21,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   <a href="/" class={`menu-home ${isHomePage ? 'active' : ''}`}>
     <span class="name" data-text={name}>
       <span>N</span>
-      <span class="slash">/</span>
+      <span class="slash"> / </span>
       <span>N</span>
     </span>
   </a>
@@ -29,7 +29,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   <nav class="menu-numbers">
     {selectedWorks.map((work) => (
       <a href={`/projects/${work.slug}`} class={`menu-number ${currentProjectSlug === work.slug ? 'active' : ''}`} data-number={work.number}>
-        <span class="number" data-number={`/${work.number}`}>/{work.number}</span>
+        <span class="number" data-number={`/ ${work.number}`}>/ {work.number}</span>
       </a>
     ))}
   </nav>
@@ -244,6 +244,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     top: 50%;
     left: 50%;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 2px;
+  }
+  
+  .name .slash {
+    margin: 0 1px;
   }
 
   .menu-archive {
