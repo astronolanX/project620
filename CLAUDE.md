@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Astro-based portfolio website featuring a classified document aesthetic with microblog homepage, project showcase pages, and fixed left navigation with logmar scaling effects.
+Astro-based portfolio website featuring a classified document aesthetic with microblog homepage, project showcase pages, and fixed left navigation.
 
 ## Commands
 
@@ -33,10 +33,11 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 ### Navigation System
 
 **LeftNav.astro** - Fixed left sidebar (80px wide, 64px mobile):
+
 - Home link: "NLN" initials with active state highlighting
 - Project numbers (1-3) mapped to specific slugs:
   1. `future-design`
-  2. `ux-patterns` 
+  2. `ux-patterns`
   3. `spatial-interfaces`
 - Archive folder icon linking to `/archive`
 - Footer toggle (© icon) controlling StickyFooter visibility
@@ -67,7 +68,6 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 - Tailwind CSS for utility classes
 - Global styles in `src/styles/global.css`
 - CSS custom properties for theming
-- Chromatic aberration effects via text shadows
 - Responsive scaling (80% on mobile via CSS)
 - Animation classes: `scaleIn`, `clickPulse`, `shrink`
 
@@ -90,6 +90,12 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 - Assets output to `_astro/` directory
 ```
 
+### TypeScript Configuration
+
+- Strict mode enabled via Astro's strict config
+- Path alias `@/*` mapped to `src/*` directory
+- TypeScript 5.9.2 for type checking
+
 ### Performance Optimizations
 
 - Single consolidated Google Fonts request (Roboto family)
@@ -97,3 +103,11 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 - PWA with offline support via service worker
 - View Transitions for instant navigation
 - Navigation preloading in service worker
+
+## Component Structure
+
+### New Component Directories
+
+- `src/components/patterns/` - Reusable UI patterns
+- `src/components/ui/` - Base UI components
+- `src/types/` - TypeScript type definitions
