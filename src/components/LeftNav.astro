@@ -1,6 +1,6 @@
 ---
 // Get user initials for the nav
-const name = "NLN"; // Initials horizontally oriented
+const name = "N/N"; // Initials with forward slash
 
 // Selected works mapped to actual project slugs
 const selectedWorks = [
@@ -19,7 +19,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
 
 <div class="left-nav">
   <a href="/" class={`menu-home ${isHomePage ? 'active' : ''}`}>
-    <span class="name" data-text={name}>{name}</span>
+    <span class="name" data-text={name}>
+      <span>N</span>
+      <span class="slash">/</span>
+      <span>N</span>
+    </span>
   </a>
   
   <nav class="menu-numbers">
@@ -63,15 +67,15 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     min-height: 100vh;
     min-height: 100dvh;
     min-height: -webkit-fill-available;
-    width: 80px;
+    width: 88px;
     z-index: 1000;
-    background: #333;
-    padding: 20px 0;
+    background: #ffffff;
+    padding: 24px 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
     align-items: center;
-    border-right: 1px solid #555;
+    border-right: 1px solid #e5e5e5;
     border-radius: 0;
     box-sizing: border-box;
     transform: translateZ(0) !important; /* Force GPU acceleration but no transform */
@@ -83,18 +87,38 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
 
   /* Active states for navigation items */
-  .left-nav .active:not(.menu-footer-toggle):not(.no-animation) {
-    background: #c6ff00;
-    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
+  .left-nav .active:not(.menu-footer-toggle):not(.no-animation):not(.menu-home) {
+    background: #000000;
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Active state without animation (for preventing double animations) */
-  .left-nav .active.no-animation:not(.menu-footer-toggle) {
+  .left-nav .active.no-animation:not(.menu-footer-toggle):not(.menu-home) {
+    background: #000000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Special active state for N/N logo */
+  .menu-home.active {
     background: #c6ff00;
+    border: 2px solid #a6d900;
+    animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
-    transition: all 0.3s ease;
+  }
+  
+  .menu-home.active.no-animation {
+    background: #c6ff00;
+    border: 2px solid #a6d900;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.3);
+  }
+  
+  .menu-home.active:hover {
+    background: #a6d900;
+    border-color: #8cb700;
+    box-shadow: 0 4px 16px rgba(198, 255, 0, 0.4);
   }
   
   
@@ -151,16 +175,18 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    background: transparent;
+    margin-bottom: 16px;
   }
   
   .menu-home:hover:not(.active) {
-    background: #444;
+    background: #f5f5f5;
   }
   
   .menu-home.active:hover .name {
@@ -170,14 +196,14 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   .menu-home:hover .name {
-    color: #ccc;
-    font-weight: 900;
-    transition: color 0.3s ease, font-weight 0.3s ease;
+    color: #000;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .menu-home.active .name {
     color: #000;
-    font-weight: 900;
+    font-weight: 700;
   }
   
   /* Common centered positioning for menu items */
@@ -200,12 +226,12 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .name {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 14px;
-    font-weight: 900;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     font-style: italic;
-    color: #c6ff00;
-    letter-spacing: 0.5px;
+    color: #333;
+    letter-spacing: -0.2px;
     writing-mode: horizontal-tb;
     text-orientation: mixed;
     height: auto;
@@ -217,23 +243,25 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     position: absolute;
     top: 50%;
     left: 50%;
-    transition: color 0.3s ease, font-weight 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .menu-archive {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     text-decoration: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
+    background: transparent;
+    margin-top: 8px;
   }
   
   .menu-archive:hover:not(.active) {
-    background: #444;
+    background: #f5f5f5;
   }
   
   .menu-archive.active:hover .archive-icon {
@@ -243,24 +271,25 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   .archive-icon {
-    font-size: 16px;
-    color: #aaa;
+    font-size: 18px;
+    color: #999;
   }
   
   .menu-archive:hover .archive-icon {
-    color: #ccc;
+    color: #666;
   }
   
   .menu-archive.active .archive-icon {
-    color: #000;
+    color: #c6ff00;
   }
   
   .menu-numbers {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 12px;
     align-items: center;
-    --logmar-ratio: 1.25;
+    flex: 1;
+    padding: 20px 0;
   }
   
   .menu-number {
@@ -268,16 +297,17 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: all 0.3s ease;
-    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
     line-height: 1;
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
+    background: transparent;
   }
   
   .menu-number:hover:not(.active) {
-    background: #444;
+    background: #f5f5f5;
   }
   
   .menu-number.active:hover .number {
@@ -286,19 +316,21 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .number {
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 600;
-    color: #aaa;
-    font-size: 14px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #999;
+    font-size: 15px;
   }
   
   .menu-number:hover .number {
-    color: #ccc;
+    color: #666;
+    font-weight: 700;
   }
   
   .menu-number.active .number {
-    color: #000;
-    font-weight: 900;
+    color: #c6ff00;
+    font-weight: 700;
   }
   
   
@@ -330,12 +362,12 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     background: transparent;
     border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     padding: 0;
     position: relative;
@@ -343,7 +375,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .menu-footer-toggle:hover:not(.active) {
-    background: #444;
+    background: #f5f5f5;
   }
   
   
@@ -357,13 +389,19 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   .copyright-icon {
-    font-size: 16px;
-    color: #aaa;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
   }
   
   .menu-footer-toggle:hover .copyright-icon {
-    color: #ccc;
+    color: #64748b;
     transform: translate(-50%, -50%) rotate(-15deg);
+  }
+  
+  .menu-footer-toggle.active {
+    background: #000;
   }
   
   .menu-footer-toggle.active .copyright-icon {
@@ -376,11 +414,11 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     top: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(
       90deg, 
       transparent 0%, 
-      #fff 50%, 
+      #c6ff00 50%, 
       transparent 100%
     );
     transform: translateX(-100%);
@@ -424,12 +462,12 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   
-  /* Responsive adjustments - 80% scaling */
+  /* Responsive adjustments */
   @media (max-width: 768px) {
     .left-nav {
-      width: 64px; /* 80% of 80px */
-      padding: 16px 0; /* 80% of 20px */
-      gap: 13px; /* 80% of 16px */
+      width: 72px;
+      padding: 20px 0;
+      gap: 8px;
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
@@ -448,40 +486,41 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     }
 
     .menu-home {
-      width: 48px; /* 80% of 60px */
-      height: 48px; /* 80% of 60px */
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
     }
     
     .name {
-      font-size: 11px; /* 80% of 14px */
-      letter-spacing: 0.4px; /* 80% of 0.5px */
+      font-size: 14px;
+      letter-spacing: -0.1px;
     }
     
     .menu-number {
-      width: 32px; /* 80% of 40px */
-      height: 32px; /* 80% of 40px */
+      width: 40px;
+      height: 40px;
     }
     
     .number {
-      font-size: 11px; /* 80% of 14px */
+      font-size: 13px;
     }
     
     .menu-archive {
-      width: 32px; /* 80% of 40px */
-      height: 32px; /* 80% of 40px */
+      width: 40px;
+      height: 40px;
     }
     
     .archive-icon {
-      font-size: 13px; /* 80% of 16px */
+      font-size: 16px;
     }
     
     .menu-footer-toggle {
-      width: 32px; /* 80% of 40px */
-      height: 32px; /* 80% of 40px */
+      width: 40px;
+      height: 40px;
     }
     
     .menu-footer-toggle .copyright-icon {
-      font-size: 13px; /* 80% of 16px */
+      font-size: 16px;
     }
     
   }
