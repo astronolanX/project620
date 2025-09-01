@@ -35,14 +35,20 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   </nav>
   
   <a href="/archive" class={`menu-archive ${isArchivePage ? 'active' : ''}`}>
-    <svg class="archive-icon" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" data-icon="folder">
-      <path opacity="0.4" d="M4.25 4.25C3.00736 4.25 2 5.25736 2 6.5V18.5C2 19.7426 3.00736 20.75 4.25 20.75H19.75C20.9926 20.75 22 19.7426 22 18.5V9.5C22 8.25736 20.9926 7.25 19.75 7.25H12.25C12.0139 7.25 11.7916 7.13885 11.65 6.95L10.3 5.15C9.87508 4.58344 9.2082 4.25 8.5 4.25H4.25Z" fill="currentColor"/>
-      <path d="M2 6.5C2 5.25736 3.00736 4.25 4.25 4.25H8.5C9.2082 4.25 9.87508 4.58344 10.3 5.15L11.65 6.95C11.7916 7.13885 12.0139 7.25 12.25 7.25H19.75C20.9926 7.25 22 8.25736 22 9.5V18.5C22 19.7426 20.9926 20.75 19.75 20.75H4.25C3.00736 20.75 2 19.7426 2 18.5V6.5ZM4.25 5.75C3.83579 5.75 3.5 6.08579 3.5 6.5V18.5C3.5 18.9142 3.83579 19.25 4.25 19.25H19.75C20.1642 19.25 20.5 18.9142 20.5 18.5V9.5C20.5 9.08579 20.1642 8.75 19.75 8.75H12.25C11.5418 8.75 10.8749 8.41656 10.45 7.85L9.1 6.05C8.95836 5.86115 8.73607 5.75 8.5 5.75H4.25Z" fill="currentColor"/>
+    <svg class="archive-icon" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3.25 10.0957C3.56503 10.1975 3.9011 10.2525 4.25 10.2525H19.75C20.0989 10.2525 20.435 10.1975 20.75 10.0957V19.0025C20.75 20.2451 19.7426 21.2525 18.5 21.2525H5.5C4.25736 21.2525 3.25 20.2451 3.25 19.0025V10.0957ZM9.25 13.7525C9.25 14.1667 9.58579 14.5025 10 14.5025H14C14.4142 14.5025 14.75 14.1667 14.75 13.7525C14.75 13.3382 14.4142 13.0025 14 13.0025H10C9.58579 13.0025 9.25 13.3382 9.25 13.7525Z" fill="currentColor"/>
+      <path opacity="0.4" d="M20.75 9.01807C20.7744 9.00594 20.7986 8.99337 20.8225 8.98039C21.5239 8.59938 22 7.85627 22 7.00195V6.00195C22 4.75931 20.9926 3.75195 19.75 3.75195H4.25C3.00736 3.75195 2 4.75931 2 6.00195V7.00195C2 7.88538 2.50914 8.6499 3.25 9.01807C3.55124 9.16778 3.89079 9.25195 4.25 9.25195H19.75C20.1092 9.25195 20.4488 9.16778 20.75 9.01807Z" fill="currentColor"/>
     </svg>
   </a>
   
   <button class="menu-footer-toggle" id="footerToggle">
-    <span class="copyright-icon">©</span>
+    <svg class="info-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="0.4">
+        <path d="M12.0008 2C9.60139 2 7.65625 3.94514 7.65625 6.34459C7.65625 8.74404 9.60139 10.6892 12.0008 10.6892C14.4003 10.6892 16.3454 8.74404 16.3454 6.34459C16.3454 3.94514 14.4003 2 12.0008 2Z" fill="currentColor"/>
+        <path d="M8.93359 12.189C6.0341 12.189 3.68359 14.5395 3.68359 17.439V18.75C3.68359 19.9926 4.69095 21 5.93359 21H11.3215C10.3398 19.8113 9.75 18.287 9.75 16.625C9.75 14.9344 10.3602 13.3863 11.3725 12.189H8.93359Z" fill="currentColor"/>
+      </g>
+      <path d="M11.25 16.625C11.25 13.6565 13.6565 11.25 16.625 11.25C19.5935 11.25 22 13.6565 22 16.625C22 19.5935 19.5935 22 16.625 22C13.6565 22 11.25 19.5935 11.25 16.625ZM15.824 14.4992C15.824 14.941 16.1822 15.2992 16.624 15.2992H16.634C17.0759 15.2992 17.434 14.941 17.434 14.4992C17.434 14.0574 17.0759 13.6992 16.634 13.6992H16.624C16.1822 13.6992 15.824 14.0574 15.824 14.4992ZM16.625 16.2504C16.2108 16.2504 15.875 16.5862 15.875 17.0004V18.7487C15.875 19.1629 16.2108 19.4987 16.625 19.4987C17.0392 19.4987 17.375 19.1629 17.375 18.7487V17.0004C17.375 16.5862 17.0392 16.2504 16.625 16.2504Z" fill="currentColor"/>
+    </svg>
   </button>
 </div>
 
@@ -92,7 +98,6 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   /* Active states for navigation items */
   .left-nav .active:not(.menu-footer-toggle):not(.no-animation):not(.menu-home) {
     background: #000000;
-    box-shadow: 0 0 16px rgba(198, 255, 0, 0.6), 0 0 8px rgba(198, 255, 0, 0.4);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -100,27 +105,23 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   /* Active state without animation (for preventing double animations) */
   .left-nav .active.no-animation:not(.menu-footer-toggle):not(.menu-home) {
     background: #000000;
-    box-shadow: 0 0 16px rgba(198, 255, 0, 0.6), 0 0 8px rgba(198, 255, 0, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   /* Special active state for N/N logo */
   .menu-home.active {
     background: #c6ff00;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .menu-home.active.no-animation {
     background: #c6ff00;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.6), 0 0 8px rgba(0, 0, 0, 0.4);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .menu-home.active:hover {
     background: #a6d900;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
   }
   
   
@@ -212,7 +213,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   .name,
   .archive-icon,
   .number,
-  .copyright-icon {
+  .info-icon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -278,13 +279,13 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   
   
   .archive-icon {
-    width: 18px;
-    height: 18px;
-    color: #999;
+    width: 24px;
+    height: 24px;
+    color: #000;
   }
   
   .menu-archive:hover .archive-icon {
-    color: #666;
+    color: #999;
   }
   
   .menu-archive.active .archive-icon {
@@ -387,7 +388,7 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
   }
   
   
-  .menu-footer-toggle.active:hover .copyright-icon {
+  .menu-footer-toggle.active:hover .info-icon {
     transform: var(--center-transform);
     transform-origin: center center;
   }
@@ -396,23 +397,21 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     animation: bounce 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
-  .copyright-icon {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 18px;
-    font-weight: 500;
-    color: #999;
+  .info-icon {
+    width: 24px;
+    height: 24px;
+    color: #000;
   }
   
-  .menu-footer-toggle:hover .copyright-icon {
-    color: #666;
-    transform: translate(-50%, -50%) rotate(-15deg);
+  .menu-footer-toggle:hover .info-icon {
+    color: #999;
   }
   
   .menu-footer-toggle.active {
     background: #000;
   }
   
-  .menu-footer-toggle.active .copyright-icon {
+  .menu-footer-toggle.active .info-icon {
     color: #c6ff00;
   }
   
@@ -519,8 +518,8 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
     }
     
     .archive-icon {
-      width: 16px;
-      height: 16px;
+      width: 24px;
+      height: 24px;
     }
     
     .menu-footer-toggle {
@@ -528,8 +527,9 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
       height: 40px;
     }
     
-    .menu-footer-toggle .copyright-icon {
-      font-size: 16px;
+    .menu-footer-toggle .info-icon {
+      width: 24px;
+      height: 24px;
     }
     
   }
