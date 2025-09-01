@@ -4,9 +4,9 @@ const name = "N/N"; // Initials with forward slash
 
 // Selected works mapped to actual project slugs
 const selectedWorks = [
-  { number: 1, slug: "future-design" },
-  { number: 2, slug: "ux-patterns" },
-  { number: 3, slug: "spatial-interfaces" }
+  { number: "01", slug: "future-design" },
+  { number: "02", slug: "ux-patterns" },
+  { number: "03", slug: "spatial-interfaces" }
 ];
 
 // Get current page info for highlighting
@@ -619,6 +619,27 @@ const currentProjectSlug = isProjectPage ? currentPath.split('/projects/')[1]?.r
           this.toggleFooter();
         }
       });
+      
+      // Also listen for footer visibility changes directly
+      const observer = new MutationObserver(() => {
+        const footer = document.querySelector('.footer-section');
+        if (footer) {
+          const isVisible = footer.classList.contains('visible');
+          if (isVisible !== window.menuState.footerVisible) {
+            window.menuState.footerVisible = isVisible;
+            if (isVisible) {
+              this.footerToggle?.classList.add('active');
+            } else {
+              this.footerToggle?.classList.remove('active');
+            }
+          }
+        }
+      });
+      
+      const footer = document.querySelector('.footer-section');
+      if (footer) {
+        observer.observe(footer, { attributes: true, attributeFilter: ['class'] });
+      }
     }
     
     initNavigationHandlers() {

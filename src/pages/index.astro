@@ -20,32 +20,41 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
       </div>
 
       <section class="microblog-section">
-        <h2 class="microblog-title">Recent Notes</h2>
-        <div class="microblog-list">
-          {sortedPosts.map(async (post) => {
+        <div class="section-header">
+          <h2 class="microblog-title">Recent Notes</h2>
+          <div class="geometric-accent">+</div>
+        </div>
+        <div class="microblog-grid">
+          {sortedPosts.map(async (post, index) => {
             const { Content } = await post.render();
+            const cardNumber = String(index + 1).padStart(2, '0');
+            const cardVariant = (index % 4) + 1;
             return (
-              <article class="microblog-entry">
-                <div class="entry-header">
-                  <h3 class="entry-title">{post.data.title}</h3>
-                  <time class="entry-date" datetime={post.data.date.toISOString()}>
-                    {post.data.date.toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'short', 
-                      day: 'numeric' 
-                    })}
-                  </time>
-                </div>
-                <div class="entry-content">
-                  <Content />
-                </div>
-                {post.data.tags && post.data.tags.length > 0 && (
-                  <div class="entry-tags">
-                    {post.data.tags.map((tag) => (
-                      <span class="tag">{tag}</span>
-                    ))}
+              <article class={`microblog-card card-variant-${cardVariant}`}>
+                <div class="card-number">{cardNumber}</div>
+                <div class="card-pattern"></div>
+                <div class="card-content">
+                  <div class="entry-header">
+                    <h3 class="entry-title">{post.data.title}</h3>
+                    <time class="entry-date" datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
+                    </time>
                   </div>
-                )}
+                  <div class="entry-content">
+                    <Content />
+                  </div>
+                  {post.data.tags && post.data.tags.length > 0 && (
+                    <div class="entry-tags">
+                      {post.data.tags.map((tag) => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div class="card-decoration"></div>
               </article>
             );
           })}
@@ -60,106 +69,231 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 <style>
   .page-wrapper {
     min-height: 100vh;
-    background: #e5e5e5;
-    margin-left: 80px; /* Space for left nav menu */
+    background: #ffffff;
+    margin-left: 88px;
     display: flex;
     flex-direction: column;
   }
 
   .portfolio-main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    text-align: left;
-    padding: 4rem 2rem 2rem;
-    max-width: 800px;
+    padding: 4rem 3rem 2rem;
+    max-width: 1400px;
     margin: 0 auto;
-    gap: 3rem;
+    width: 100%;
   }
 
   .intro-section {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+    position: relative;
   }
 
   .main-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 3rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 4rem;
     font-weight: 900;
-    color: #333;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.02em;
+    color: #000;
+    margin: 0;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
   }
 
   .intro-text {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 400;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
-    max-width: 600px;
+    color: #000;
+    line-height: 1.5;
+    margin: 1.5rem 0 0;
+    max-width: 700px;
   }
 
   .microblog-section {
     width: 100%;
   }
 
-  .microblog-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0 0 2rem 0;
-    letter-spacing: -0.01em;
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
   }
 
-  .microblog-list {
+  .microblog-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #000;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .geometric-accent {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #c6ff00;
+    line-height: 1;
+  }
+
+  .microblog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    grid-auto-rows: minmax(300px, auto);
+  }
+
+  .microblog-card {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #000;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    transition: transform 0.3s ease;
   }
 
-  .microblog-entry {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 2rem;
+  .microblog-card:hover {
+    transform: translateY(-4px);
   }
 
-  .microblog-entry:last-child {
-    border-bottom: none;
+  /* Card Variants */
+  .card-variant-1 {
+    background: #ffffff;
+  }
+
+  .card-variant-2 {
+    background: #c6ff00;
+  }
+
+  .card-variant-3 {
+    background: #e6e6e6;
+  }
+
+  .card-variant-4 {
+    background: #000;
+    color: #ffffff;
+  }
+
+  .card-variant-4 .entry-title,
+  .card-variant-4 .entry-content,
+  .card-variant-4 .entry-date {
+    color: #ffffff;
+  }
+
+  .card-variant-2 .entry-title,
+  .card-variant-2 .entry-content,
+  .card-variant-2 .entry-date {
+    color: #000;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.1);
+    line-height: 1;
+    z-index: 1;
+  }
+
+  .card-variant-4 .card-number {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card-variant-2 .card-number {
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  .card-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  /* Pattern Variants */
+  .card-variant-1 .card-pattern {
+    background: 
+      linear-gradient(45deg, #000 25%, transparent 25%), 
+      linear-gradient(-45deg, #000 25%, transparent 25%), 
+      linear-gradient(45deg, transparent 75%, #000 75%), 
+      linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+
+  .card-variant-2 .card-pattern {
+    background: 
+      repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 2px,
+        transparent 2px,
+        transparent 12px
+      );
+  }
+
+  .card-variant-3 .card-pattern {
+    background: 
+      radial-gradient(circle at 50% 50%, #000 2px, transparent 2px);
+    background-size: 15px 15px;
+  }
+
+  .card-variant-4 .card-pattern {
+    background: 
+      linear-gradient(90deg, #c6ff00 50%, transparent 50%),
+      linear-gradient(#c6ff00 50%, transparent 50%);
+    background-size: 10px 10px;
+  }
+
+  .card-content {
+    padding: 4rem 2rem 2rem;
+    flex: 1;
+    position: relative;
+    z-index: 2;
   }
 
   .entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 1rem;
-    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .entry-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-    flex: 1;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
   }
 
   .entry-date {
     font-family: 'Roboto Mono', monospace;
-    font-size: 0.875rem;
-    color: #888;
-    white-space: nowrap;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-variant-4 .entry-date {
+    color: #c6ff00;
   }
 
   .entry-content {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: #000;
+    margin-bottom: 1.5rem;
   }
 
   .entry-content :global(p) {
@@ -174,74 +308,133 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-top: auto;
   }
 
   .tag {
     font-family: 'Roboto Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #666;
-    background: #f5f5f5;
-    padding: 0.25rem 0.5rem;
-    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #000;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-variant-4 .tag {
+    color: #c6ff00;
+    background: rgba(198, 255, 0, 0.1);
+    border-color: #c6ff00;
+  }
+
+  .card-variant-2 .tag {
+    color: #000;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: #000;
+  }
+
+  .card-decoration {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #000;
+    z-index: 1;
+  }
+
+  .card-variant-4 .card-decoration {
+    border-color: #c6ff00;
+  }
+
+  .card-variant-2 .card-decoration {
+    background: #000;
+  }
+
+  /* Large cards for featured content */
+  .microblog-card:nth-child(1) {
+    grid-column: span 2;
+  }
+
+  .microblog-card:nth-child(5) {
+    grid-row: span 2;
   }
 
   /* Responsive Design */
+  @media (max-width: 1200px) {
+    .microblog-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .microblog-card:nth-child(1) {
+      grid-column: span 1;
+    }
+  }
+
   @media (max-width: 768px) {
     .page-wrapper {
-      margin-left: 0;
+      margin-left: 72px;
     }
 
     .portfolio-main {
-      padding: 2rem 1rem 1rem;
-      margin-left: 64px;
-      gap: 2rem;
+      padding: 2rem 1.5rem;
+      margin-left: 0;
+    }
+
+    .main-title {
+      font-size: 3rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+    }
+
+    .microblog-title {
+      font-size: 2rem;
+    }
+
+    .microblog-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .microblog-card:nth-child(1),
+    .microblog-card:nth-child(5) {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .card-content {
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .card-number {
+      font-size: 2.5rem;
+      top: 1rem;
+      left: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .portfolio-main {
+      padding: 1.5rem 1rem;
+      margin-left: 0;
     }
 
     .main-title {
       font-size: 2.5rem;
     }
 
-    .intro-text {
-      font-size: 1rem;
-    }
-
-    .entry-header {
+    .section-header {
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
-    .entry-date {
-      order: -1;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .portfolio-main {
-      padding: 1.5rem 0.75rem 0.75rem;
-      margin-left: 64px;
-      gap: 1.5rem;
-    }
-
-    .main-title {
-      font-size: 2rem;
-    }
-
-    .microblog-list {
-      gap: 2rem;
-    }
-  }
-
-  @media (max-width: 320px) {
-    .portfolio-main {
-      padding: 1rem 0.5rem 0.5rem;
-      margin-left: 64px;
-    }
-
-    .main-title {
-      font-size: 1.75rem;
+    .card-content {
+      padding: 2.5rem 1rem 1rem;
     }
   }
 </style>
-

@@ -3,64 +3,101 @@
 
 <footer class="footer-section">
   <button class="footer-close-btn" id="footerCloseBtn" aria-label="Close footer">
-    <i class="lni lni-close"></i>
+    <span class="close-text">ESC</span>
+    <svg class="exit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M11.75 12.75C11.9729 12.75 12.1731 12.6528 12.3104 12.4984L16.2802 8.53122C16.5731 8.23842 16.5733 7.76354 16.2805 7.47056C15.9877 7.17757 15.5128 7.17742 15.2198 7.47022L12.5 10.1883L12.5 4.25C12.5 3.83579 12.1642 3.5 11.75 3.5C11.3358 3.5 11 3.83579 11 4.25L11 10.1882L8.28014 7.4702C7.98715 7.17741 7.51227 7.17758 7.21948 7.47057C6.92669 7.76357 6.92686 8.23844 7.21986 8.53123L11.1876 12.4962C11.325 12.6518 11.526 12.75 11.75 12.75Z" fill="currentColor"/>
+      <path opacity="0.4" d="M21.75 11.5C21.75 10.2574 20.7426 9.25 19.5 9.25H17.6218C17.541 9.37082 17.4472 9.48555 17.3405 9.59221L16.182 10.75L19.5 10.75C19.9142 10.75 20.25 11.0858 20.25 11.5V17.5C20.25 17.9142 19.9142 18.25 19.5 18.25L4 18.25C3.58579 18.25 3.25 17.5L3.25 11.5C3.25 11.0858 3.58579 10.75 4 10.75L7.31811 10.75L6.15957 9.59227C6.05281 9.48558 5.95901 9.37084 5.87817 9.25L4 9.25C2.75736 9.25 1.75 10.2574 1.75 11.5V17.5C1.75 18.7426 2.75736 19.75 4 19.75H19.5C20.7426 19.75 21.75 18.7426 21.75 17.5V11.5Z" fill="currentColor"/>
+    </svg>
   </button>
   <div class="footer-content">
-    <div class="job-opportunity-banner">
-      <div class="banner-content">
-        <div class="banner-text">
-          <h4>Got a project in mind? Let's work together!</h4>
-          <p>Always open to discussing new opportunities and interesting challenges.</p>
-        </div>
-        <a href="mailto:hello@astronolan.com?subject=What's your bandwidth look like, Nolan? 😄" class="banner-cta">
-          Reach Out →
-        </a>
-      </div>
-    </div>
-    
-    <div class="footer-main">
-      <div class="footer-logo">NF</div>
-      
-      <div class="footer-info">
-        <h3>Nolan Figueroa</h3>
-        <p>Design & Technology Professional</p>
-        <p class="footer-bio">
-          Bridging design and tech to transform how people and 
-          organizations come together through innovative experiences.
-        </p>
-      </div>
-
-      <div class="footer-links">
-        <a href="/about" class="footer-link">About</a>
-        <a href="/projects" class="footer-link">Projects</a>
-        <a href="/blog" class="footer-link">Blog</a>
-        <a href="/case-studies" class="footer-link">Case Studies</a>
-      </div>
-
-      <div class="footer-contact">
-        <a href="mailto:hello@astronolan.com" class="contact-button">
-          Get in Touch →
-        </a>
-        <div class="social-links">
-          <a href="https://bsky.app/profile/astronolan.com" target="_blank" aria-label="Bluesky">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/astronolan/" target="_blank" aria-label="LinkedIn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-            </svg>
-          </a>
-        </div>
+    <div class="footer-header">
+      <div class="footer-title">
+        <span class="section-number">01</span>
+        <h2>About</h2>
+        <div class="geometric-accent">+</div>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <p class="copyright">© <span id="current-year"></span> Nolan Figueroa. All rights reserved.</p>
-      <div class="footer-badges">
-        <span class="badge">Available for Work</span>
-        <span class="badge">Remote Friendly</span>
+    <div class="footer-grid">
+      <!-- Hero Card -->
+      <div class="footer-card hero-card card-variant-1">
+        <div class="card-number">NF</div>
+        <div class="card-pattern"></div>
+        <div class="card-content">
+          <h3 class="card-title">Nolan Figueroa</h3>
+          <p class="card-subtitle">Design & Technology Professional</p>
+          <p class="card-description">
+            Bridging design and tech to transform how people and 
+            organizations come together through innovative experiences.
+          </p>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="footer-card cta-card card-variant-2">
+        <div class="card-number">02</div>
+        <div class="card-pattern"></div>
+        <div class="card-content">
+          <h4 class="card-title">Got a project in mind?</h4>
+          <p class="card-description">Always open to discussing new opportunities and interesting challenges.</p>
+          <a href="mailto:hello@astronolan.com?subject=What's your bandwidth look like, Nolan? 😄" class="card-cta">
+            Reach Out →
+          </a>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+
+      <!-- Contact Card -->
+      <div class="footer-card contact-card card-variant-3">
+        <div class="card-number">03</div>
+        <div class="card-pattern"></div>
+        <div class="card-content">
+          <h4 class="card-title">Get in Touch</h4>
+          <a href="mailto:hello@astronolan.com" class="contact-button">
+            hello@astronolan.com
+          </a>
+          <div class="social-links">
+            <a href="https://bsky.app/profile/astronolan.com" target="_blank" aria-label="Bluesky">
+              <span class="social-label">BLUESKY</span>
+            </a>
+            <a href="https://www.linkedin.com/in/astronolan/" target="_blank" aria-label="LinkedIn">
+              <span class="social-label">LINKEDIN</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+
+      <!-- Navigation Card -->
+      <div class="footer-card nav-card card-variant-4">
+        <div class="card-number">04</div>
+        <div class="card-pattern"></div>
+        <div class="card-content">
+          <h4 class="card-title">Navigation</h4>
+          <nav class="footer-nav">
+            <a href="/about" class="nav-link">About</a>
+            <a href="/projects" class="nav-link">Projects</a>
+            <a href="/blog" class="nav-link">Blog</a>
+            <a href="/case-studies" class="nav-link">Case Studies</a>
+          </nav>
+        </div>
+        <div class="card-decoration"></div>
+      </div>
+
+      <!-- Status Card -->
+      <div class="footer-card status-card card-variant-1">
+        <div class="card-number">05</div>
+        <div class="card-pattern"></div>
+        <div class="card-content">
+          <h4 class="card-title">Current Status</h4>
+          <div class="status-badges">
+            <span class="status-badge available">Available for Work</span>
+            <span class="status-badge remote">Remote Friendly</span>
+          </div>
+          <p class="copyright-text">© <span id="current-year"></span> Nolan Figueroa</p>
+        </div>
+        <div class="card-decoration"></div>
       </div>
     </div>
   </div>
@@ -70,14 +107,14 @@
   .footer-section {
     position: fixed;
     top: 0;
-    left: 80px; /* Account for nav menu */
+    left: 88px;
     right: 0;
     bottom: 0;
-    width: calc(100% - 80px);
+    width: calc(100% - 88px);
     height: 100vh;
     height: 100dvh;
-    background: var(--gray-900);
-    color: var(--gray-100);
+    background: #e6e6e6;
+    color: #000;
     border-radius: 0;
     overflow: auto;
     transform: translateY(100%);
@@ -87,408 +124,540 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
-  
+
   .footer-section.visible {
     transform: translateY(0);
   }
-  
+
   .footer-close-btn {
     position: absolute;
     top: 2rem;
     right: 2rem;
-    width: 40px;
+    min-width: 60px;
     height: 40px;
-    background: transparent;
-    border: none;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #aaa;
+    gap: 8px;
+    padding: 0 12px;
+    color: #666;
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
   }
-  
+
   .footer-close-btn:hover {
-    background: #444;
-    color: #ccc;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #333;
   }
-  
-  .footer-close-btn i {
-    font-size: 16px;
+
+  .close-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+  }
+
+  .exit-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-close-btn:hover .exit-icon {
+    transform: translateY(2px);
   }
 
   .footer-content {
-    max-width: 1200px;
-    width: calc(100% - 80px);
-    margin: 0 0 0 80px;
-    padding: 8rem 3rem 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    min-height: calc(100vh - 8rem);
-    min-height: calc(100dvh - 8rem);
+    width: 100%;
+    padding: 4rem 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .job-opportunity-banner {
-    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
-    color: var(--gray-900);
-    border-radius: 12px;
+  .footer-header {
     margin-bottom: 3rem;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(198, 255, 0, 0.2);
-    transform: scale(1);
-    transition: transform 0.3s ease;
-  }
-  
-  .job-opportunity-banner:hover {
-    transform: scale(1.02);
   }
 
-  .banner-content {
+  .footer-title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
     gap: 2rem;
   }
 
-  .banner-text h4 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 0 0 0.5rem;
-    color: var(--gray-900);
+  .section-number {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.1);
+    line-height: 1;
   }
 
-  .banner-text p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.95rem;
+  .footer-title h2 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #000;
     margin: 0;
-    color: var(--gray-700);
-    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
 
-  .banner-cta {
-    background: var(--gray-900);
-    color: var(--gray-100);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius-sm);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .banner-cta:hover {
-    background: var(--gray-800);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(33, 37, 41, 0.2);
-  }
-
-  .footer-main {
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    gap: 3rem;
-    align-items: center;
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-  }
-
-  .footer-logo {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
-    color: var(--gray-900);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .geometric-accent {
     font-family: 'Roboto Mono', monospace;
+    font-size: 3rem;
     font-weight: 900;
-    font-size: 1.75rem;
-    box-shadow: 0 10px 30px rgba(198, 255, 0, 0.3);
-  }
-
-  .footer-info h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    margin: 0 0 0.5rem;
     color: #c6ff00;
+    line-height: 1;
+    margin-left: auto;
   }
 
-  .footer-info p {
-    margin: 0 0 0.75rem;
-    color: var(--gray-200);
-    font-size: 0.95rem;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    grid-auto-rows: minmax(250px, auto);
   }
 
-  .footer-bio {
-    max-width: 400px;
-    line-height: 1.6;
-  }
-
-  .footer-links {
+  .footer-card {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #000;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    transition: transform 0.3s ease;
   }
 
-  .footer-link {
-    color: var(--gray-200);
+  .footer-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Card Variants */
+  .card-variant-1 {
+    background: #ffffff;
+  }
+
+  .card-variant-2 {
+    background: #c6ff00;
+  }
+
+  .card-variant-3 {
+    background: #000;
+    color: #ffffff;
+  }
+
+  .card-variant-4 {
+    background: #e6e6e6;
+  }
+
+  .card-variant-3 .card-title,
+  .card-variant-3 .card-description,
+  .card-variant-3 .contact-button,
+  .card-variant-3 .social-label {
+    color: #ffffff;
+  }
+
+  .card-variant-2 .card-title,
+  .card-variant-2 .card-description,
+  .card-variant-2 .card-cta {
+    color: #000;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.1);
+    line-height: 1;
+    z-index: 1;
+  }
+
+  .card-variant-3 .card-number {
+    color: rgba(255, 255, 255, 0.1);
+  }
+
+  .card-variant-2 .card-number {
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  .card-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    opacity: 0.1;
+    z-index: 1;
+  }
+
+  /* Pattern Variants */
+  .card-variant-1 .card-pattern {
+    background: 
+      linear-gradient(45deg, #000 25%, transparent 25%), 
+      linear-gradient(-45deg, #000 25%, transparent 25%), 
+      linear-gradient(45deg, transparent 75%, #000 75%), 
+      linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 15px 15px;
+    background-position: 0 0, 0 7.5px, 7.5px -7.5px, -7.5px 0px;
+  }
+
+  .card-variant-2 .card-pattern {
+    background: 
+      repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 2px,
+        transparent 2px,
+        transparent 10px
+      );
+  }
+
+  .card-variant-3 .card-pattern {
+    background: 
+      radial-gradient(circle at 50% 50%, #c6ff00 2px, transparent 2px);
+    background-size: 12px 12px;
+  }
+
+  .card-variant-4 .card-pattern {
+    background: 
+      linear-gradient(90deg, #000 50%, transparent 50%),
+      linear-gradient(#000 50%, transparent 50%);
+    background-size: 8px 8px;
+  }
+
+  .card-content {
+    padding: 3rem 2rem 2rem;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .hero-card .card-title {
+    font-size: 2rem;
+  }
+
+  .card-subtitle {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .card-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .card-cta {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+    display: inline-block;
   }
 
-  .footer-link:hover {
-    color: var(--gray-400);
+  .card-cta:hover {
     transform: translateX(4px);
   }
 
-  .footer-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
   .contact-button {
-    background: linear-gradient(135deg, #c6ff00 0%, #a6d900 100%);
-    color: var(--gray-900);
-    padding: 1rem 2rem;
-    border-radius: 12px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.125rem;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(198, 255, 0, 0.3);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.8rem 1.2rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
   }
 
   .contact-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 40px rgba(198, 255, 0, 0.4);
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .card-variant-3 .contact-button {
+    background: rgba(198, 255, 0, 0.1);
+    border-color: #c6ff00;
+    color: #c6ff00;
+  }
+
+  .card-variant-3 .contact-button:hover {
+    background: rgba(198, 255, 0, 0.2);
   }
 
   .social-links {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .social-links a {
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gray-200);
-    transition: all 0.3s;
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
 
-  .social-links a:hover {
-    background: var(--gray-400);
-    color: var(--gray-900);
+  .social-label {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover .social-label {
+    background: rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
   }
 
-  .footer-bottom {
+  .card-variant-3 .social-label {
+    color: #c6ff00;
+    border-color: #c6ff00;
+    background: rgba(198, 255, 0, 0.1);
+  }
+
+  .card-variant-3 .social-links a:hover .social-label {
+    background: rgba(198, 255, 0, 0.2);
+  }
+
+  .footer-nav {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     flex-direction: column;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    width: 100%;
+    gap: 0.75rem;
   }
 
-  .copyright {
-    margin: 0;
-    color: var(--gray-300);
-    font-size: 0.875rem;
+  .nav-link {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
   }
 
-  .footer-badges {
+  .nav-link:hover {
+    color: #666;
+    transform: translateX(4px);
+  }
+
+  .status-badges {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
   }
 
-  .badge {
-    background: rgba(206, 212, 218, 0.2);
-    color: var(--gray-400);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--border-radius-sm);
+  .status-badge {
+    font-family: 'Roboto Mono', monospace;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.5px;
+    padding: 0.6rem 1rem;
+    border: 1px solid #000;
+    background: rgba(0, 0, 0, 0.05);
+    color: #000;
+    width: fit-content;
+  }
+
+  .status-badge.available {
+    border-color: #c6ff00;
+    background: rgba(198, 255, 0, 0.1);
+    color: #000;
+  }
+
+  .copyright-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #666;
+    margin: 0;
+  }
+
+  .card-decoration {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #000;
+    z-index: 1;
+  }
+
+  .card-variant-3 .card-decoration {
+    border-color: #c6ff00;
+  }
+
+  .card-variant-2 .card-decoration {
+    background: #000;
+  }
+
+  /* Featured cards */
+  .hero-card {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .cta-card {
+    grid-column: span 2;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .footer-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    
+    .hero-card {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    
+    .cta-card {
+      grid-column: span 1;
+    }
   }
 
   @media (max-width: 768px) {
     .footer-section {
-      left: 0;
-      width: 100%;
+      left: 72px;
+      width: calc(100% - 72px);
     }
 
     .footer-content {
-      padding: 6rem 1.5rem 3rem;
-      min-height: calc(100vh - 6rem);
-      min-height: calc(100dvh - 6rem);
-      width: calc(100% - 64px);
-      margin: 0 0 0 64px;
+      padding: 3rem 1.5rem 2rem;
+      margin-left: 0;
+      width: 100%;
     }
 
     .footer-close-btn {
       top: 1rem;
       right: 1rem;
-      width: 32px;
+      min-width: 50px;
       height: 32px;
+      padding: 0 8px;
+    }
+    
+    .close-text {
+      font-size: 10px;
     }
 
-    .footer-close-btn i {
-      font-size: 13px;
+    .exit-icon {
+      width: 14px;
+      height: 14px;
     }
 
-    .job-opportunity-banner {
-      margin-bottom: 2rem;
+    .section-number {
+      font-size: 3rem;
     }
 
-    .banner-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
+    .footer-title h2 {
+      font-size: 2rem;
     }
 
-    .banner-cta {
-      align-self: stretch;
-      text-align: center;
-      justify-content: center;
+    .geometric-accent {
+      font-size: 2rem;
     }
 
-    .footer-main {
+    .footer-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
-    }
-
-    .footer-logo {
-      width: 60px;
-      height: 60px;
-      font-size: 1.5rem;
-    }
-
-    .footer-info h3 {
-      font-size: 1.75rem;
-    }
-
-    .footer-info p {
-      font-size: 0.9rem;
-    }
-
-    .footer-bio {
-      max-width: 100%;
-    }
-
-    .contact-button {
-      padding: 0.875rem 1.5rem;
-      font-size: 1rem;
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      gap: 1rem;
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
-
-    .footer-links {
-      flex-direction: row;
-      flex-wrap: wrap;
       gap: 1.5rem;
     }
 
-    .footer-badges {
-      flex-wrap: wrap;
+    .hero-card,
+    .cta-card {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .card-content {
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .card-number {
+      font-size: 2rem;
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+    }
+
+    .hero-card .card-title {
+      font-size: 1.75rem;
     }
   }
 
   @media (max-width: 480px) {
     .footer-content {
-      padding: 5rem 1rem 2rem;
-      min-height: calc(100vh - 5rem);
-      min-height: calc(100dvh - 5rem);
-      width: calc(100% - 64px);
-      margin: 0 0 0 64px;
+      padding: 2rem 1rem;
+      margin-left: 0;
+      width: 100%;
     }
 
-    .banner-content {
-      padding: 1rem 1.25rem;
-    }
-
-    .banner-text h4 {
-      font-size: 1rem;
-    }
-
-    .banner-text p {
-      font-size: 0.875rem;
-    }
-
-    .banner-cta {
-      padding: 0.625rem 1.25rem;
-      font-size: 0.875rem;
-    }
-
-    .footer-main {
-      gap: 1.5rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-    }
-
-    .footer-logo {
-      width: 50px;
-      height: 50px;
-      font-size: 1.25rem;
-    }
-
-    .footer-info h3 {
-      font-size: 1.5rem;
-    }
-
-    .footer-links {
+    .footer-title {
+      flex-direction: column;
+      align-items: flex-start;
       gap: 1rem;
     }
 
-    .contact-button {
-      padding: 0.75rem 1.25rem;
-      font-size: 0.95rem;
+    .geometric-accent {
+      margin-left: 0;
     }
 
-    .social-links a {
-      width: 32px;
-      height: 32px;
+    .card-content {
+      padding: 2rem 1rem 1rem;
     }
 
-    .footer-badges {
-      gap: 0.5rem;
+    .status-badges {
+      flex-direction: column;
     }
 
-    .badge {
-      padding: 0.25rem 0.5rem;
-      font-size: 0.7rem;
+    .social-links {
+      flex-direction: column;
     }
   }
 </style>
