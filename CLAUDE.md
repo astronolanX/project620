@@ -34,7 +34,7 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 
 **LeftNav.astro** - Fixed left sidebar (80px wide, 64px mobile):
 
-- Home link: "NLN" initials with active state highlighting
+- Home link: "N/N" initials with active state highlighting
 - Project numbers (1-3) mapped to specific slugs:
   1. `future-design`
   2. `ux-patterns`
@@ -99,7 +99,7 @@ Note: No test framework configured - TypeScript checking via `astro check` only.
 ### Performance Optimizations
 
 - Single consolidated Google Fonts request (Roboto family)
-- Font Awesome icons loaded from CDN
+- LineIcons from CDN for icon library
 - PWA with offline support via service worker
 - View Transitions for instant navigation
 - Navigation preloading in service worker
