@@ -17,23 +17,24 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     <main class="portfolio-main">
       <div class="message-grid" id="message-grid">
         <p class="document-text">
-          <span class="hidden-text">WHERE HUMAN INTENTION MEETS MACHINE LOGIC </span>
+          <span class="hidden-text">I BELIEVE </span>
           <span class="visible-text">THERE'S </span>
-          <span class="hidden-text">A DANCE OF MEANING AND THERE IS </span>
+          <span class="hidden-text">GENUINELY </span>
           <span class="visible-text">ALWAYS </span>
-          <span class="hidden-text">A DEEPER CONVERSATION WAITING BECAUSE </span>
+          <span class="hidden-text">BEEN </span>
           <span class="visible-text">SOMETHING </span>
-          <span class="hidden-text">PROFOUND </span>
+          <span class="hidden-text">BEAUTIFUL </span>
           <span class="visible-text">TO </span>
-          <span class="hidden-text">UNDERSTAND AND </span>
+          <span class="hidden-text">DISCOVER AND </span>
           <span class="visible-text">LEARN </span>
-          <span class="hidden-text">EMERGES </span>
+          <span class="hidden-text">HIDDEN </span>
           <span class="visible-text">BETWEEN </span>
-          <span class="hidden-text">PIXELS AND PERCEPTION WHERE </span>
+          <span class="hidden-text">ALL </span>
           <span class="visible-text">THE </span>
-          <span class="hidden-text">HUMAN STORY TOUCHES THESE DIGITAL </span>
+          <span class="hidden-text">OBVIOUS </span>
           <span class="visible-text">LINES </span>
-          <span class="hidden-text">OF INTERACTIVE POETRY</span>
+          <span class="hidden-text">WE DRAW</span>
+          <span class="accent-text">.</span>
         </p>
       </div>
 
@@ -65,7 +66,7 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 
   .message-grid {
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
   }
 
   .document-text {
@@ -88,6 +89,17 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     color: #000;
   }
 
+  .accent-text {
+    color: #c6ff00;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    display: inline;
+    line-height: 1.2;
+  }
+
   .hidden-text {
     background: #000;
     color: #000;
@@ -104,8 +116,8 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
   }
 
   .unredacted .hidden-text {
-    background: #000;
-    color: #fff;
+    background: transparent;
+    color: #000;
   }
 
   .unredact-toggle {
@@ -136,7 +148,8 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 
   @media (max-width: 1200px) {
     .visible-text,
-    .hidden-text {
+    .hidden-text,
+    .accent-text {
       font-size: 4rem;
     }
   }
@@ -151,7 +164,8 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     }
 
     .visible-text,
-    .hidden-text {
+    .hidden-text,
+    .accent-text {
       font-size: 3rem;
     }
   }
@@ -162,7 +176,8 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     }
 
     .visible-text,
-    .hidden-text {
+    .hidden-text,
+    .accent-text {
       font-size: 2rem;
     }
   }
