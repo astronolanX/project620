@@ -10,56 +10,33 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 
 <Layout title="Nolan Figueroa - Design & Technology">
   <div class="page-wrapper">
+    <button id="unredact-toggle" class="unredact-toggle">
+      <span class="toggle-text">DECLASSIFY</span>
+    </button>
+    
     <main class="portfolio-main">
-      <div class="intro-section">
-        <h1 class="main-title">Nolan Figueroa</h1>
-        <div class="intro-text">
-          Designer and technologist exploring the intersection of human experience and digital systems. 
-          Currently focused on spatial interfaces, design systems, and the future of interactive media.
-        </div>
+      <div class="message-grid" id="message-grid">
+        <p class="document-text">
+          <span class="hidden-text">WHERE HUMAN INTENTION MEETS MACHINE LOGIC </span>
+          <span class="visible-text">THERE'S </span>
+          <span class="hidden-text">A DANCE OF MEANING AND THERE IS </span>
+          <span class="visible-text">ALWAYS </span>
+          <span class="hidden-text">A DEEPER CONVERSATION WAITING BECAUSE </span>
+          <span class="visible-text">SOMETHING </span>
+          <span class="hidden-text">PROFOUND </span>
+          <span class="visible-text">TO </span>
+          <span class="hidden-text">UNDERSTAND AND </span>
+          <span class="visible-text">LEARN </span>
+          <span class="hidden-text">EMERGES </span>
+          <span class="visible-text">BETWEEN </span>
+          <span class="hidden-text">PIXELS AND PERCEPTION WHERE </span>
+          <span class="visible-text">THE </span>
+          <span class="hidden-text">HUMAN STORY TOUCHES THESE DIGITAL </span>
+          <span class="visible-text">LINES </span>
+          <span class="hidden-text">OF INTERACTIVE POETRY</span>
+        </p>
       </div>
 
-      <section class="microblog-section">
-        <div class="section-header">
-          <h2 class="microblog-title">Recent Notes</h2>
-          <div class="geometric-accent">+</div>
-        </div>
-        <div class="microblog-grid">
-          {sortedPosts.map(async (post, index) => {
-            const { Content } = await post.render();
-            const cardNumber = String(index + 1).padStart(2, '0');
-            const cardVariant = (index % 4) + 1;
-            return (
-              <article class={`microblog-card card-variant-${cardVariant}`}>
-                <div class="card-number">{cardNumber}</div>
-                <div class="card-pattern"></div>
-                <div class="card-content">
-                  <div class="entry-header">
-                    <h3 class="entry-title">{post.data.title}</h3>
-                    <time class="entry-date" datetime={post.data.date.toISOString()}>
-                      {post.data.date.toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}
-                    </time>
-                  </div>
-                  <div class="entry-content">
-                    <Content />
-                  </div>
-                  {post.data.tags && post.data.tags.length > 0 && (
-                    <div class="entry-tags">
-                      {post.data.tags.map((tag) => (
-                        <span class="tag">{tag}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div class="card-decoration"></div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
     </main>
 
     <StickyFooter />
@@ -69,7 +46,7 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 <style>
   .page-wrapper {
     min-height: 100vh;
-    background: #ffffff;
+    background: #fff;
     margin-left: 88px;
     display: flex;
     flex-direction: column;
@@ -81,295 +58,86 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-  }
-
-  .intro-section {
-    margin-bottom: 4rem;
-    position: relative;
-  }
-
-  .main-title {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 4rem;
-    font-weight: 900;
-    color: #000;
-    margin: 0;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-  }
-
-  .intro-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #000;
-    line-height: 1.5;
-    margin: 1.5rem 0 0;
-    max-width: 700px;
-  }
-
-  .microblog-section {
-    width: 100%;
-  }
-
-  .section-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
+    justify-content: center;
   }
 
-  .microblog-title {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #000;
+  .message-grid {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .document-text {
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
+    padding: 0;
   }
 
-  .geometric-accent {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 3rem;
-    font-weight: 900;
-    color: #c6ff00;
-    line-height: 1;
-  }
-
-  .microblog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    grid-auto-rows: minmax(300px, auto);
-  }
-
-  .microblog-card {
-    position: relative;
-    background: #ffffff;
-    border: 2px solid #000;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-  }
-
-  .microblog-card:hover {
-    transform: translateY(-4px);
-  }
-
-  /* Card Variants */
-  .card-variant-1 {
-    background: #ffffff;
-  }
-
-  .card-variant-2 {
-    background: #c6ff00;
-  }
-
-  .card-variant-3 {
-    background: #e6e6e6;
-  }
-
-  .card-variant-4 {
-    background: #000;
-    color: #ffffff;
-  }
-
-  .card-variant-4 .entry-title,
-  .card-variant-4 .entry-content,
-  .card-variant-4 .entry-date {
-    color: #ffffff;
-  }
-
-  .card-variant-2 .entry-title,
-  .card-variant-2 .entry-content,
-  .card-variant-2 .entry-date {
-    color: #000;
-  }
-
-  .card-number {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
+  .visible-text,
+  .hidden-text {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 900;
-    color: rgba(0, 0, 0, 0.1);
-    line-height: 1;
-    z-index: 1;
-  }
-
-  .card-variant-4 .card-number {
-    color: rgba(255, 255, 255, 0.1);
-  }
-
-  .card-variant-2 .card-number {
-    color: rgba(0, 0, 0, 0.2);
-  }
-
-  .card-pattern {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 120px;
-    height: 120px;
-    opacity: 0.1;
-    z-index: 1;
-  }
-
-  /* Pattern Variants */
-  .card-variant-1 .card-pattern {
-    background: 
-      linear-gradient(45deg, #000 25%, transparent 25%), 
-      linear-gradient(-45deg, #000 25%, transparent 25%), 
-      linear-gradient(45deg, transparent 75%, #000 75%), 
-      linear-gradient(-45deg, transparent 75%, #000 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  }
-
-  .card-variant-2 .card-pattern {
-    background: 
-      repeating-linear-gradient(
-        45deg,
-        #000,
-        #000 2px,
-        transparent 2px,
-        transparent 12px
-      );
-  }
-
-  .card-variant-3 .card-pattern {
-    background: 
-      radial-gradient(circle at 50% 50%, #000 2px, transparent 2px);
-    background-size: 15px 15px;
-  }
-
-  .card-variant-4 .card-pattern {
-    background: 
-      linear-gradient(90deg, #c6ff00 50%, transparent 50%),
-      linear-gradient(#c6ff00 50%, transparent 50%);
-    background-size: 10px 10px;
-  }
-
-  .card-content {
-    padding: 4rem 2rem 2rem;
-    flex: 1;
-    position: relative;
-    z-index: 2;
-  }
-
-  .entry-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .entry-title {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000;
-    margin: 0 0 0.5rem 0;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.03em;
+    display: inline;
     line-height: 1.2;
   }
 
-  .entry-date {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .card-variant-4 .entry-date {
-    color: #c6ff00;
-  }
-
-  .entry-content {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    line-height: 1.5;
+  .visible-text {
     color: #000;
-    margin-bottom: 1.5rem;
   }
 
-  .entry-content :global(p) {
-    margin: 0 0 1rem 0;
-  }
-
-  .entry-content :global(p:last-child) {
-    margin: 0;
-  }
-
-  .entry-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: auto;
-  }
-
-  .tag {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #000;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 0.4rem 0.8rem;
-    border: 1px solid #000;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .card-variant-4 .tag {
-    color: #c6ff00;
-    background: rgba(198, 255, 0, 0.1);
-    border-color: #c6ff00;
-  }
-
-  .card-variant-2 .tag {
-    color: #000;
-    background: rgba(0, 0, 0, 0.1);
-    border-color: #000;
-  }
-
-  .card-decoration {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    width: 40px;
-    height: 40px;
-    border: 3px solid #000;
-    z-index: 1;
-  }
-
-  .card-variant-4 .card-decoration {
-    border-color: #c6ff00;
-  }
-
-  .card-variant-2 .card-decoration {
+  .hidden-text {
     background: #000;
+    color: #000;
+    cursor: pointer;
+    user-select: text;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Large cards for featured content */
-  .microblog-card:nth-child(1) {
-    grid-column: span 2;
+  .hidden-text:hover,
+  .hidden-text::selection,
+  .hidden-text::-moz-selection {
+    background: #000;
+    color: #fff;
   }
 
-  .microblog-card:nth-child(5) {
-    grid-row: span 2;
+  .unredacted .hidden-text {
+    background: #000;
+    color: #fff;
   }
 
-  /* Responsive Design */
+  .unredact-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .unredact-toggle:hover {
+    background: #333;
+  }
+
+  .unredacted .unredact-toggle .toggle-text::before {
+    content: "RE";
+  }
+
   @media (max-width: 1200px) {
-    .microblog-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-    
-    .microblog-card:nth-child(1) {
-      grid-column: span 1;
+    .visible-text,
+    .hidden-text {
+      font-size: 4rem;
     }
   }
 
@@ -380,61 +148,35 @@ const sortedPosts = microblogPosts.sort((a, b) => b.data.date.getTime() - a.data
 
     .portfolio-main {
       padding: 2rem 1.5rem;
-      margin-left: 0;
     }
 
-    .main-title {
+    .visible-text,
+    .hidden-text {
       font-size: 3rem;
-    }
-
-    .intro-text {
-      font-size: 1.1rem;
-    }
-
-    .microblog-title {
-      font-size: 2rem;
-    }
-
-    .microblog-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .microblog-card:nth-child(1),
-    .microblog-card:nth-child(5) {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-
-    .card-content {
-      padding: 3rem 1.5rem 1.5rem;
-    }
-
-    .card-number {
-      font-size: 2.5rem;
-      top: 1rem;
-      left: 1rem;
     }
   }
 
   @media (max-width: 480px) {
     .portfolio-main {
       padding: 1.5rem 1rem;
-      margin-left: 0;
     }
 
-    .main-title {
-      font-size: 2.5rem;
-    }
-
-    .section-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .card-content {
-      padding: 2.5rem 1rem 1rem;
+    .visible-text,
+    .hidden-text {
+      font-size: 2rem;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('unredact-toggle');
+    const messageGrid = document.getElementById('message-grid');
+    
+    if (toggleButton && messageGrid) {
+      toggleButton.addEventListener('click', function() {
+        messageGrid.classList.toggle('unredacted');
+      });
+    }
+  });
+</script>
