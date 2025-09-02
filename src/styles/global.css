@@ -5,21 +5,49 @@
 /* stylelint-enable at-rule-no-unknown */
 
 :root {
-  /* Coolors palette: Light to Dark */
-  --gray-100: #f8f9fa;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #6c757d;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
+  /* New color palette based on provided design */
+  --black: #000000;
+  --white: #ffffff;
+  --purple: #6366F1;
+  --green: #84CC16;
   
-  /* Consolidated section colors - all using gray theme */
-  --section-color: #6B7280;
-  --section-color-light: #9CA3AF;
-  --section-color-lighter: #F9FAFB;
+  /* Gray scale variations */
+  --gray-100: #ffffff;
+  --gray-200: #f5f5f5;
+  --gray-300: #e5e5e5;
+  --gray-400: #d4d4d4;
+  --gray-500: #a3a3a3;
+  --gray-600: #737373;
+  --gray-700: #525252;
+  --gray-800: #404040;
+  --gray-900: #171717;
+  
+  /* Green variations (DQ Green family) */
+  --green-100: #f7fee7;
+  --green-200: #ecfccb;
+  --green-300: #d9f99d;
+  --green-400: #a3e635;
+  --green-500: #84cc16;
+  --green-600: #65a30d;
+  --green-700: #4d7c0f;
+  --green-800: #365314;
+  --green-900: #1a2e05;
+  
+  /* Purple variations (DQ Purple family) */
+  --purple-100: #f0f9ff;
+  --purple-200: #e0e7ff;
+  --purple-300: #c7d2fe;
+  --purple-400: #a5b4fc;
+  --purple-500: #6366f1;
+  --purple-600: #4f46e5;
+  --purple-700: #4338ca;
+  --purple-800: #3730a3;
+  --purple-900: #312e81;
+  
+  /* Consolidated section colors - using new palette */
+  --section-color: var(--gray-600);
+  --section-color-light: var(--gray-500);
+  --section-color-lighter: var(--gray-100);
   
   /* Updated checkerboard pattern */
   --checkerboard-size: 40px;
@@ -43,7 +71,7 @@
   body {
     @apply antialiased;
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background-color: #f7f7f7;
+    background-color: var(--gray-200);
     margin-left: 0; /* No margin needed - nav will overlay */
   }
   
@@ -55,15 +83,15 @@
   
   /* Remove all cursor styles since we're using a custom cursor */
   
-  /* Text selection highlighting with lime color scheme */
+  /* Text selection highlighting with green color scheme */
   *::selection {
-    background-color: #c6ff00;
-    color: #000;
+    background-color: var(--green-400);
+    color: var(--black);
   }
   
   *::-moz-selection {
-    background-color: #c6ff00;
-    color: #000;
+    background-color: var(--green-400);
+    color: var(--black);
   }
 
   /* Prevent text selection on clickable elements */
