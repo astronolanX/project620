@@ -127,6 +127,7 @@ export default defineConfig({
 ## Component Structure
 
 ### Core Components
+
 - `src/components/LeftNav.astro` - Fixed navigation sidebar
 - `src/components/StickyFooter.astro` - Toggleable footer section
 - `src/layouts/Layout.astro` - Base layout wrapper
